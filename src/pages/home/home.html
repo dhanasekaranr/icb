@@ -1,23 +1,26 @@
 <ion-header>
     <ion-navbar>
         <ion-title>
-            Movie List
+            Book List
         </ion-title>
     </ion-navbar>
 </ion-header>
 
 <ion-content class="home" padding>
     <ion-item>
-        <ion-input type="text" placeholder="Search a movie..." (input)="searchMovieDB($event, searchKey)"></ion-input>
+        <ion-input type="text" placeholder="Search a movie..." (input)="searchBookDB($event)"></ion-input>
     </ion-item>
 
     <ion-list>
-        <ion-item *ngFor="let movie of movies" (click)="itemTapped($event, movie)">
+        <ion-item *ngFor="let movie of movies" (click)="openMenu($event, movie)">
             <ion-avatar item-left>
-                <img src="PictureSRC" />
+                <img src="{{movie.PictureLink}}" />
             </ion-avatar>
             <h2>{{movie.Description}}</h2>
             <p class="item-description">{{movie.Description}}</p>
         </ion-item>
     </ion-list>
 </ion-content>
+
+
+

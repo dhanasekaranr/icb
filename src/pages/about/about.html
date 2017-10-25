@@ -1,20 +1,20 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>
-      About
-    </ion-title>
+      <ion-title>
+          Users List
+      </ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content class="home" padding>
+  <ion-item>
+      <ion-input type="text" placeholder="Search users(s) by first name..." (input)="searchUserDB($event)"></ion-input>
+  </ion-item>
 
-    <h2>Ionic 2 in Visual Studio</h2>
-    <p>
-        This starter project comes with simple tabs-based layout for apps
-        that are going to primarily use a Tabbed UI.
-    </p>
-    <p>
-        Take a look at the <code>src/</code> directory to add or change tabs,
-        update any existing page or create new pages.
-    </p>
+  <ion-list>
+      <ion-item *ngFor="let user of users" (click)="openMenu($event, user)">
+          <h2>{{user.FirstName}} {{user.LastName}}</h2>
+          <p class="item-description">{{user.Email}}</p>
+      </ion-item>
+  </ion-list>
 </ion-content>

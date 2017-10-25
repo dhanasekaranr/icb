@@ -8,13 +8,14 @@ import { Tab } from '../pages/tab/tab';
 import { HomePage } from '../pages/home/home';
 import { ContactPage } from '../pages/contact/contact';
 import { AboutPage } from '../pages/about/about';
+import { MovieInfo } from '../pages/home/movie-info';
 @NgModule({
   declarations: [
     MyApp,
     RegisterExternalUser,
     ValuesPage,
       Login,
-      Tab, HomePage, ContactPage, AboutPage
+      Tab, HomePage, ContactPage, AboutPage,MovieInfo
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -25,7 +26,7 @@ import { AboutPage } from '../pages/about/about';
     RegisterExternalUser,
     ValuesPage,
     Login,
-      Tab, HomePage, ContactPage, AboutPage
+      Tab, HomePage, ContactPage, AboutPage, MovieInfo
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
 })

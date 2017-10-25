@@ -12,6 +12,7 @@ import { Tab } from '../pages/tab/tab';
 import { HomePage } from '../pages/home/home';
 import { ContactPage } from '../pages/contact/contact';
 import { AboutPage } from '../pages/about/about';
+import { MovieInfo } from '../pages/home/movie-info';
 
 import '../shared/rxjs-operators';
 
@@ -26,7 +27,7 @@ import '../shared/rxjs-operators';
     Values,
     User,
     GlobalSettings,
-    Tab, HomePage, ContactPage, AboutPage
+      Tab, HomePage, ContactPage, AboutPage, MovieInfo
   ]
 })
 export class MyApp {
