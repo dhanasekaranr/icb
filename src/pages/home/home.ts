@@ -38,7 +38,9 @@ export class HomePage {
                 this.movies = data;
                 //console.log(data);
             }
-        );
+        ).catch(err => {
+           console.log(err);
+      });
         }
     }
     bookInfo( key)

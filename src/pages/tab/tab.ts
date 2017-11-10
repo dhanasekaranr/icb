@@ -23,14 +23,15 @@ export class Tab {
 
 //        console.log(this.authentication.getAccessToken());
       this.storage.get('accessToken').then((token) => {
-        console.log('here:',token);
+        //console.log('here:',token);
               if (token == null) {
 
                   this.navCtrl.push(Login);
                   //this.user.
-              } else {
-                  console.log(this.authentication.getAccessToken());
               }
+              //else {
+                //  console.log(this.authentication.getAccessToken());
+             // }
 
           });
 

@@ -21,6 +21,7 @@ export class icbService {
     var url =this.baseUrl + '/api/' + action +'/' + name ;
     return new Promise<any>( resolve => {
         this.storage.get('accessToken').then((token) => {
+          if(token == null) return;
           let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
           headers.append('Authorization', 'Bearer ' + token);
           this.http.get(url, {headers : headers})
