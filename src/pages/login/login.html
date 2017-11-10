@@ -6,7 +6,7 @@
 -->
 <ion-header>
 
-  <ion-navbar>
+  <ion-navbar hideBackButton="true">
     <ion-title>Login</ion-title>
   </ion-navbar>
 
@@ -30,11 +30,9 @@
             <ion-item>
               <ion-input type="text" [(ngModel)]="email" placeholder="Email" name="email"></ion-input>
             </ion-item>
-
             <ion-item>
               <ion-input type="password" [(ngModel)]="pwd"  placeholder="Password" name="pwd"></ion-input>
             </ion-item>
-
           </ion-list>
         </ion-col>
       </ion-row>
@@ -44,6 +42,5 @@
           <button ion-button class="register-btn" block clear >Create New Account</button>
         </ion-col>
       </ion-row>
-    
   </div>
 </ion-content>

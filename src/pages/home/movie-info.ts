@@ -12,7 +12,8 @@ export class MovieInfo {
     book: {};
 
     constructor(public navCtrl: NavController, private navParams: NavParams, private bookService: icbService) {
-        this.book = navParams.get('book');
+        this.book = navParams.get('movie');
+
     }
 
 }

@@ -9,13 +9,15 @@ import { HomePage } from '../pages/home/home';
 import { ContactPage } from '../pages/contact/contact';
 import { AboutPage } from '../pages/about/about';
 import { MovieInfo } from '../pages/home/movie-info';
+import { TransPage } from '../pages/home/trans';
+import { RentPage } from '../pages/home/Rent';
 @NgModule({
   declarations: [
     MyApp,
     RegisterExternalUser,
     ValuesPage,
       Login,
-      Tab, HomePage, ContactPage, AboutPage,MovieInfo
+      Tab, HomePage, ContactPage, AboutPage,MovieInfo, TransPage,RentPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -26,7 +28,7 @@ import { MovieInfo } from '../pages/home/movie-info';
     RegisterExternalUser,
     ValuesPage,
     Login,
-      Tab, HomePage, ContactPage, AboutPage, MovieInfo
+      Tab, HomePage, ContactPage, AboutPage, MovieInfo, TransPage,RentPage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
 })

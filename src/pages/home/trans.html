@@ -1,0 +1,38 @@
+<ion-header>
+    <ion-navbar >
+      <ion-title>Book Info</ion-title>
+    </ion-navbar>
+  </ion-header>
+  <ion-content class="home" padding>
+    <div *ngIf="book" class="selection">
+      <ion-card>
+        <ion-item text-wrap>
+          <ion-avatar item-left image-large>
+            <img src="{{book.PictureLink}}" />
+          </ion-avatar>
+          <p class="item-description">{{book.Description}}</p>
+        </ion-item>
+      </ion-card>
+    </div>
+
+      <ion-list>
+          <ion-list-header>
+              User List
+            </ion-list-header>
+          <ion-item-sliding *ngFor="let user of users">
+            <ion-item>
+              <ion-icon name="contact"  item-start></ion-icon> {{user.CreatedBy}}
+              <ion-note item-end>
+                  <p> Rented Date : {{user.CreatedDate | date: "MM/dd/yyyy"}}</p>
+              </ion-note>
+
+            </ion-item>
+            <ion-item-options>
+              <button ion-button color="primary" (click)="updateStat(user.Id)" icon-start>
+                  <ion-icon name="refresh"></ion-icon>
+                  Return
+              </button>
+            </ion-item-options>
+          </ion-item-sliding>
+        </ion-list>
+  </ion-content>

@@ -20,17 +20,13 @@ searchUserDB(event) {
       queryval = event.target.value;
 
     if (queryval.length > 1 || queryval == "") {
-        this.movieService.searchUsers(queryval).subscribe(
+        this.movieService.searchTrans('user',queryval).then(
             data => {
-                this.users = data;
-                console.log(data);
-            },
-            err => {
-                console.log(err);
-            },
-            () => console.log('Movie Search Complete')
-        );
-    }
+              this.users = data;
+             // console.log(data);
+          }
+      );
+      }
 }
 openMenu(event, key) {
   let actionSheet = this.actionsheetCtrl.create({
@@ -50,20 +46,6 @@ openMenu(event, key) {
               icon: !this.platform.is('ios') ? 'share' : null,
               handler: () => {
                   console.log('Share clicked');
-              }
-          },
-          {
-              text: 'Play',
-              icon: !this.platform.is('ios') ? 'arrow-dropright-circle' : null,
-              handler: () => {
-                  console.log('Play clicked');
-              }
-          },
-          {
-              text: 'Favorite',
-              icon: !this.platform.is('ios') ? 'heart-outline' : null,
-              handler: () => {
-                  console.log('Favorite clicked');
               }
           },
           {

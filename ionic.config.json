@@ -2,11 +2,6 @@
   "name": "$safeappid$",
   "app_id": "8c6418b5",
   "integrations": {},
-  "type": "ionic-angular",
-
-    "proxies": [{
-    "path": "/api",
-    "proxyUrl": "https://api.icarebooks.com"
-    }]
+  "type": "ionic-angular"
 
 }

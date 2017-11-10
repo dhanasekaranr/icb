@@ -1,0 +1,42 @@
+<ion-header>
+    <ion-navbar >
+      <ion-title>Book Info</ion-title>
+    </ion-navbar>
+  </ion-header>
+  <ion-content class="home" padding>
+    <div *ngIf="book" class="selection">
+      <ion-card>
+        <ion-item text-wrap>
+          <ion-avatar item-left image-large>
+            <img src="{{book.PictureLink}}" />
+          </ion-avatar>
+          <p class="item-description">{{book.Description}}</p>
+        </ion-item>
+      </ion-card>
+    </div>
+
+    <ion-item>
+        <ion-input type="text" placeholder="Search users(s) by first name..." (input)="searchUserDB($event)"></ion-input>
+    </ion-item>
+
+      <ion-list>
+          <ion-list-header>
+              Renters List
+            </ion-list-header>
+          <ion-item-sliding *ngFor="let user of users">
+            <ion-item>
+              <ion-icon name="contact"  item-start></ion-icon> {{user.FirstName}} {{user.LastName}}
+              <ion-note item-end>
+                  <p> {{user.Email}}</p>
+              </ion-note>
+
+            </ion-item>
+            <ion-item-options>
+              <button ion-button color="primary" (click)="updateStat(user.Id)" icon-start>
+                  <ion-icon name="refresh"></ion-icon>
+                  Rent
+              </button>
+            </ion-item-options>
+          </ion-item-sliding>
+        </ion-list>
+  </ion-content>

@@ -15,6 +15,7 @@
       <ion-item *ngFor="let user of users" (click)="openMenu($event, user)">
           <h2>{{user.FirstName}} {{user.LastName}}</h2>
           <p class="item-description">{{user.Email}}</p>
+          <p *ngIf="user.Counter > 0" class="item-description" style="color:red">Books Rented : {{user.Counter}}</p>
       </ion-item>
   </ion-list>
 </ion-content>

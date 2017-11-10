@@ -2,7 +2,9 @@ import { Component } from '@angular/core';
 import { NavController, Platform, ActionSheetController } from 'ionic-angular';
 import { icbService } from '../../shared/service';
 import { MovieInfo } from './movie-info';
-
+import { TransPage } from './trans';
+import { RentPage } from './Rent';
+import { Authentication, User } from '../../shared/shared';
 @Component({
     selector: 'page-home',
     templateUrl: 'home.html',
@@ -13,37 +15,62 @@ import { MovieInfo } from './movie-info';
 export class HomePage {
 
     movies: Array<any>;
-
+    Available : Array<any>;
+    AvailableCount : any;
+    RentedOut;
     constructor(public navCtrl: NavController, private service: icbService, public platform: Platform,
-        public actionsheetCtrl: ActionSheetController) {
-            this.searchBookDB(null);
+        public actionsheetCtrl: ActionSheetController,private authentication: Authentication,) {
+
+          //if (this.authentication.getAccessToken() != null) {
+          this.searchBookDB(null);
+         // }
+
     }
 
-    searchBookDB(event) {
+    searchBookDB(event){
        // console.log(event.target.value);
        let queryval = "";
        if( event )
          queryval = event.target.value;
         if (queryval.length > 1 || queryval == "" ) {
-            this.service.searchBooks(queryval).subscribe(
-                data => {
-                    this.movies = data;
-                   // console.log(data);
-                },
-                err => {
-                    console.log(err);
-                },
-                () => console.log('Movie Search Complete')
-            );
+            this.service.searchTrans('values',queryval).then(
+              data => {
+                this.movies = data;
+                //console.log(data);
+            }
+        );
         }
     }
+    bookInfo( key)
+    {
+      this.navCtrl.push(MovieInfo, {
+        movie:key
+      });
+    }
+    returnBook( key)
+    {
+      this.navCtrl.push(TransPage, {
+        book:key, isbn: key.ISBN,action: 'Out'
+      });
+    }
+    checkout( key)
+    {
+      this.navCtrl.push(RentPage, {
+        book:key, isbn: key.ISBN,action: 'Out'
+      });
+    }
     openMenu(event, key) {
-        let actionSheet = this.actionsheetCtrl.create({
+      this.service.getBookProfile(key.ISBN).then(
+        data => {
+          this.Available = data;
+          this.RentedOut = this.Available.filter((t) => t.Status == '3').length;
+          this.AvailableCount = this.Available.filter((t) => t.Status != '3').length;
+          let actionSheet = this.actionsheetCtrl.create({
             title: 'Click the link below.',
             cssClass: 'action-sheets-basic-page',
             buttons: [
                 {
-                    text: 'Book Info',
+                    text: 'Book Info [Count: ' + this.Available.length + ']',
                     role: 'destructive',
                     icon: !this.platform.is('ios') ? 'list' : null,
                     handler: () => {
@@ -53,27 +80,28 @@ export class HomePage {
                         });
                     }
                 },
-                {
-                    text: 'Share',
+         /*       {
+                    text: 'Checked Out - ' + this.RentedOut,
                     icon: !this.platform.is('ios') ? 'share' : null,
                     handler: () => {
-                        console.log('Share clicked');
+                        //console.log('Checked Out clicked');
+                        if( this.RentedOut > 0 )
+                        this.navCtrl.push(TransPage, {
+                          book:key, isbn: key.ISBN,action: 'Out'
+                      });
                     }
                 },
                 {
-                    text: 'Play',
+                    text: 'Available - ' + this.AvailableCount,
                     icon: !this.platform.is('ios') ? 'arrow-dropright-circle' : null,
                     handler: () => {
-                        console.log('Play clicked');
+                      if( this.AvailableCount > 0 )
+                      this.navCtrl.push(RentPage, {
+                        book:key, isbn: key.ISBN,action: 'Out'
+                    });
                     }
-                },
-                {
-                    text: 'Favorite',
-                    icon: !this.platform.is('ios') ? 'heart-outline' : null,
-                    handler: () => {
-                        console.log('Favorite clicked');
-                    }
-                },
+                },*/
+
                 {
                     text: 'Cancel',
                     role: 'cancel', // will always sort to be on the bottom
@@ -85,6 +113,7 @@ export class HomePage {
             ]
         });
         actionSheet.present();
+      });
     }
     itemTapped(event, movie) {
         this.navCtrl.push(MovieInfo, {

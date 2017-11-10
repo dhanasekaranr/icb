@@ -86,9 +86,10 @@ export class Authentication {
     // Clear subject
     this.accessTokenSubject = null;
     // Remove saved credentials from Facebook login service
-    this.facebookAuthentication.logout();
+    //this.facebookAuthentication.logout();
 
     // Perform request
     return this.http.post(this.baseUrl + '/api/Account/Logout', null, options);
+    //return null;
   }
 }

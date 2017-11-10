@@ -17,7 +17,9 @@ export class Login {
               public navParams: NavParams,
               private authentication: Authentication,
               private user: User) {
-  }
+
+              }
+
 
   facebookLogin () {
     this.authentication.facebookLogin()
@@ -46,24 +48,23 @@ export class Login {
 
   credentialsLogin () {
     // Credentials should be fetched through input fields, but they are hardcoded here for clarity
-      
+
       let credentials = {
-          username: this.email, // 'test@test121.com',
-          password: this.pwd //'Junkpass75@1'
+          username: this.email,
+          password: this.pwd
     };
 
     this.authentication.credentialsLogin(credentials)
     .subscribe( token => {
       // Now use the retrieved access token to perform authenticated requests to the API
-      console.log('token retrieved', token);
-
+   //   console.log('token retrieved', token);
       this.user.getUserInfo(token)
       .subscribe( user => {
-        console.log('retrieved user, response:', user);
+  //      console.log('retrieved user, response:', user);
 
         // If the user has registered, proceed to the values page,
         // else go to the register external user page
-        if (user.HasRegistered) {
+        if (this.authentication.getAccessToken() != null) {
             this.navCtrl.push(Tab);
         } else {
 
@@ -71,6 +72,7 @@ export class Login {
           this.user.registerLocalUser(token, credentials)
           .subscribe( response => {
               this.navCtrl.push(Tab);
+
           });
         }
       })

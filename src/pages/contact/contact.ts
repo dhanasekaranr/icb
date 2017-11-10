@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 import { NavController, Platform, ActionSheetController } from 'ionic-angular';
 import { icbService } from '../../shared/service';
-
+import { Storage } from '@ionic/storage';
 @Component({
   selector: 'page-contact',
   templateUrl: 'contact.html',
@@ -11,8 +11,8 @@ import { icbService } from '../../shared/service';
 export class ContactPage {
 
   trans: Array<any>;
-  constructor(public navCtrl: NavController, private movieService: icbService, public platform: Platform,
-    public actionsheetCtrl: ActionSheetController) {
+  constructor(public navCtrl: NavController, private icbservice: icbService, public platform: Platform,
+    public actionsheetCtrl: ActionSheetController, public storage: Storage) {
       this.searchTransDB(null);
 }
 searchTransDB(event) {
@@ -21,19 +21,15 @@ searchTransDB(event) {
       queryval = event.target.value;
 
     if (queryval.length > 1 || queryval == "") {
-        this.movieService.searchTrans(queryval).subscribe(
+        this.icbservice.searchTrans('Trans',queryval).then(
             data => {
                 this.trans = data;
-                console.log(data);
-            },
-            err => {
-                console.log(err);
-            },
-            () => console.log('Movie Search Complete')
+               // console.log(data);
+            }
         );
     }
 }
-openMenu(event, key) {
+openMenu(event, key)  {
   let actionSheet = this.actionsheetCtrl.create({
       title: 'Click the link below.',
       cssClass: 'action-sheets-basic-page',
@@ -51,20 +47,6 @@ openMenu(event, key) {
               icon: !this.platform.is('ios') ? 'share' : null,
               handler: () => {
                   console.log('Share clicked');
-              }
-          },
-          {
-              text: 'Play',
-              icon: !this.platform.is('ios') ? 'arrow-dropright-circle' : null,
-              handler: () => {
-                  console.log('Play clicked');
-              }
-          },
-          {
-              text: 'Favorite',
-              icon: !this.platform.is('ios') ? 'heart-outline' : null,
-              handler: () => {
-                  console.log('Favorite clicked');
               }
           },
           {
