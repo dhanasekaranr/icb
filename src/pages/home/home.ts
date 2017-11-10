@@ -19,7 +19,7 @@ export class HomePage {
     AvailableCount : any;
     RentedOut;
     constructor(public navCtrl: NavController, private service: icbService, public platform: Platform,
-        public actionsheetCtrl: ActionSheetController,private authentication: Authentication,) {
+        public actionsheetCtrl: ActionSheetController,private authentication: Authentication) {
 
           //if (this.authentication.getAccessToken() != null) {
           this.searchBookDB(null);
