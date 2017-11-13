@@ -1,17 +1,24 @@
 <ion-header>
-    <ion-navbar>
-        <ion-title>
-            Book List
-        </ion-title>
-    </ion-navbar>
+  <ion-navbar color="header">
+    <ion-title>Books</ion-title>
+        <ion-buttons end>
+
+          <button style="background-color: #0277bd">
+            <ion-icon  style="color:white; font-size: 25px;" name="md-log-out" tabtitle="LogOut" (click)="this.logOut();"></ion-icon>
+          </button>
+        </ion-buttons>
+  </ion-navbar>
 </ion-header>
 
-<ion-content class="home" padding>
+<ion-content class="home" padding >
     <ion-item>
-        <ion-input type="text" placeholder="Search a book..." (input)="searchBookDB($event)"></ion-input>
+
+        <ion-searchbar
+        [showCancelButton]="true"
+        (ionInput)="searchBookDB($event)"
+        (ionCancel)="searchBookDB($event)">
+      </ion-searchbar>
     </ion-item>
-
-
 
     <ion-list>
 
@@ -20,19 +27,19 @@
           <ion-avatar item-left>
             <img src="{{movie.PictureLink}}" />
         </ion-avatar>
-        <h2 >{{movie.Description}}</h2>
+        <h3>{{movie.Description}}</h3>
 
-        <p *ngIf="movie.Counter > 0" class="item-description" style="color:red">Total Books : {{movie.Counter}}
-          <span *ngIf="movie.SubCounter > 0">[Checked Out : {{movie.SubCounter}}]</span></p>
+        <p *ngIf="movie.TotalCopies > 0" class="item-description" style="color:red">Available : {{movie.TotalCopies - movie.RentedCopies}}
+          <span *ngIf="movie.RentedCopies > 0">[Checked Out : {{movie.RentedCopies}}]</span></p>
       </ion-item>
         <ion-item-options>
-          <button ion-button color="danger" (click)="returnBook(movie)" icon-start *ngIf="movie.SubCounter > 0 ">
+          <button ion-button color="danger" (click)="returnBook(movie)" icon-start *ngIf="movie.RentedCopies > 0 ">
               <ion-icon name="refresh"></ion-icon>
-              Return Book ({{movie.SubCounter}})
+              Return Book ({{movie.RentedCopies}})
           </button>
-          <button ion-button color="primary" (click)="checkout(movie)" icon-start *ngIf="movie.Counter > 0">
+          <button ion-button color="primary" (click)="checkout(movie)" icon-start *ngIf="(movie.TotalCopies - movie.RentedCopies) > 0">
               <ion-icon name="cart"></ion-icon>
-            Check out ({{movie.Counter - movie.SubCounter}})
+            Check out ({{movie.TotalCopies - movie.RentedCopies}})
           </button>
         </ion-item-options>
       </ion-item-sliding>

@@ -66,6 +66,9 @@ export class Authentication {
       // Save the access token in storage
       this.storage.set('accessToken', accessToken);
 
+      this.storage.set('username', credentials.username);
+      this.storage.set('password', credentials.password);
+
       // Set the access token as the result for the observerable
       this.accessTokenSubject.next(accessToken);
       this.accessTokenSubject.complete();

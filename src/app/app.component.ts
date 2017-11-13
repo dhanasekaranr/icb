@@ -11,7 +11,7 @@ import { Tab } from '../pages/tab/tab';
 
 import { HomePage } from '../pages/home/home';
 import { ContactPage } from '../pages/contact/contact';
-import { AboutPage } from '../pages/about/about';
+import { UserPage } from '../pages/user/user';
 import { MovieInfo } from '../pages/home/movie-info';
 import { TransPage } from '../pages/home/trans';
 import { RentPage } from '../pages/home/Rent';
@@ -28,7 +28,7 @@ import '../shared/rxjs-operators';
     Values,
     User,
     GlobalSettings,
-      Tab, HomePage, ContactPage, AboutPage, MovieInfo, TransPage,RentPage
+      Tab, HomePage, ContactPage, UserPage, MovieInfo, TransPage,RentPage
   ]
 })
 export class MyApp {

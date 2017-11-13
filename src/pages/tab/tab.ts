@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { HomePage } from '../home/home';
-import { AboutPage } from '../about/about';
+import { UserPage } from '../user/user';
 import { ContactPage } from '../contact/contact';
 import { NavController, NavParams } from 'ionic-angular';
 import { User, Authentication } from '../../shared/shared';
@@ -13,9 +13,8 @@ export class Tab {
     // this tells the tabs component which Pages
     // should be each tab's root Page
     tab1Root: any = HomePage;
-    tab2Root: any = AboutPage;
+    tab2Root: any = UserPage;
     tab3Root: any = ContactPage;
-
     constructor(public navCtrl: NavController,
         public navParams: NavParams,
         private authentication: Authentication,

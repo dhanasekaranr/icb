@@ -3,12 +3,12 @@ import { NavController, Platform, ActionSheetController } from 'ionic-angular';
 import { icbService } from '../../shared/service';
 
 @Component({
-  selector: 'page-about',
-  templateUrl: 'about.html',
+  selector: 'page-user',
+  templateUrl: 'user.html',
   providers: [icbService]
 
 })
-export class AboutPage {
+export class UserPage {
   users: Array<any>;
   constructor(public navCtrl: NavController, private movieService: icbService, public platform: Platform,
     public actionsheetCtrl: ActionSheetController) {
@@ -16,8 +16,10 @@ export class AboutPage {
 }
 searchUserDB(event) {
     let queryval = "";
-    if( event )
-      queryval = event.target.value;
+    if( event ){
+      if(event.target.value != undefined)
+        queryval = event.target.value;
+     }
 
     if (queryval.length > 1 || queryval == "") {
         this.movieService.searchTrans('user',queryval).then(

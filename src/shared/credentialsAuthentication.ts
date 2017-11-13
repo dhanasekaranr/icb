@@ -19,6 +19,7 @@ export class CredentialsAuthentication {
     // Construct data
     let loginData = 'grant_type=password&username=' + credentials.username + '&password=' + credentials.password;
 
+
     // Construct POST Headers
     let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded'  });
     let options = new RequestOptions({ headers: headers });

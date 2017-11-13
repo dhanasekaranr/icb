@@ -7,7 +7,7 @@ import { ValuesPage } from '../pages/values/values';
 import { Tab } from '../pages/tab/tab';
 import { HomePage } from '../pages/home/home';
 import { ContactPage } from '../pages/contact/contact';
-import { AboutPage } from '../pages/about/about';
+import { UserPage } from '../pages/user/user';
 import { MovieInfo } from '../pages/home/movie-info';
 import { TransPage } from '../pages/home/trans';
 import { RentPage } from '../pages/home/Rent';
@@ -17,7 +17,7 @@ import { RentPage } from '../pages/home/Rent';
     RegisterExternalUser,
     ValuesPage,
       Login,
-      Tab, HomePage, ContactPage, AboutPage,MovieInfo, TransPage,RentPage
+      Tab, HomePage, ContactPage, UserPage,MovieInfo, TransPage,RentPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -28,7 +28,7 @@ import { RentPage } from '../pages/home/Rent';
     RegisterExternalUser,
     ValuesPage,
     Login,
-      Tab, HomePage, ContactPage, AboutPage, MovieInfo, TransPage,RentPage
+      Tab, HomePage, ContactPage, UserPage, MovieInfo, TransPage,RentPage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
 })

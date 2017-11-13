@@ -1,10 +1,12 @@
+import { Tab } from '../tab/tab';
 import { Component } from '@angular/core';
 import { NavController, Platform, ActionSheetController } from 'ionic-angular';
 import { icbService } from '../../shared/service';
 import { MovieInfo } from './movie-info';
 import { TransPage } from './trans';
 import { RentPage } from './Rent';
-import { Authentication, User } from '../../shared/shared';
+import { User,Authentication } from '../../shared/shared';
+import { Login } from '../login/login';
 @Component({
     selector: 'page-home',
     templateUrl: 'home.html',
@@ -19,7 +21,7 @@ export class HomePage {
     AvailableCount : any;
     RentedOut;
     constructor(public navCtrl: NavController, private service: icbService, public platform: Platform,
-        public actionsheetCtrl: ActionSheetController,private authentication: Authentication) {
+        public actionsheetCtrl: ActionSheetController,public authentication: Authentication) {
 
           //if (this.authentication.getAccessToken() != null) {
           this.searchBookDB(null);
@@ -30,8 +32,11 @@ export class HomePage {
     searchBookDB(event){
        // console.log(event.target.value);
        let queryval = "";
-       if( event )
-         queryval = event.target.value;
+
+       if( event ){
+        if(event.target.value != undefined)
+          queryval = event.target.value;
+       }
         if (queryval.length > 1 || queryval == "" ) {
             this.service.searchTrans('values',queryval).then(
               data => {
@@ -122,4 +127,10 @@ export class HomePage {
             movie: movie
         });
     }
+    logOut() {
+      // console.log(event.target.value);
+           this.authentication.logout();
+           this.navCtrl.push(Login);
+
+   }
 }

@@ -1,8 +1,14 @@
 <ion-header>
-    <ion-navbar >
-      <ion-title>Book Info</ion-title>
-    </ion-navbar>
-  </ion-header>
+  <ion-navbar color="header">
+    <ion-title>Return Book</ion-title>
+        <ion-buttons end>
+
+          <button style="background-color: #0277bd">
+            <ion-icon  style="color:white; font-size: 25px;" name="md-log-out" tabtitle="LogOut" (click)="this.logOut();"></ion-icon>
+          </button>
+        </ion-buttons>
+  </ion-navbar>
+</ion-header>
   <ion-content class="home" padding>
     <div *ngIf="book" class="selection">
       <ion-card>
@@ -16,23 +22,13 @@
     </div>
 
       <ion-list>
-          <ion-list-header>
-              User List
-            </ion-list-header>
-          <ion-item-sliding *ngFor="let user of users">
-            <ion-item>
-              <ion-icon name="contact"  item-start></ion-icon> {{user.CreatedBy}}
-              <ion-note item-end>
-                  <p> Rented Date : {{user.CreatedDate | date: "MM/dd/yyyy"}}</p>
-              </ion-note>
 
-            </ion-item>
-            <ion-item-options>
-              <button ion-button color="primary" (click)="updateStat(user.Id)" icon-start>
-                  <ion-icon name="refresh"></ion-icon>
-                  Return
-              </button>
-            </ion-item-options>
-          </ion-item-sliding>
+
+          <ion-item *ngFor="let user of users" >
+            <ion-icon name="contact" item-start></ion-icon> {{user.CreatedBy}}
+            <button default ion-button item-right color="primary" (click)="updateStat(user.Id)">
+              Return</button>
+             <br> Rented Date : {{user.CreatedDate | date: "MM/dd/yyyy"}}
+          </ion-item>
         </ion-list>
   </ion-content>

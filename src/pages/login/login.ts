@@ -1,11 +1,9 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-
 import { Authentication, User } from '../../shared/shared';
-
 import { Tab } from '../tab/tab';
 //import { RegisterExternalUser } from '../registerExternalUser/registerExternalUser';
-
+import { Storage } from '@ionic/storage';
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html'
@@ -16,7 +14,17 @@ export class Login {
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               private authentication: Authentication,
-              private user: User) {
+              private user: User,private storage: Storage) {
+
+                this.storage.get('username').then((username) => {
+                        if (username != null) {
+                            this.email = username;
+                            this.storage.get('password').then((password) => {
+                              this.pwd = password;
+                            });
+                        }
+                    });
+
 
               }
 
@@ -37,7 +45,7 @@ export class Login {
         } else {
 
           // Register the user and continue
-          this.user.registerExternalUser(token, 'anders@facebook.com')
+          this.user.registerExternalUser(token, 'icarebooks@facebook.com')
           .subscribe( response => {
               this.navCtrl.push(Tab);
           });
@@ -74,8 +82,11 @@ export class Login {
               this.navCtrl.push(Tab);
 
           });
+
         }
       })
     });
   }
+
+
 }
