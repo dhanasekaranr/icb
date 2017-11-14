@@ -6,11 +6,11 @@ import { ToastController } from 'ionic-angular';
 import { Authentication } from '../../shared/shared';
 import { Login } from '../login/login';
 @Component({
-    selector: 'page-trans',
-    templateUrl: 'trans.html',
+    selector: 'page-Return',
+    templateUrl: 'Return.html',
     providers: [icbService]
 })
-export class TransPage {
+export class ReturnPage {
 
   book: Array<any>;
   users: Array<any>;

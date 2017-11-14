@@ -7,11 +7,11 @@ import { Tab } from '../tab/tab';
 import { Authentication } from '../../shared/shared';
 import { Login } from '../login/login';
 @Component({
-    selector: 'page-rent',
-    templateUrl: 'Rent.html',
+    selector: 'page-CheckOut',
+    templateUrl: 'CheckOut.html',
     providers: [icbService]
 })
-export class RentPage {
+export class CheckOutPage {
   queryval: any;
   book: Array<any>;
   users: Array<any>;

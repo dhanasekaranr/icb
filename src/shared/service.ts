@@ -12,8 +12,8 @@ export class icbService {
 
     constructor(private http: Http, private storage: Storage,private globalSettings: GlobalSettings) {
 
-     // this.baseUrl = 'http://localhost:52146';//globalSettings.getSettings().apiUrl;
-      this.baseUrl =   'http://www.api.icarebooks.com';
+      this.baseUrl = 'http://localhost:52146';//globalSettings.getSettings().apiUrl;
+     // this.baseUrl =   'http://www.api.icarebooks.com';
     }
 
 
@@ -112,4 +112,16 @@ export class icbService {
         });
       });
   }
+  GetBookInfo(isbn) {
+    var url = 'https://www.googleapis.com/books/v1/volumes?q=isbn:' + isbn;
+    return new Promise<any>( resolve => {
+      this.http.get(url)
+      .map(res => res.json())
+      .subscribe( data =>{
+          this.data = data;
+          resolve(this.data);
+      });
+      });
+  }
+
 }

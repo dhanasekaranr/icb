@@ -8,16 +8,16 @@ import { Tab } from '../pages/tab/tab';
 import { HomePage } from '../pages/home/home';
 import { ContactPage } from '../pages/contact/contact';
 import { UserPage } from '../pages/user/user';
-import { MovieInfo } from '../pages/home/movie-info';
-import { TransPage } from '../pages/home/trans';
-import { RentPage } from '../pages/home/Rent';
+import { BookInfo } from '../pages/home/BookInfo';
+import { CheckOutPage } from '../pages/home/CheckOut';
+import { ReturnPage } from '../pages/home/Return';
 @NgModule({
   declarations: [
     MyApp,
     RegisterExternalUser,
     ValuesPage,
       Login,
-      Tab, HomePage, ContactPage, UserPage,MovieInfo, TransPage,RentPage
+      Tab, HomePage, ContactPage, UserPage,BookInfo, CheckOutPage,ReturnPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -28,7 +28,7 @@ import { RentPage } from '../pages/home/Rent';
     RegisterExternalUser,
     ValuesPage,
     Login,
-      Tab, HomePage, ContactPage, UserPage, MovieInfo, TransPage,RentPage
+      Tab, HomePage, ContactPage, UserPage, BookInfo, CheckOutPage,ReturnPage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
 })

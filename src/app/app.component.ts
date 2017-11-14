@@ -12,9 +12,9 @@ import { Tab } from '../pages/tab/tab';
 import { HomePage } from '../pages/home/home';
 import { ContactPage } from '../pages/contact/contact';
 import { UserPage } from '../pages/user/user';
-import { MovieInfo } from '../pages/home/movie-info';
-import { TransPage } from '../pages/home/trans';
-import { RentPage } from '../pages/home/Rent';
+import { BookInfo } from '../pages/home/BookInfo';
+import { ReturnPage } from '../pages/home/Return';
+import { CheckOutPage } from '../pages/home/CheckOut';
 import '../shared/rxjs-operators';
 
 @Component({
@@ -28,7 +28,7 @@ import '../shared/rxjs-operators';
     Values,
     User,
     GlobalSettings,
-      Tab, HomePage, ContactPage, UserPage, MovieInfo, TransPage,RentPage
+      Tab, HomePage, ContactPage, UserPage, BookInfo, ReturnPage,CheckOutPage
   ]
 })
 export class MyApp {

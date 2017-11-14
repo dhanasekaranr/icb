@@ -1,10 +1,10 @@
+import { ReturnPage } from './Return';
 import { Tab } from '../tab/tab';
 import { Component } from '@angular/core';
 import { NavController, Platform, ActionSheetController } from 'ionic-angular';
 import { icbService } from '../../shared/service';
-import { MovieInfo } from './movie-info';
-import { TransPage } from './trans';
-import { RentPage } from './Rent';
+import { BookInfo } from './BookInfo';
+import { CheckOutPage } from './CheckOut';
 import { User,Authentication } from '../../shared/shared';
 import { Login } from '../login/login';
 @Component({
@@ -41,7 +41,7 @@ export class HomePage {
             this.service.searchTrans('values',queryval).then(
               data => {
                 this.movies = data;
-                //console.log(data);
+                console.log(data);
             }
         ).catch(err => {
            console.log(err);
@@ -50,19 +50,19 @@ export class HomePage {
     }
     bookInfo( key)
     {
-      this.navCtrl.push(MovieInfo, {
+      this.navCtrl.push(BookInfo, {
         movie:key
       });
     }
     returnBook( key)
     {
-      this.navCtrl.push(TransPage, {
+      this.navCtrl.push(ReturnPage, {
         book:key, isbn: key.ISBN,action: 'Out'
       });
     }
     checkout( key)
     {
-      this.navCtrl.push(RentPage, {
+      this.navCtrl.push(CheckOutPage, {
         book:key, isbn: key.ISBN,action: 'Out'
       });
     }
@@ -82,7 +82,7 @@ export class HomePage {
                     icon: !this.platform.is('ios') ? 'list' : null,
                     handler: () => {
                        // console.log('Delete clicked');
-                        this.navCtrl.push(MovieInfo, {
+                        this.navCtrl.push(BookInfo, {
                             movie: key
                         });
                     }
@@ -123,7 +123,7 @@ export class HomePage {
       });
     }
     itemTapped(event, movie) {
-        this.navCtrl.push(MovieInfo, {
+        this.navCtrl.push(BookInfo, {
             movie: movie
         });
     }
