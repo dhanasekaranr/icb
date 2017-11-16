@@ -37,7 +37,8 @@ export class ReturnPage {
                 duration: 2000
               });
               toast.present();
-               this.navCtrl.push(HomePage);
+              if(this.users.length == 0)
+                this.navCtrl.push(HomePage);
            }
        );
    }

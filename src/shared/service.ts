@@ -12,8 +12,8 @@ export class icbService {
 
     constructor(private http: Http, private storage: Storage,private globalSettings: GlobalSettings) {
 
-     // this.baseUrl = 'http://localhost:52146';//globalSettings.getSettings().apiUrl;
-      this.baseUrl =   'http://www.api.icarebooks.com';
+      //this.baseUrl = 'http://localhost:52146';//globalSettings.getSettings().apiUrl;
+    this.baseUrl =   'http://www.api.icarebooks.com';
     }
 
 
@@ -104,6 +104,22 @@ export class icbService {
           let headers = new Headers({ 'Content-Type': 'application/json' });
           headers.append('Authorization', 'Bearer ' + token);
           this.http.put(url, body, {headers : headers}).map(res => res.json())
+          .subscribe( data =>{
+              this.data = data;
+              resolve(this.data);
+          });
+
+        });
+      });
+  }
+  notify(userId, BookId, transactions,search) {
+    var url = this.baseUrl + '/api/User';
+    return new Promise<any>( resolve => {
+        this.storage.get('accessToken').then((token) => {
+          let body = JSON.stringify({id:userId, bookId:BookId,transaction:transactions,search:search});
+          let headers = new Headers({ 'Content-Type': 'application/json' });
+          headers.append('Authorization', 'Bearer ' + token);
+          this.http.post(url, body,{headers : headers}).map(res => res.json())
           .subscribe( data =>{
               this.data = data;
               resolve(this.data);

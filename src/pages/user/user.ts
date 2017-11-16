@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { NavController, Platform, ActionSheetController } from 'ionic-angular';
+import { NavController, Platform, ActionSheetController,ToastController } from 'ionic-angular';
 import { icbService } from '../../shared/service';
-
+import { HomePage } from '../home/home';
 @Component({
   selector: 'page-user',
   templateUrl: 'user.html',
@@ -10,19 +10,27 @@ import { icbService } from '../../shared/service';
 })
 export class UserPage {
   users: Array<any>;
-  constructor(public navCtrl: NavController, private movieService: icbService, public platform: Platform,
-    public actionsheetCtrl: ActionSheetController) {
+  queryval = "";
+  constructor(public navCtrl: NavController, private icbservice: icbService, public platform: Platform,
+    public actionsheetCtrl: ActionSheetController, public toastCtrl: ToastController) {
       this.searchUserDB(null);
 }
+ionViewWillEnter(){
+  // this.searchBookDB(this.queryval);
+   //console.log("Enter :", this.users)
+   if(this.users) //reload the data.
+     this.icbservice.searchTrans('user',this.queryval).then(data => {this.users = data;});
+
+ }
 searchUserDB(event) {
-    let queryval = "";
+  this.queryval = "";
     if( event ){
       if(event.target.value != undefined)
-        queryval = event.target.value;
+        this.queryval = event.target.value;
      }
 
-    if (queryval.length > 1 || queryval == "") {
-        this.movieService.searchTrans('user',queryval).then(
+    if (this.queryval.length > 1 || this.queryval == "") {
+        this.icbservice.searchTrans('user',this.queryval).then(
             data => {
               this.users = data;
               console.log(data);
@@ -30,7 +38,22 @@ searchUserDB(event) {
       );
       }
 }
-openMenu(event, key) {
+notify(userId, BookId, transactions){
+     this.icbservice.notify(userId, BookId, transactions,this.queryval).then(
+               data => {
+                 console.log(data);
+                 this.users = data;
+                 let toast = this.toastCtrl.create({
+                  message: "Notified User !",
+                  duration: 2000
+                });
+                toast.present();
+               //  this.navCtrl.push(HomePage);
+
+             }
+         );
+     }
+openMenu(key) {
   let actionSheet = this.actionsheetCtrl.create({
       title: 'Click the link below.',
       cssClass: 'action-sheets-basic-page',

@@ -6,6 +6,7 @@ import { HomePage } from '../home/home';
 import { Tab } from '../tab/tab';
 import { Authentication } from '../../shared/shared';
 import { Login } from '../login/login';
+import { ToastController } from 'ionic-angular';
 @Component({
     selector: 'page-CheckOut',
     templateUrl: 'CheckOut.html',
@@ -16,10 +17,12 @@ export class CheckOutPage {
   book: Array<any>;
   users: Array<any>;
   isbn: any;
+  copy = 0;
     constructor(public navCtrl: NavController, private navParams: NavParams, private bookService: icbService,
-      public authentication: Authentication) {
+      public authentication: Authentication,public toastCtrl: ToastController) {
       this.book = navParams.get('book');
       this.isbn = navParams.get('isbn');
+      this.copy = navParams.get('copy');
       this.searchUserDB(null);
     }
     searchUserDB(event) {
@@ -39,15 +42,20 @@ export class CheckOutPage {
         }
   }
     updateStat(id){
-
-
            this.bookService.markRent(this.queryval,id,this.isbn).then(
              data => {
-            //   console.log(data);
-               this.users = data;
-               this.navCtrl.push(HomePage, {
-                //movie: key
-            });
+               console.log("copy:", this.copy);
+
+               let toast = this.toastCtrl.create({
+                message: "Checked out successfully !",
+                duration: 2000
+              });
+              toast.present();
+              this.copy--;
+              if(this.copy == 0)
+                this.navCtrl.push(HomePage, {});
+               else
+                 this.users = data;
            }
        );
    }

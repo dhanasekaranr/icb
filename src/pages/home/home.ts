@@ -20,6 +20,7 @@ export class HomePage {
     Available : Array<any>;
     AvailableCount : any;
     RentedOut;
+    queryval = "";
     constructor(public navCtrl: NavController, private service: icbService, public platform: Platform,
         public actionsheetCtrl: ActionSheetController,public authentication: Authentication) {
 
@@ -28,20 +29,26 @@ export class HomePage {
          // }
 
     }
+    ionViewWillEnter(){
+     // this.searchBookDB(this.queryval);
+      //console.log("entering ionViewWillEnter;",this.movies)
 
+       if(this.movies) //reload the data.
+         this.service.searchTrans('values',this.queryval).then(data => {this.movies = data;});
+    }
     searchBookDB(event){
        // console.log(event.target.value);
-       let queryval = "";
+      // let queryval = "";
 
        if( event ){
         if(event.target.value != undefined)
-          queryval = event.target.value;
+          this.queryval = event.target.value;
        }
-        if (queryval.length > 1 || queryval == "" ) {
-            this.service.searchTrans('values',queryval).then(
+        if ( this.queryval.length > 1 ||  this.queryval == "" ) {
+            this.service.searchTrans('values', this.queryval).then(
               data => {
                 this.movies = data;
-                console.log(data);
+               // console.log(data);
             }
         ).catch(err => {
            console.log(err);
@@ -63,7 +70,7 @@ export class HomePage {
     checkout( key)
     {
       this.navCtrl.push(CheckOutPage, {
-        book:key, isbn: key.ISBN,action: 'Out'
+        book:key, isbn: key.ISBN,copy:key.TotalCopies - key.RentedCopies,action: 'Out'
       });
     }
     openMenu(event, key) {

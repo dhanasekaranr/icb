@@ -20,16 +20,16 @@
     </ion-searchbar>
   </ion-item>
 
-  <ion-card *ngFor="let user of users" (click)="openMenu(event, user)">
-    <ion-card-header>
+  <ion-card *ngFor="let user of users" cache-view="false">
+    <ion-card-header (click)="openMenu(user)">
          <ion-icon name="contact" item-left></ion-icon> {{user.FirstName}} {{user.LastName}} - {{user.Email}}
     </ion-card-header>
    <ion-card-content color="danger" *ngIf="user.BookList.length > 0">
      Books Checkedout - {{user.BookList.length}}
      <ion-item *ngFor="let bk of user.BookList" text-wrap>
         <p color="danger">{{bk.Description}}</p>
-        <button default ion-button item-right color="primary" (click)="updateStat(user.Id)">
-          Notify</button>
+        <button default ion-button item-right color="primary" (click)="notify(user.Id,bk.Description, bk.RentedTransactions[0].TransactionId)">
+          Notify ({{bk.RentedTransactions.length - 1}})</button>
      </ion-item>
     </ion-card-content>
   </ion-card>
