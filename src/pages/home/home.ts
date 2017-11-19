@@ -34,7 +34,7 @@ export class HomePage {
       //console.log("entering ionViewWillEnter;",this.movies)
 
        if(this.movies) //reload the data.
-         this.service.searchTrans('values',this.queryval).then(data => {this.movies = data;});
+         this.service.searchTrans('book',this.queryval).then(data => {this.movies = data;});
     }
     searchBookDB(event){
        // console.log(event.target.value);
@@ -45,7 +45,7 @@ export class HomePage {
           this.queryval = event.target.value;
        }
         if ( this.queryval.length > 1 ||  this.queryval == "" ) {
-            this.service.searchTrans('values', this.queryval).then(
+            this.service.searchTrans('book', this.queryval).then(
               data => {
                 this.movies = data;
                // console.log(data);

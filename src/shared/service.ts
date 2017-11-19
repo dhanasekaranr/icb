@@ -12,7 +12,7 @@ export class icbService {
 
     constructor(private http: Http, private storage: Storage,private globalSettings: GlobalSettings) {
 
-      //this.baseUrl = 'http://localhost:52146';//globalSettings.getSettings().apiUrl;
+   //   this.baseUrl = 'http://localhost:52146';//globalSettings.getSettings().apiUrl;
     this.baseUrl =   'http://www.api.icarebooks.com';
     }
 
@@ -36,7 +36,7 @@ export class icbService {
       });
   }
   getBookProfile(isbn) {
-    var url = this.baseUrl + '/api/Values/get/2/' + isbn ;
+    var url = this.baseUrl + '/api/book/get/2/' + isbn ;
     return new Promise<any>( resolve => {
         this.storage.get('accessToken').then((token) => {
           let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
@@ -66,7 +66,7 @@ export class icbService {
       });
   }
   getTransaction(isbn) {
-    var url = this.baseUrl + '/api/Values/get/' + isbn ;
+    var url = this.baseUrl + '/api/book/get/' + isbn ;
     return new Promise<any>( resolve => {
         this.storage.get('accessToken').then((token) => {
           let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
@@ -81,7 +81,7 @@ export class icbService {
       });
   }
   markReturn(xid) {
-    var url = this.baseUrl + '/api/Values';
+    var url = this.baseUrl + '/api/book';
     return new Promise<any>( resolve => {
         this.storage.get('accessToken').then((token) => {
           let body = JSON.stringify({id:xid});
