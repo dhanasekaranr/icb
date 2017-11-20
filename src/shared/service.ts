@@ -12,11 +12,9 @@ export class icbService {
 
     constructor(private http: Http, private storage: Storage,private globalSettings: GlobalSettings) {
 
-<<<<<<< HEAD
      // this.baseUrl = 'http://localhost:52146';//globalSettings.getSettings().apiUrl;
-=======
    //   this.baseUrl = 'http://localhost:52146';//globalSettings.getSettings().apiUrl;
->>>>>>> d64b6a66527239582309e9a3fb4b7f4e0f032ce9
+
     this.baseUrl =   'http://www.api.icarebooks.com';
     }
 
