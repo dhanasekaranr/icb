@@ -33,7 +33,7 @@ searchUserDB(event) {
         this.icbservice.searchTrans('user',this.queryval).then(
             data => {
               this.users = data;
-              console.log(data);
+              //console.log(data);
           }
       );
       }

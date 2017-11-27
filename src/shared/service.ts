@@ -12,10 +12,10 @@ export class icbService {
 
     constructor(private http: Http, private storage: Storage,private globalSettings: GlobalSettings) {
 
-     // this.baseUrl = 'http://localhost:52146';//globalSettings.getSettings().apiUrl;
+   //   this.baseUrl = 'http://localhost:52146';//globalSettings.getSettings().apiUrl;
    //   this.baseUrl = 'http://localhost:52146';//globalSettings.getSettings().apiUrl;
 
-    this.baseUrl =   'http://www.api.icarebooks.com';
+    this.baseUrl =   'http://api.icarebooks.com';
     }
 
 
@@ -31,9 +31,14 @@ export class icbService {
           this.http.get(url, {headers : headers})
           .map(res => res.json())
           .subscribe( data =>{
+            console.log(data);
               this.data = data;
               resolve(this.data);
-          });
+          },err => {
+            //this.showAlert(err);
+            //reject(err);
+            console.log(err);
+        });
         });
       });
   }

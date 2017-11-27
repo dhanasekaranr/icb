@@ -7,6 +7,7 @@ import { BookInfo } from './BookInfo';
 import { CheckOutPage } from './CheckOut';
 import { User,Authentication } from '../../shared/shared';
 import { Login } from '../login/login';
+import { LoadingController } from 'ionic-angular';
 @Component({
     selector: 'page-home',
     templateUrl: 'home.html',
@@ -21,12 +22,19 @@ export class HomePage {
     AvailableCount : any;
     RentedOut;
     queryval = "";
+    loader;
     constructor(public navCtrl: NavController, private service: icbService, public platform: Platform,
-        public actionsheetCtrl: ActionSheetController,public authentication: Authentication) {
+        public actionsheetCtrl: ActionSheetController,public authentication: Authentication,public loading: LoadingController) {
 
           //if (this.authentication.getAccessToken() != null) {
+            this.loader = this.loading.create({
+              content: 'Getting books...',
+            });
           this.searchBookDB(null);
          // }
+
+
+
 
     }
     ionViewWillEnter(){
@@ -45,14 +53,22 @@ export class HomePage {
           this.queryval = event.target.value;
        }
         if ( this.queryval.length > 1 ||  this.queryval == "" ) {
+
+          this.loader.present().then(() => {
             this.service.searchTrans('book', this.queryval).then(
               data => {
                 this.movies = data;
+                this.loader.dismiss();
                // console.log(data);
-            }
-        ).catch(err => {
-           console.log(err);
-      });
+                    }
+                ).catch(err => {
+                  console.log(err);
+              });
+
+          });
+
+
+
         }
     }
     bookInfo( key)
