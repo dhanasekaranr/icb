@@ -25,22 +25,14 @@ export class HomePage {
     loader;
     constructor(public navCtrl: NavController, private service: icbService, public platform: Platform,
         public actionsheetCtrl: ActionSheetController,public authentication: Authentication,public loading: LoadingController) {
-
-          //if (this.authentication.getAccessToken() != null) {
+        if( this.authentication.getAccessToken() != null){
             this.loader = this.loading.create({
               content: 'Getting books...',
             });
           this.searchBookDB(null);
-         // }
-
-
-
-
+          }
     }
     ionViewWillEnter(){
-     // this.searchBookDB(this.queryval);
-      //console.log("entering ionViewWillEnter;",this.movies)
-
        if(this.movies) //reload the data.
          this.service.searchTrans('book',this.queryval).then(data => {this.movies = data;});
     }
