@@ -4,7 +4,7 @@ import { StatusBar, Splashscreen } from 'ionic-native';
 import { HttpModule } from '@angular/http';
 import { Storage } from '@ionic/storage';
 
-import { Authentication, FacebookAuthentication, CredentialsAuthentication, Values, GlobalSettings, User } from '../shared/shared';
+import { Authentication, FacebookAuthentication, CredentialsAuthentication, Values, GlobalSettings, User} from '../shared/shared';
 
 import { Login } from '../pages/login/login';
 import { Tab } from '../pages/tab/tab';
@@ -15,6 +15,7 @@ import { UserPage } from '../pages/user/user';
 import { BookInfo } from '../pages/home/BookInfo';
 import { ReturnPage } from '../pages/home/Return';
 import { CheckOutPage } from '../pages/home/CheckOut';
+import { MultiCopies } from '../pages/home/MultiCopies';
 import '../shared/rxjs-operators';
 
 @Component({
@@ -28,7 +29,7 @@ import '../shared/rxjs-operators';
     Values,
     User,
     GlobalSettings,
-      Tab, HomePage, ContactPage, UserPage, BookInfo, ReturnPage,CheckOutPage
+      Tab, HomePage, ContactPage, UserPage, BookInfo, ReturnPage,CheckOutPage,MultiCopies
   ]
 })
 export class MyApp {

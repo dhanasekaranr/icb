@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, Platform, ActionSheetController,ToastController } from 'ionic-angular';
+import { NavController, Platform, ActionSheetController,ToastController,LoadingController } from 'ionic-angular';
 import { icbService } from '../../shared/service';
 import { HomePage } from '../home/home';
 @Component({
@@ -11,16 +11,17 @@ import { HomePage } from '../home/home';
 export class UserPage {
   users: Array<any>;
   queryval = "";
+  loader;FirstNameSearch;
   constructor(public navCtrl: NavController, private icbservice: icbService, public platform: Platform,
-    public actionsheetCtrl: ActionSheetController, public toastCtrl: ToastController) {
+    public actionsheetCtrl: ActionSheetController, public toastCtrl: ToastController,public loading: LoadingController) {
+      this.loader = this.loading.create({content: 'Getting Users...'});
       this.searchUserDB(null);
 }
 ionViewWillEnter(){
-  // this.searchBookDB(this.queryval);
-   //console.log("Enter :", this.users)
-   if(this.users) //reload the data.
-     this.icbservice.searchTrans('user',this.queryval).then(data => {this.users = data;});
-
+   if(this.users) { //reload the data.{
+    this.loader = this.loading.create({content: 'Getting Users...'});
+    this.icbservice.searchTrans('user',this.queryval).then(data => {this.users = data;});
+  }
  }
 searchUserDB(event) {
   this.queryval = "";
@@ -30,18 +31,22 @@ searchUserDB(event) {
      }
 
     if (this.queryval.length > 1 || this.queryval == "") {
+      this.loader.present().then(() => {
         this.icbservice.searchTrans('user',this.queryval).then(
             data => {
               this.users = data;
-              //console.log(data);
+              this.loader.dismiss();
           }
       );
-      }
+      });
+     }
+}
+FilterUserDB(event){
+  this.FirstNameSearch = event.target.value;
 }
 notify(userId, BookId, transactions){
      this.icbservice.notify(userId, BookId, transactions,this.queryval).then(
                data => {
-                 console.log(data);
                  this.users = data;
                  let toast = this.toastCtrl.create({
                   message: "Notified User !",

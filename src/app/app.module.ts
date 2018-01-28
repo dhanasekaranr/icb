@@ -10,14 +10,16 @@ import { ContactPage } from '../pages/contact/contact';
 import { UserPage } from '../pages/user/user';
 import { BookInfo } from '../pages/home/BookInfo';
 import { CheckOutPage } from '../pages/home/CheckOut';
+import { MultiCopies } from '../pages/home/MultiCopies';
 import { ReturnPage } from '../pages/home/Return';
+import { Search} from '../shared/Search';
 @NgModule({
   declarations: [
     MyApp,
     RegisterExternalUser,
     ValuesPage,
       Login,
-      Tab, HomePage, ContactPage, UserPage,BookInfo, CheckOutPage,ReturnPage
+      Tab, HomePage, ContactPage, UserPage,BookInfo, CheckOutPage,ReturnPage, Search,MultiCopies
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -28,7 +30,7 @@ import { ReturnPage } from '../pages/home/Return';
     RegisterExternalUser,
     ValuesPage,
     Login,
-      Tab, HomePage, ContactPage, UserPage, BookInfo, CheckOutPage,ReturnPage
+      Tab, HomePage, ContactPage, UserPage, BookInfo, CheckOutPage,ReturnPage,MultiCopies
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
 })

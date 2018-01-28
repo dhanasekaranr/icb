@@ -33,10 +33,10 @@ export class Login {
     this.authentication.facebookLogin()
     .subscribe( token => {
       // Now use the retrieved access token to perform authenticated requests to the API
-      console.log('token retrieved', token);
+    //  console.log('token retrieved', token);
       this.user.getUserInfo(token)
       .subscribe( user => {
-        console.log('retrieved user, response:', user);
+    //    console.log('retrieved user, response:', user);
 
         // If the user has registered, proceed to the values page,
         // else go to the register external user page

@@ -14,17 +14,20 @@ import { ToastController } from 'ionic-angular';
 })
 export class CheckOutPage {
   queryval: any;
-  book: Array<any>;
   users: Array<any>;
-  isbn: any;
-  copy = 0;
+  code :string = "";
+  description :string = "";
+  FirstNameSearch :string ="";
     constructor(public navCtrl: NavController, private navParams: NavParams, private bookService: icbService,
       public authentication: Authentication,public toastCtrl: ToastController) {
-      this.book = navParams.get('book');
-      this.isbn = navParams.get('isbn');
-      this.copy = navParams.get('copy');
+
+      this.code = navParams.get('code');
+      this.description = navParams.get('desc');
       this.searchUserDB(null);
     }
+      FilterUserDB(event){
+      this.FirstNameSearch = event.target.value;
+  }
     searchUserDB(event) {
       this.queryval = "";
       if( event ){
@@ -33,36 +36,28 @@ export class CheckOutPage {
        }
 
       if (this.queryval.length > 1 || this.queryval == "") {
-          this.bookService.getUserByISBN(this.queryval,this.isbn).then(
+          this.bookService.getUserByISBN(this.queryval,this.code).then(
               data => {
                 this.users = data;
-             //   console.log(data);
+
             }
         );
         }
   }
     updateStat(id){
-           this.bookService.markRent(this.queryval,id,this.isbn).then(
+           this.bookService.markRent(this.queryval,id,this.code).then(
              data => {
-               console.log("copy:", this.copy);
-
                let toast = this.toastCtrl.create({
                 message: "Checked out successfully !",
                 duration: 2000
               });
               toast.present();
-              this.copy--;
-              if(this.copy == 0)
-                this.navCtrl.push(HomePage, {});
-               else
-                 this.users = data;
+                this.navCtrl.push(HomePage, {refresh: "false"});
            }
        );
    }
    logOut() {
-    // console.log(event.target.value);
          this.authentication.logout();
          this.navCtrl.push(Login);
-
  }
 }

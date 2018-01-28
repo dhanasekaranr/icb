@@ -1,9 +1,8 @@
 
 <ion-header>
   <ion-navbar color="header">
-    <ion-title>Check Out</ion-title>
+    <ion-title style="text-align: center">Return Book</ion-title>
         <ion-buttons end>
-
           <button style="background-color: #0277bd">
             <ion-icon  style="color:white; font-size: 25px;" name="md-log-out" tabtitle="LogOut" (click)="this.logOut();"></ion-icon>
           </button>
@@ -19,18 +18,16 @@
             <img src="{{book.PictureLink}}" />
           </ion-avatar>
           <p class="item-description">{{book.Description}}</p>
+
         </ion-item>
       </ion-card>
     </div>
-
       <ion-list>
-
-
-          <ion-item *ngFor="let user of users" >
-            <ion-icon name="contact" item-start></ion-icon> {{user.CreatedBy}}
-            <button default ion-button item-right color="primary" (click)="updateStat(user.Id)">
+          <ion-item *ngFor="let tran of trans" >
+            <ion-icon name="contact" item-start></ion-icon> {{tran.CreatedBy}}
+            <button default ion-button item-right color="primary" (click)="markReturn(tran.Id)">
               Return</button>
-             <br> Rented Date : {{user.CreatedDate | date: "MM/dd/yyyy"}}
+             <br> Rented Date : {{tran.CreatedDate | date: "MM/dd/yyyy"}}
           </ion-item>
         </ion-list>
   </ion-content>

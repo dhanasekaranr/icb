@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar color="header">
-    <ion-title style="text-align: center">CheckOut</ion-title>
+    <ion-title style="text-align: center">Multi Copies Checkout</ion-title>
         <ion-buttons end>
 
           <button style="background-color: #0277bd">
@@ -10,21 +10,23 @@
   </ion-navbar>
 </ion-header>
   <ion-content class="home" padding>
+
     <ion-item>
+
         <ion-searchbar
         [showCancelButton]="true"
-        (ionInput)="FilterUserDB($event)"
+        (ionInput)="FilterBookDB($event)"
         (ionCancel)="searchUserDB($event)">
       </ion-searchbar>
     </ion-item>
-    <ion-title style="color:red">{{this.code}}</ion-title>
-    <p>{{this.description}}</p>
+    <ion-title style="color:red">{{this.description}}</ion-title>
       <ion-list>
-            <ion-item *ngFor="let user of users | search: null:null:FirstNameSearch" >
-              <ion-icon name="contact" item-start></ion-icon> {{user.FirstName}} {{user.LastName}}
-              <button default ion-button item-right color="primary" (click)="updateStat(user.Id)">
-                  Check out</button>
-               <br> {{user.Email}}
+            <ion-item *ngFor="let book of books | search: null:CodeSearch" >
+              <ion-icon name="contact" item-start></ion-icon> {{book.Code}}
+              <button default ion-button item-right color="primary" (click)="updateStat(book.Code,book.Description)">
+                  Select</button>
+               <br> {{book.Description}}
+               {{book.StatusDesc}}
             </ion-item>
         </ion-list>
 

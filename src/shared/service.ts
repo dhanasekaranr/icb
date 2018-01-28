@@ -23,15 +23,12 @@ export class icbService {
     var url =this.baseUrl + '/api/' + action +'/' + name ;
     return new Promise<any>( resolve => {
         this.storage.get('accessToken').then((token) => {
-          //
           if(token == null) return;
-//
           let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
           headers.append('Authorization', 'Bearer ' + token);
           this.http.get(url, {headers : headers})
           .map(res => res.json())
           .subscribe( data =>{
-            console.log(data);
               this.data = data;
               resolve(this.data);
           },err => {
@@ -57,8 +54,10 @@ export class icbService {
         });
       });
   }
+
+
   getUserByISBN(id,isbn) {
-    var url = this.baseUrl + '/api/User/get/' + id + '/' + isbn ;
+    var url = this.baseUrl + '/api/User/get/' + id + '/' + isbn + '/';
     return new Promise<any>( resolve => {
         this.storage.get('accessToken').then((token) => {
           let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
@@ -87,14 +86,14 @@ export class icbService {
         });
       });
   }
-  markReturn(xid) {
+  markReturn(transId) {
     var url = this.baseUrl + '/api/book';
     return new Promise<any>( resolve => {
         this.storage.get('accessToken').then((token) => {
-          let body = JSON.stringify({id:xid});
+          let body = JSON.stringify({id:transId});
           let headers = new Headers({ 'Content-Type': 'application/json' });
           headers.append('Authorization', 'Bearer ' + token);
-          this.http.put(url, xid, {headers : headers}).map(res => res.json())
+          this.http.put(url, transId, {headers : headers}).map(res => res.json())
           .subscribe( data =>{
               this.data = data;
               resolve(this.data);
@@ -103,19 +102,19 @@ export class icbService {
         });
       });
   }
-  markRent(search, userid, isbn) {
-    var url = this.baseUrl + '/api/User';
+  markRent(search, userid, code) {
+    var url = this.baseUrl + '/api/user';
+    //console.log("search: " + search);
     return new Promise<any>( resolve => {
         this.storage.get('accessToken').then((token) => {
-          let body = JSON.stringify({id:userid,search:search, isbn:isbn});
+          let body = JSON.stringify({id:userid,search:search, code:code});
           let headers = new Headers({ 'Content-Type': 'application/json' });
           headers.append('Authorization', 'Bearer ' + token);
-          this.http.put(url, body, {headers : headers}).map(res => res.json())
+          this.http.put (url, body, {headers : headers}).map(res => res.json())
           .subscribe( data =>{
               this.data = data;
               resolve(this.data);
           });
-
         });
       });
   }

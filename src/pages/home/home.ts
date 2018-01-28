@@ -8,6 +8,8 @@ import { CheckOutPage } from './CheckOut';
 import { User,Authentication } from '../../shared/shared';
 import { Login } from '../login/login';
 import { LoadingController } from 'ionic-angular';
+import { MultiCopies} from './MultiCopies';
+
 @Component({
     selector: 'page-home',
     templateUrl: 'home.html',
@@ -17,27 +19,31 @@ import { LoadingController } from 'ionic-angular';
 
 export class HomePage {
 
-    movies: Array<any>;
-    Available : Array<any>;
-    AvailableCount : any;
-    RentedOut;
-    queryval = "";
-    loader;
+    books: Array<any>;Available : Array<any>;
+    AvailableCount : any;RentedOut;queryval = "";
+    loader;DescriptionSearch: string = ''; bookCoiun
+
     constructor(public navCtrl: NavController, private service: icbService, public platform: Platform,
-        public actionsheetCtrl: ActionSheetController,public authentication: Authentication,public loading: LoadingController) {
-        if( this.authentication.getAccessToken() != null){
-            this.loader = this.loading.create({
-              content: 'Getting books...',
-            });
-          this.searchBookDB(null);
-          }
+        public actionsheetCtrl: ActionSheetController,public authentication: Authentication,
+        public loading: LoadingController) {
+
+        }
+
+
+     ionViewWillEnter(){
+      if(this.books != null) {return;}
+  //      console.log("Enter");
+      if( this.authentication.getAccessToken() != null){
+        this.loader = this.loading.create({content: 'Getting books...'});
+        this.searchBookDB(null);
+        }
+        else{
+          this.navCtrl.push(Login);
+        }
     }
-    ionViewWillEnter(){
-       if(this.movies) //reload the data.
-         this.service.searchTrans('book',this.queryval).then(data => {this.movies = data;});
-    }
+
     searchBookDB(event){
-       // console.log(event.target.value);
+  //      console.log(event);
       // let queryval = "";
 
        if( event ){
@@ -46,12 +52,20 @@ export class HomePage {
        }
         if ( this.queryval.length > 1 ||  this.queryval == "" ) {
 
+
           this.loader.present().then(() => {
             this.service.searchTrans('book', this.queryval).then(
               data => {
-                this.movies = data;
+                this.books = data;
+                this.RentedOut =  this.books.reduce((previous, current) => {
+                  return previous + parseInt(current.RentedCopies);
+                }, 0);
+               // this.AvailableCount = data.filter((t) => t.Status == '2').length;
+
+                this.AvailableCount = this.books.reduce((previous, current) => {
+                  return previous + parseInt(current.TotalCopies);
+                }, 0);
                 this.loader.dismiss();
-               // console.log(data);
                     }
                 ).catch(err => {
                   console.log(err);
@@ -63,10 +77,21 @@ export class HomePage {
 
         }
     }
+    getIdCheval() {
+
+      this.AvailableCount = this.books.reduce((previous, current) => {
+        return previous + parseInt(current.Course.allocation);
+      }, 0);
+    }
+    FilterBookDB(event){
+      this.DescriptionSearch = event.target.value;
+
+  }
+
     bookInfo( key)
     {
       this.navCtrl.push(BookInfo, {
-        movie:key
+        book:key
       });
     }
     returnBook( key)
@@ -77,9 +102,17 @@ export class HomePage {
     }
     checkout( key)
     {
-      this.navCtrl.push(CheckOutPage, {
-        book:key, isbn: key.ISBN,copy:key.TotalCopies - key.RentedCopies,action: 'Out'
-      });
+      if(key.TotalCopies > 1 ) {
+        this.navCtrl.push(MultiCopies, {
+          book:key, code: key.Code, isbn: key.ISBN,desc:key.Description,action: 'Out'
+        });
+      }
+      else{
+        this.navCtrl.push(CheckOutPage, {
+          book:key, code: key.Code, isbn: key.ISBN,copy:key.TotalCopies - key.RentedCopies,action: 'Out'
+        });
+    }
+
     }
     openMenu(event, key) {
       this.service.getBookProfile(key.ISBN).then(
@@ -98,7 +131,7 @@ export class HomePage {
                     handler: () => {
                        // console.log('Delete clicked');
                         this.navCtrl.push(BookInfo, {
-                            movie: key
+                            book: key
                         });
                     }
                 },
@@ -137,9 +170,9 @@ export class HomePage {
         actionSheet.present();
       });
     }
-    itemTapped(event, movie) {
+    itemTapped(event, book) {
         this.navCtrl.push(BookInfo, {
-            movie: movie
+            book: book
         });
     }
     logOut() {

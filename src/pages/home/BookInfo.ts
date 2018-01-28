@@ -13,10 +13,10 @@ export class BookInfo {
     book: {};
     title; subtitle; author;description;
     constructor(public navCtrl: NavController, private navParams: NavParams, private bookService: icbService,public authentication: Authentication) {
-        this.book = navParams.get('movie');
+        this.book = navParams.get('book');
         //this.title = this.bookService.GetBookInfo( navParams.get('movie').ISBN );
 
-        this.bookService.GetBookInfo(navParams.get('movie').ISBN).then(
+        this.bookService.GetBookInfo(navParams.get('book').ISBN).then(
           data => {
             if(!data.items) return;
             console.log(data.items);

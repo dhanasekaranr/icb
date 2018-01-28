@@ -13,31 +13,27 @@ import { Login } from '../login/login';
 export class ReturnPage {
 
   book: Array<any>;
-  users: Array<any>;
+  trans: Array<any>;
     constructor(public navCtrl: NavController, private navParams: NavParams, private bookService: icbService,
       public toastCtrl: ToastController,public authentication: Authentication) {
         this.book = navParams.get('book');
-        //console.log ('action:',navParams.get('action'));
         this.bookService.getTransaction(navParams.get('isbn')).then(
           data => {
-            this.users = data;
-           // console.log(data);
+            this.trans = data;
           }
         );
 
     }
-    updateStat(id){
-      // console.log(event.target.value);
-           this.bookService.markReturn(id).then(
+    markReturn(trasnsId){
+           this.bookService.markReturn(trasnsId).then(
              data => {
-             //  console.log(data);
-               this.users = data;
+               this.trans = data;
                let toast = this.toastCtrl.create({
-                message: "Updated successfully !",
+                message: "Returned successfully !",
                 duration: 2000
               });
               toast.present();
-              if(this.users.length == 0)
+              if(this.trans.length == 0)
                 this.navCtrl.push(HomePage);
            }
        );
