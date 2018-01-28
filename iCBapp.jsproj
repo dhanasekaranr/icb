@@ -97,6 +97,9 @@
     <Content Include="**\**" Exclude="**\platforms\**;**\bin\**;**\bld\**;**\node_modules\**;**\simulation\**;.gitignore;ionic2-ts-sidemenu1.*" />
   </ItemGroup>
   <ItemGroup>
+    <Content Update=".vs\config\applicationhost.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Update="config.xml">
       <SubType>Designer</SubType>
     </Content>

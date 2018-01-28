@@ -22,11 +22,11 @@
     <ion-title style="color:red">{{this.description}}</ion-title>
       <ion-list>
             <ion-item *ngFor="let book of books | search: null:CodeSearch" >
-              <ion-icon name="contact" item-start></ion-icon> {{book.Code}}
+              <ion-icon name="contact" item-start><span style="color: green; font-size: .8em">{{book.Code}}</span></ion-icon>
               <button default ion-button item-right color="primary" (click)="updateStat(book.Code,book.Description)">
                   Select</button>
-               <br> {{book.Description}}
-               {{book.StatusDesc}}
+               <br>
+
             </ion-item>
         </ion-list>
 
