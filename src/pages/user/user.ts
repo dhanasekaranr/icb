@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { NavController, Platform, ActionSheetController,ToastController,LoadingController } from 'ionic-angular';
 import { icbService } from '../../shared/service';
 import { HomePage } from '../home/home';
+import { Authentication } from '../../shared/shared';
+import { Login } from '../login/login';
 @Component({
   selector: 'page-user',
   templateUrl: 'user.html',
@@ -13,7 +15,8 @@ export class UserPage {
   queryval = "";
   loader;FirstNameSearch;
   constructor(public navCtrl: NavController, private icbservice: icbService, public platform: Platform,
-    public actionsheetCtrl: ActionSheetController, public toastCtrl: ToastController,public loading: LoadingController) {
+    public actionsheetCtrl: ActionSheetController, public toastCtrl: ToastController,public loading: LoadingController,
+    public authentication: Authentication) {
       this.loader = this.loading.create({content: 'Getting Users...'});
       this.searchUserDB(null);
 }
@@ -90,4 +93,12 @@ openMenu(key) {
   });
   actionSheet.present();
 }
+
+logOut() {
+  // console.log(event.target.value);
+       this.authentication.logout();
+       this.navCtrl.push(Login);
+
+}
+
 }
