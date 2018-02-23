@@ -7,6 +7,7 @@ import { Tab } from '../tab/tab';
 import { Authentication } from '../../shared/shared';
 import { Login } from '../login/login';
 import { ToastController } from 'ionic-angular';
+import { ContactPage } from '../contact/contact';
 @Component({
     selector: 'page-CheckOut',
     templateUrl: 'CheckOut.html',
@@ -18,11 +19,13 @@ export class CheckOutPage {
   code :string = "";
   description :string = "";
   FirstNameSearch :string ="";
+  HomePage:string="N";
     constructor(public navCtrl: NavController, private navParams: NavParams, private bookService: icbService,
       public authentication: Authentication,public toastCtrl: ToastController) {
 
       this.code = navParams.get('code');
       this.description = navParams.get('desc');
+      this.HomePage = navParams.get('home');
       this.searchUserDB(null);
     }
       FilterUserDB(event){
@@ -52,6 +55,9 @@ export class CheckOutPage {
                 duration: 2000
               });
               toast.present();
+              if(this.HomePage == 'N')
+                this.navCtrl.push(ContactPage, {refresh: "true"});
+              else
                 this.navCtrl.push(HomePage, {refresh: "false"});
            }
        );

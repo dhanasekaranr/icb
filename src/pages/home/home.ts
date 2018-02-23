@@ -21,7 +21,7 @@ export class HomePage {
 
     books: Array<any>;Available : Array<any>;
     AvailableCount : any;RentedOut;queryval = "";
-    loader;DescriptionSearch: string = ''; bookCoiun
+    loader;DescriptionSearch: string = '';
 
     constructor(public navCtrl: NavController, private service: icbService, public platform: Platform,
         public actionsheetCtrl: ActionSheetController,public authentication: Authentication,

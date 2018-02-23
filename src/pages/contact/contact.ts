@@ -3,6 +3,12 @@ import { Component } from '@angular/core';
 import { NavController, Platform, ActionSheetController } from 'ionic-angular';
 import { icbService } from '../../shared/service';
 import { Storage } from '@ionic/storage';
+import { ReturnPage } from '../home/Return';
+import { CheckOutPage } from '../home/CheckOut';
+import { ToastController } from 'ionic-angular';
+import { Authentication } from '../../shared/shared';
+import { LoadingController } from 'ionic-angular';
+import { Login } from '../login/login';
 @Component({
   selector: 'page-contact',
   templateUrl: 'contact.html',
@@ -10,56 +16,61 @@ import { Storage } from '@ionic/storage';
 })
 export class ContactPage {
 
-  trans: Array<any>;
+  books: Array<any>;
+  loader; CodeSearch: string = '';
   constructor(public navCtrl: NavController, private icbservice: icbService, public platform: Platform,
-    public actionsheetCtrl: ActionSheetController, public storage: Storage) {
-      this.searchTransDB(null);
+    public toastCtrl: ToastController,public authentication: Authentication,public loading: LoadingController) {
 }
-searchTransDB(event) {
-    let queryval = "";
-    if( event )
-      queryval = event.target.value;
+searchTransDB() {
+      this.icbservice.searchTrans('book','GetBookCodes').then(
+          data => {
+              this.books = data;
+          }
+      );
 
-    if (queryval.length > 1 || queryval == "") {
-        this.icbservice.searchTrans('Trans',queryval).then(
-            data => {
-                this.trans = data;
-               // console.log(data);
-            }
-        );
+}
+FilterBookDB(event){
+  this.CodeSearch = event.target.value;
+
+}
+
+ionViewWillEnter(){
+ if(this.books != null) {return;}
+    if( this.authentication.getAccessToken() != null){
+      this.loader = this.loading.create({content: 'Getting books...'});
+      this.searchTransDB();
+      //console.log('test');
+    }
+    else{
+      this.navCtrl.push(Login);
     }
 }
-openMenu(event, key)  {
-  let actionSheet = this.actionsheetCtrl.create({
-      title: 'Click the link below.',
-      cssClass: 'action-sheets-basic-page',
-      buttons: [
-          {
-              text: 'User Info',
-              role: 'destructive',
-              icon: !this.platform.is('ios') ? 'list' : null,
-              handler: () => {
-                  console.log('Delete clicked');
-              }
-          },
-          {
-              text: 'Share',
-              icon: !this.platform.is('ios') ? 'share' : null,
-              handler: () => {
-                  console.log('Share clicked');
-              }
-          },
-          {
-              text: 'Cancel',
-              role: 'cancel', // will always sort to be on the bottom
-              icon: !this.platform.is('ios') ? 'close' : null,
-              handler: () => {
-                  console.log('Cancel clicked');
-              }
-          }
-      ]
-  });
-  actionSheet.present();
+markReturn(trasnsId){
+  this.icbservice.markReturn(trasnsId).then(
+    data => {
+      //this.books = data;
+      let toast = this.toastCtrl.create({
+       message: "Returned successfully !",
+       duration: 2000
+     });
+     toast.present();
+     this.searchTransDB();
+  }
+);
 }
+checkout( key)
+{
+
+    this.navCtrl.push(CheckOutPage, {
+      book:key, code: key.Code, isbn: key.ISBN,copy:key.TotalCopies - key.RentedCopies,action: 'Out', home:'N'
+    });
+}
+logOut() {
+  // console.log(event.target.value);
+       this.authentication.logout();
+       this.navCtrl.push(Login);
+
+}
+
 }
 
