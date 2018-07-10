@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { ReturnPage } from './Return';
 import { Tab } from '../tab/tab';
 import { Component } from '@angular/core';
@@ -9,16 +10,27 @@ import { User,Authentication } from '../../shared/shared';
 import { Login } from '../login/login';
 import { LoadingController } from 'ionic-angular';
 import { MultiCopies} from './MultiCopies';
+=======
+import { Component } from '@angular/core';
+import { NavController } from 'ionic-angular';
+import { MovieService } from './movie-service';
+
+>>>>>>> c07536c77f2aff6b8c07376a37bf75528954efcc
 
 @Component({
     selector: 'page-home',
     templateUrl: 'home.html',
+<<<<<<< HEAD
     providers: [icbService]
+=======
+    providers: [MovieService]
+>>>>>>> c07536c77f2aff6b8c07376a37bf75528954efcc
 
 })
 
 export class HomePage {
 
+<<<<<<< HEAD
     books: Array<any>;Available : Array<any>;
     AvailableCount : any;RentedOut;queryval = "";
     loader;DescriptionSearch: string = '';
@@ -181,4 +193,33 @@ export class HomePage {
            this.navCtrl.push(Login);
 
    }
+=======
+    movies: Array<any>;
+
+    constructor(public navCtrl: NavController, private movieService: MovieService) {
+
+    }
+
+    searchMovieDB(event, key) {
+        console.log(event.target.value);
+        if (event.target.value.length > 2) {
+            this.movieService.searchMovies(event.target.value).subscribe(
+                data => {
+                    this.movies = data.results;
+                    console.log(data);
+                },
+                err => {
+                    console.log(err);
+                },
+                () => console.log('Movie Search Complete')
+            );
+        }
+    }
+
+    //itemTapped(event, movie) {
+    //    this.navCtrl.push(MovieInfoPage, {
+    //        movie: movie
+    //    });
+    //}
+>>>>>>> c07536c77f2aff6b8c07376a37bf75528954efcc
 }

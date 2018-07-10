@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 
+<<<<<<< HEAD
 import { NavController, Platform, ActionSheetController } from 'ionic-angular';
 import { icbService } from '../../shared/service';
 import { Storage } from '@ionic/Storage';
@@ -75,3 +76,18 @@ logOut() {
 
 }
 
+=======
+import { NavController } from 'ionic-angular';
+
+@Component({
+  selector: 'page-contact',
+  templateUrl: 'contact.html'
+})
+export class ContactPage {
+
+  constructor(public navCtrl: NavController) {
+
+  }
+
+}
+>>>>>>> c07536c77f2aff6b8c07376a37bf75528954efcc

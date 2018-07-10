@@ -19,9 +19,14 @@ export class CredentialsAuthentication {
     // Construct data
     let loginData = 'grant_type=password&username=' + credentials.username + '&password=' + credentials.password;
 
+<<<<<<< HEAD
 
     // Construct POST Headers
     let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded'  });
+=======
+    // Construct POST Headers
+    let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded', 'Access-Control-Allow-Origin': '*'  });
+>>>>>>> c07536c77f2aff6b8c07376a37bf75528954efcc
     let options = new RequestOptions({ headers: headers });
 
     // Perform request

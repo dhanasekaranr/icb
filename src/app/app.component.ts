@@ -2,14 +2,21 @@ import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
 import { HttpModule } from '@angular/http';
+<<<<<<< HEAD
 
 import { Authentication, FacebookAuthentication, CredentialsAuthentication, Values, GlobalSettings, User} from '../shared/shared';
+=======
+import { Storage } from '@ionic/storage';
+
+import { Authentication, FacebookAuthentication, CredentialsAuthentication, Values, GlobalSettings, User } from '../shared/shared';
+>>>>>>> c07536c77f2aff6b8c07376a37bf75528954efcc
 
 import { Login } from '../pages/login/login';
 import { Tab } from '../pages/tab/tab';
 
 import { HomePage } from '../pages/home/home';
 import { ContactPage } from '../pages/contact/contact';
+<<<<<<< HEAD
 import { UserPage } from '../pages/user/user';
 import { BookInfo } from '../pages/home/BookInfo';
 import { ReturnPage } from '../pages/home/Return';
@@ -17,6 +24,10 @@ import { CheckOutPage } from '../pages/home/CheckOut';
 import { MultiCopies } from '../pages/home/MultiCopies';
 import { DashPage } from '../pages/dashboard/dash';
 import { ScanPage } from '../pages/scanner/scan';
+=======
+import { AboutPage } from '../pages/about/about';
+
+>>>>>>> c07536c77f2aff6b8c07376a37bf75528954efcc
 import '../shared/rxjs-operators';
 
 @Component({
@@ -30,7 +41,11 @@ import '../shared/rxjs-operators';
     Values,
     User,
     GlobalSettings,
+<<<<<<< HEAD
       Tab, HomePage, ContactPage, UserPage, BookInfo, ReturnPage,CheckOutPage,MultiCopies,DashPage,ScanPage
+=======
+    Tab, HomePage, ContactPage, AboutPage
+>>>>>>> c07536c77f2aff6b8c07376a37bf75528954efcc
   ]
 })
 export class MyApp {

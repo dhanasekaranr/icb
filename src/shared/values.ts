@@ -22,7 +22,11 @@ export class Values {
     var headers = new Headers();
     headers.append('Authorization', 'Bearer ' + accessToken);
 
+<<<<<<< HEAD
     return this.http.get(this.baseUrl + '/api/book', {headers: headers});
+=======
+    return this.http.get(this.baseUrl + '/api/Values', {headers: headers});
+>>>>>>> c07536c77f2aff6b8c07376a37bf75528954efcc
   }
 
 }
