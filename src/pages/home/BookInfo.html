@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-navbar color="header">
+    <ion-title style="text-align: center">Book Information</ion-title>
+        <ion-buttons end>
+          <button style="background-color: #0277bd">
+            <ion-icon  style="color:white; font-size: 25px;" name="md-log-out" tabtitle="LogOut" (click)="this.logOut();"></ion-icon>
+          </button>
+        </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content class="home" padding>
+  <div *ngIf="book" class="selection">
+    <ion-card>
+      <ion-item text-wrap>
+        <ion-avatar item-left image-large>
+          <img src="{{book.PictureLink}}" />
+        </ion-avatar>
+        <h1>{{book.Description}}</h1>
+        <p>{{book.LanguageDesc}}</p>
+
+
+      </ion-item>
+
+      <ion-item>
+        <ion-icon name="document" item-left class="wrap"></ion-icon>
+        <h2>Author</h2>
+        <p class="item-description">{{this.author}}</p>
+      </ion-item>
+      <ion-item text-wrap>
+        <ion-icon name="bookmark" item-left></ion-icon>
+        <p>{{this.title}}</p>
+        <p>{{this.subtitle}}</p>
+      </ion-item>
+      <ion-item text-wrap>
+        <ion-icon name="information" item-left></ion-icon>
+        <p>{{this.description}}</p>
+      </ion-item>
+    </ion-card>
+  </div>
+</ion-content>
