@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { InAppBrowser } from 'ionic-native';
 import { Http, Response, Headers, RequestOptions } from "@angular/http";
-import {ReplaySubject} from 'rxjs/Rx';
+import {ReplaySubject} from 'rxjs';
 
 import { GlobalSettings } from "./shared";
 

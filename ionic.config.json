@@ -1,15 +1,8 @@
 {
-<<<<<<< HEAD
   "name": "ICBApp3.0",
   "app_id": "",
   "type": "ionic-angular",
   "integrations": {
     "cordova": {}
   }
-=======
-  "name": "$safeappid$",
-  "app_id": "",
-  "v2": true,
-  "typescript": true
->>>>>>> c07536c77f2aff6b8c07376a37bf75528954efcc
 }

@@ -13,10 +13,7 @@ log.txt
 npm-debug.log*
 
 .idea/
-<<<<<<< HEAD
 .sourcemaps/
-=======
->>>>>>> c07536c77f2aff6b8c07376a37bf75528954efcc
 .sass-cache/
 .tmp/
 .versions/
@@ -36,11 +33,3 @@ $RECYCLE.BIN/
 .DS_Store
 Thumbs.db
 UserInterfaceState.xcuserstate
-<<<<<<< HEAD
-=======
-.vs/
-bin/
-bld/
-*.user
-*.suo
->>>>>>> c07536c77f2aff6b8c07376a37bf75528954efcc

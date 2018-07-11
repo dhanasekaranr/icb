@@ -3,7 +3,6 @@ import { NavController, NavParams } from 'ionic-angular';
 
 import { User, Authentication } from '../../shared/shared';
 
-import { ValuesPage } from '../values/values';
 
 @Component({
   selector: 'page-register-user',
@@ -22,7 +21,7 @@ export class RegisterExternalUser {
     this.user.registerExternalUser(this.authentication.getAccessToken(), username)
     .subscribe( response => {
       console.log('registered external user', response);
-      this.navCtrl.push(ValuesPage);
+      //this.navCtrl.push(ValuesPage);
     });
   }
 }

@@ -1,11 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Http, Response, Headers, RequestOptions } from "@angular/http";
-import { ReplaySubject, AsyncSubject } from 'rxjs/Rx';
-<<<<<<< HEAD
+import { ReplaySubject, AsyncSubject } from 'rxjs';
 import { Storage } from '@ionic/Storage';
-=======
-import { Storage } from '@ionic/storage';
->>>>>>> c07536c77f2aff6b8c07376a37bf75528954efcc
 
 import { FacebookAuthentication, CredentialsAuthentication, GlobalSettings } from "./shared";
 
@@ -70,12 +66,9 @@ export class Authentication {
       // Save the access token in storage
       this.storage.set('accessToken', accessToken);
 
-<<<<<<< HEAD
       this.storage.set('username', credentials.username);
       this.storage.set('password', credentials.password);
 
-=======
->>>>>>> c07536c77f2aff6b8c07376a37bf75528954efcc
       // Set the access token as the result for the observerable
       this.accessTokenSubject.next(accessToken);
       this.accessTokenSubject.complete();
@@ -96,17 +89,10 @@ export class Authentication {
     // Clear subject
     this.accessTokenSubject = null;
     // Remove saved credentials from Facebook login service
-<<<<<<< HEAD
     //this.facebookAuthentication.logout();
 
     // Perform request
     return this.http.post(this.baseUrl + '/api/Account/Logout', null, options);
     //return null;
-=======
-    this.facebookAuthentication.logout();
-
-    // Perform request
-    return this.http.post(this.baseUrl + '/api/Account/Logout', null, options);
->>>>>>> c07536c77f2aff6b8c07376a37bf75528954efcc
   }
 }

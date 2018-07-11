@@ -1,9 +1,6 @@
 {
   "compilerOptions": {
-<<<<<<< HEAD
-  "noStrictGenericChecks": true,  
-=======
->>>>>>> c07536c77f2aff6b8c07376a37bf75528954efcc
+  "noStrictGenericChecks": true,
     "allowSyntheticDefaultImports": true,
     "declaration": false,
     "emitDecoratorMetadata": true,
@@ -21,13 +18,9 @@
     "src/**/*.ts"
   ],
   "exclude": [
-<<<<<<< HEAD
     "node_modules",
     "src/**/*.spec.ts",
     "src/**/__tests__/*.ts"
-=======
-    "node_modules"
->>>>>>> c07536c77f2aff6b8c07376a37bf75528954efcc
   ],
   "compileOnSave": false,
   "atom": {

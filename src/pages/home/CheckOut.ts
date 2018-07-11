@@ -1,8 +1,7 @@
-import { Values } from './../../shared/values';
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { icbService } from '../../shared/service';
-import { HomePage } from '../home/home';
+import { HomePage } from './home';
 import { Tab } from '../tab/tab';
 import { Authentication } from '../../shared/shared';
 import { Login } from '../login/login';
