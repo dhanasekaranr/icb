@@ -1,0 +1,40 @@
+<app-header [title]="'Profile'"></app-header>
+<ion-content>
+  <ng-container *ngFor="let validation of  this.validationMessage">
+    <div class="error-message">
+      <ion-icon name="information-circle-outline"></ion-icon> {{ validation }}
+    </div>
+  </ng-container>
+  <form  [formGroup]="registrationForm" (ngSubmit)="onSubmit(registrationForm.value)">
+    <ion-item>
+      <ion-label position="floating" color="primary">First name</ion-label>
+      <ion-input type="text" formControlName="FirstName"></ion-input>
+    </ion-item>
+      <ng-container *ngFor="let validation of validation_messages.FirstName">
+        <div class="error-message" *ngIf="registrationForm.get('FirstName').hasError(validation.type) && (registrationForm.get('FirstName').dirty || registrationForm.get('FirstName').touched)">
+          <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+        </div>
+      </ng-container>
+    <ion-item>
+      <ion-label position="floating" color="primary">Last name</ion-label>
+      <ion-input type="text" formControlName="LastName"></ion-input>
+    </ion-item>
+      <ng-container *ngFor="let validation of validation_messages.LastName">
+        <div class="error-message" *ngIf="registrationForm.get('LastName').hasError(validation.type) && (registrationForm.get('LastName').dirty || registrationForm.get('LastName').touched)">
+          <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+        </div>
+      </ng-container>
+    <ion-item>
+      <ion-label position="floating" color="primary">Email</ion-label>
+      <ion-input type="text" formControlName="Email"></ion-input>
+    </ion-item>
+
+      
+  
+    <br/>
+   <ion-button type="submit" color="danger" [disabled]="!registrationForm.valid">Save</ion-button>
+   <ion-button color="primary">Cancel</ion-button>
+  </form>
+
+
+</ion-content> 

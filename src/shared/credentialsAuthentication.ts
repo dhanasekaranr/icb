@@ -24,14 +24,12 @@ export class CredentialsAuthentication {
     };
     const loginData = 'grant_type=password&username=' + credentials.username + '&password=' + credentials.password;
     // Construct POST Headers
-
     return this.http.post(this.baseUrl + '/Token', loginData, httpOptions)
     .pipe(map( response => {
       return response;
     }) , catchError (this.handleError) );
 
 }
-
 handleError(error: Response) {
   console.error(error);
   return throwError(error);
