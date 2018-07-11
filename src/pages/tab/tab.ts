@@ -29,6 +29,7 @@ export class Tab {
             });
   }
 
+
   logOut() {
          this.authentication.logout();
          this.navCtrl.push(Login);
