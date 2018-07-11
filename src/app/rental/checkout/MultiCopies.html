@@ -12,7 +12,7 @@
     <p>{{this.description}}</p>
       <ion-list>
            <ion-item *ngFor="let book of books | search: null:CodeSearch">
-              <ion-label text-wrap>
+              <ion-label class="ion-text-wrap">
                 <h2>{{book.Code}}</h2>
                 <p class="item-description">{{book.Description}}</p>
               </ion-label>    

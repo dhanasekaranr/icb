@@ -267,4 +267,30 @@ export class ICBService {
         });
       });
   }
+
+  getGroups() {
+    const url = this.baseUrl + '/api/user/getgroups';
+    return new Promise<any>( resolve => {
+        this.storage.get('accessToken').then((token) => {
+          this.http.get(url, {headers : this.getHeaders(token)})
+          .subscribe( data => {
+              this.data = data;
+              resolve(this.data);
+          });
+        });
+      });
+  }
+
+  getRelationShips() {
+    const url = this.baseUrl + '/api/user/getRelationships';
+    return new Promise<any>( resolve => {
+        this.storage.get('accessToken').then((token) => {
+          this.http.get(url, {headers : this.getHeaders(token)})
+          .subscribe( data => {
+              this.data = data;
+              resolve(this.data);
+          });
+        });
+      });
+  }
 }

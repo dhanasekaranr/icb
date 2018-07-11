@@ -28,3 +28,9 @@
 //@import "~@angular/material/prebuilt-themes/indigo-pink.css";
 //@import "~@angular/material/prebuilt-themes/pink-bluegrey.css";
 @import "~@angular/material/prebuilt-themes/purple-green.css";
+ion-toast.toast-mess {
+    opacity: 0.9;
+    text-align: center;
+    color: var(--ion-color-light);
+    --background: var(--ion-color-dark);
+  }

@@ -1,11 +1,12 @@
 import { Component, ViewChild } from '@angular/core';
-import { NotificationPopoverPage } from 'src/app/home/notificationPopover';
 import { PopoverController, NavController, LoadingController } from '@ionic/angular';
-import { Authentication } from 'src/shared/shared';
-import { ICBService } from 'src/shared/service';
-import { PopoverPage } from 'src/app/home/popover';
 import { Chart } from 'chart.js';
-import { MasterDetailService } from 'src/providers/data-service/masterDetailService';
+import { PopoverPage } from './popover';
+import { NotificationPopoverPage } from './notificationPopover';
+import { SettingPopover } from './settingPopover';
+import { Authentication } from '../../shared/authentication.service';
+import { ICBService } from '../../shared/service';
+import { MasterDetailService } from '../../providers/data-service/masterDetailService';
 
 @Component({
   selector: 'app-home',
@@ -31,7 +32,7 @@ export class HomePage {
               public loading: LoadingController) {
 
   }
-  @ViewChild('lineCanvas', {static: false}) lineCanvas: { nativeElement: any; };
+  @ViewChild('lineCanvas') lineCanvas: { nativeElement: any; };
 
   lineChart: any;
   async ionViewWillEnter() {
@@ -50,6 +51,16 @@ export class HomePage {
          this.navCtrl.navigateForward('tabs/login');
        }
    }
+   async settingsPopover(myEvent: any) {
+    const popover = await this.popoverCtrl.create({
+      component: SettingPopover,      event: myEvent,
+      translucent: true});
+
+      return await popover.present();
+      popover.onDidDismiss();
+    
+ }
+
    async presentPopover(myEvent: any) {
     const popover = await this.popoverCtrl.create({
       component: PopoverPage,

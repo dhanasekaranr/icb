@@ -1,24 +1,24 @@
-<ion-tabs>
-  <ion-tab-bar slot="bottom" color="primary">
-    <ion-tab-button tab="home">
-      <ion-icon name="Home"></ion-icon>
-      <ion-label>Home</ion-label>
-    </ion-tab-button>
-    <ion-tab-button tab="catalogue">
-      <ion-icon name="Book"></ion-icon>
-      <ion-label>Catalogue</ion-label>
-    </ion-tab-button>
-    <ion-tab-button tab="rental"  *ngIf= "this.authentication.getIsAdmin() == 'Y'" >
-      <ion-icon name="cart"></ion-icon>
-      <ion-label>Rental</ion-label>
-    </ion-tab-button>
-    <ion-tab-button tab="users"  *ngIf= "this.authentication.getIsAdmin() == 'Y'" > 
-        <ion-icon name="people"></ion-icon>
-        <ion-label>Users</ion-label>
-    </ion-tab-button>
-    <ion-tab-button tab="history" *ngIf= "this.authentication.getIsAdmin() == 'N'" >
-        <ion-icon name="stats"></ion-icon>
-        <ion-label>History</ion-label>
-    </ion-tab-button>
-  </ion-tab-bar>
-</ion-tabs>
+  <ion-tabs>
+    <ion-tab-bar slot="bottom" color="primary">
+      <ion-tab-button tab="home">
+        <ion-icon name="Home"></ion-icon>
+        <ion-label>Home</ion-label>
+      </ion-tab-button>
+      <ion-tab-button tab="catalogue">
+        <ion-icon name="Book"></ion-icon>
+        <ion-label>Catalogue</ion-label>
+      </ion-tab-button>
+      <ion-tab-button tab="rental"  *ngIf= "this.authentication.getIsAdmin() == 'Y'" >
+        <ion-icon name="cart"></ion-icon>
+        <ion-label>Rental</ion-label>
+      </ion-tab-button>
+      <ion-tab-button tab="users"  *ngIf= "this.authentication.getIsAdmin() == 'Y'" > 
+          <ion-icon name="people"></ion-icon>
+          <ion-label>Users</ion-label>
+      </ion-tab-button>
+      <ion-tab-button tab="history" *ngIf= "this.authentication.getIsAdmin() == 'N'" >
+          <ion-icon name="list-outline"></ion-icon>
+          <ion-label>History</ion-label>
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>

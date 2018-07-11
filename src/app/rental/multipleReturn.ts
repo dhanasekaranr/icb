@@ -1,12 +1,12 @@
-import { MasterDetailService } from 'src/providers/data-service/masterDetailService';
 import { Component } from '@angular/core';
 import { NavController, ToastController } from '@ionic/angular';
 import { ICBService } from '../../shared/service';
 import { Authentication } from '../../shared/authentication.service';
+import { MasterDetailService } from '../../providers/data-service/masterDetailService';
 
 @Component({
     selector: 'page-MultipleReturn',
-    templateUrl: 'MultipleReturn.html',
+    templateUrl: 'multipleReturn.html',
     providers: [ICBService]
 })
 export class MultipleReturnPage {

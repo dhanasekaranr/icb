@@ -1,18 +1,18 @@
 import { Component,ViewChild } from '@angular/core';
-import { NavController, LoadingController, AlertController, ToastController,NavParams } from 'ionic-angular';
+import { NavController, LoadingController, AlertController, ToastController,NavParams } from '@ionic/angular';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
-import { icbService } from '../../shared/service';
+import { ICBService } from '../../shared/service';
 import { Chart } from 'chart.js';
 import { BookInfo } from '../home/BookInfo';
 @Component({
   selector: 'page-history',
   templateUrl: 'history.html',
-  providers: [icbService]
+  providers: [ICBService]
 
 })
 export class HistoryPage {
 
-  constructor(private navParams: NavParams, public navCtrl: NavController, private service: icbService, private alertCtrl: AlertController,
+  constructor(private navParams: NavParams, public navCtrl: NavController, private service: ICBService, private alertCtrl: AlertController,
     private loadingCtrl: LoadingController, private toastCtrl: ToastController, private iab: InAppBrowser) {
     this.books = navParams.get('books');
   }
