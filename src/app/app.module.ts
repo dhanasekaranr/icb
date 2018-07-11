@@ -25,7 +25,6 @@ import { Toast } from '@ionic-native/toast';
   declarations: [
     MyApp,
     RegisterExternalUser,
-
       Login,
       Tab, HomePage, ContactPage, UserPage,BookInfo, CheckOutPage,ReturnPage, Search,MultiCopies,DashPage,ScanPage
   ],
@@ -36,7 +35,6 @@ import { Toast } from '@ionic-native/toast';
   entryComponents: [
     MyApp,
     RegisterExternalUser,
-
     Login,
       Tab, HomePage, ContactPage, UserPage, BookInfo, CheckOutPage,ReturnPage,MultiCopies,DashPage,ScanPage
   ],
