@@ -55,7 +55,6 @@ export class icbService {
       });
   }
 
-
   getUserByISBN(id,isbn) {
     var url = this.baseUrl + '/api/User/get/' + id + '/' + isbn + '/';
     return new Promise<any>( resolve => {
