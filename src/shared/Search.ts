@@ -7,8 +7,8 @@ import { Injectable, Pipe } from '@angular/core';
 })
 @Injectable()
 export class Search {
-  transform(list: any[], DescriptionSearch: string, CodeSearch: string, FirstNameSearch: string, FullName: string,
-            NameSearch: string): any[] {
+  transform(list: any[], DescriptionSearch?: string, CodeSearch?: string, FirstNameSearch?: string, FullName?: string,
+            NameSearch?: string): any[] {
        if (list && list.length) {
         return list.filter(item => {
           if (DescriptionSearch) {

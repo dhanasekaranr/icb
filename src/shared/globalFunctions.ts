@@ -7,8 +7,8 @@ import { Authentication } from './authentication.service';
 @Injectable()
 export class GlobalFunctions {
   public data: any;
-   private apiUrl = 'http://localhost:52146';
-  // private apiUrl = 'http://api.icarebooks.com';
+   // private apiUrl = 'http://localhost:52146';
+   private apiUrl = 'http://api.icarebooks.com';
   constructor(public navCtrl: NavController,
               private authentication: Authentication, private http: HttpClient, private storage: Storage) {}
 
