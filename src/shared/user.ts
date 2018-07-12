@@ -60,5 +60,4 @@ export class User {
     // Perform request
     return this.http.post(this.baseUrl + '/api/Account/Register', registerUserData, options);
   }
-
 }
