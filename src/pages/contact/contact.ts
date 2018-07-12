@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 
 import { NavController, Platform, ActionSheetController } from 'ionic-angular';
 import { icbService } from '../../shared/service';
-import { Storage } from '@ionic/Storage';
 import { ReturnPage } from '../home/Return';
 import { CheckOutPage } from '../home/CheckOut';
 import { ToastController } from 'ionic-angular';

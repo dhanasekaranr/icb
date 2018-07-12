@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
-import { HttpModule } from '@angular/http';
+import { HttpClientModule  } from '@angular/common/http';
 import { Authentication, FacebookAuthentication, CredentialsAuthentication, GlobalSettings, User} from '../shared/shared';
 import { Login } from '../pages/login/login';
 import { Tab } from '../pages/tab/tab';
@@ -12,19 +12,18 @@ import { BookInfo } from '../pages/home/BookInfo';
 import { ReturnPage } from '../pages/home/Return';
 import { CheckOutPage } from '../pages/home/CheckOut';
 import { MultiCopies } from '../pages/home/MultiCopies';
-import { DashPage } from '../pages/dashboard/dash';
-import { ScanPage } from '../pages/scanner/scan';
+import { IonicStorageModule } from '@ionic/Storage';
 @Component({
   templateUrl: 'app.html',
   providers: [
-    HttpModule,
-    Storage,
+    HttpClientModule,
+    IonicStorageModule,
     Authentication,
     FacebookAuthentication,
     CredentialsAuthentication,
     User,
     GlobalSettings,
-      Tab, HomePage, ContactPage, UserPage, BookInfo, ReturnPage,CheckOutPage,MultiCopies,DashPage,ScanPage
+      Tab, HomePage, ContactPage, UserPage, BookInfo, ReturnPage,CheckOutPage,MultiCopies
   ]
 })
 export class MyApp {

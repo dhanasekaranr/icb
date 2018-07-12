@@ -1,10 +1,7 @@
-import { Component,ViewChild } from '@angular/core';
-import { NavController, Platform, ActionSheetController,ToastController,LoadingController } from 'ionic-angular';
+import { Component } from '@angular/core';
+import { NavController, Platform } from 'ionic-angular';
 import { icbService } from '../../shared/service';
-import { HomePage } from '../home/home';
-import { Authentication } from '../../shared/shared';
-import { Login } from '../login/login';
-import { Chart } from 'chart.js';
+
 
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { Toast } from '@ionic-native/toast';

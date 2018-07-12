@@ -17,10 +17,9 @@ import { IonicStorageModule } from '@ionic/Storage';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule} from "@angular/common/http";
 import { DashPage } from '../pages/dashboard/dash';
-import { DataServiceProvider } from '../providers/data-service/data-service';
+
 import { ScanPage } from '../pages/scanner/scan';
-import { BarcodeScanner } from '@ionic-native/barcode-scanner';
-import { Toast } from '@ionic-native/toast';
+
 @NgModule({
   declarations: [
     MyApp,
@@ -38,8 +37,6 @@ import { Toast } from '@ionic-native/toast';
     Login,
       Tab, HomePage, ContactPage, UserPage, BookInfo, CheckOutPage,ReturnPage,MultiCopies,DashPage,ScanPage
   ],
-  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},
-    DataServiceProvider, BarcodeScanner,
-    Toast]
+  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
 })
 export class AppModule {}
