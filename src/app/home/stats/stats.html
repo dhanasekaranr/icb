@@ -7,12 +7,12 @@
   <p *ngIf="choice == 'weekly'" style="align-content: center"> 
     <ion-list-header>
       Weekly statistics for 2 months
-      <a (click)="randomize('monthly')"> Monthly</a>
+      <p (click)="randomize('monthly')"> Monthly</p>
     </ion-list-header>
   </p>
   <p *ngIf="choice == 'monthly'"> 
     <ion-list-header>
-      Monthly statistics <a (click)="randomize('weekly')">Weekly</a>
+      Monthly statistics <p (click)="randomize('weekly')">Weekly</p>
     </ion-list-header>    
   </p>
   <canvas #barCanvas height="25vh" width="80vw" style="background-color: beige"></canvas>

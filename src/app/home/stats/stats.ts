@@ -1,43 +1,40 @@
 import { Component, ViewChild } from '@angular/core';
 import { NavController} from '@ionic/angular';
-import { ICBService } from '../../../shared/service';
-import { Chart } from 'chart.js';
-import 'chartjs-plugin-labels';
+import * as Chart from 'chart.js';
 import { MasterDetailService } from '../../../providers/data-service/masterDetailService';
 import { Authentication } from '../../../shared/authentication.service';
+import { ICBService } from '../../../shared/service';
 @Component({
   selector: 'page-stats',
   templateUrl: 'stats.html',
-  providers: [ICBService]
+  providers: [ICBService],
 
 })
 export class StatsPage {
-
 
   constructor(public navCtrl: NavController, private service: ICBService, private ms: MasterDetailService,
               public authentication: Authentication) {
 
   }
  // Doughnut
- doughnutChartLabels =  [];
- demodoughnutChartData =  [];
- doughnutBackGroundColor = [];
- doughnutHoverColor =  [];
+ public doughnutChartLabels =  [];
+ public demodoughnutChartData =  [];
+ public doughnutBackGroundColor = [];
+ public doughnutHoverColor =  [];
 
  public doughnutChartType = 'doughnut';
- barChart: any;
- doughnutChart: any;
- label = [];
- bookData = [];
- books = [];
- transactions = [];
- choice: any;
+ public barChart: any;
+ public doughnutChart: any;
+ public label = [];
+ public bookData = [];
+ public books = [];
+ public transactions = [];
+ public choice: any;
 
- @ViewChild('barCanvas') barCanvas: { nativeElement: any; };
- @ViewChild('doughnutCanvas') doughnutCanvas: { nativeElement: any; };
+ @ViewChild('barCanvas') public barCanvas: { nativeElement: any; };
+ @ViewChild('doughnutCanvas') public doughnutCanvas: { nativeElement: any; };
 
-
- doughnutChartMethod() {
+ public doughnutChartMethod() {
   this.doughnutChart = new Chart(this.doughnutCanvas.nativeElement, {
     type: 'pie',
     data: {
@@ -45,22 +42,22 @@ export class StatsPage {
       datasets: [{
         data: this.demodoughnutChartData,
         backgroundColor: this.doughnutBackGroundColor,
-        hoverBackgroundColor: this.doughnutHoverColor
-      }]
+        hoverBackgroundColor: this.doughnutHoverColor,
+      }],
     },
     options: {
       plugins: {
         labels: {
           render: 'percentage', fontColor: '#fff',
-        }
+        },
       },
       title: {
         display: true,
-        text: 'Academic Year Book Completion By Class'
+        text: 'Academic Year Book Completion By Class',
       },
         legend: {
           display: true,
-          position: 'bottom'
+          position: 'bottom',
         },
 
       tooltips: {
@@ -76,30 +73,28 @@ export class StatsPage {
             const tooltipPercentage = Math.round((tooltipData / total) * 100);
 
             return tooltipLabel + ': ' + tooltipData + ' (' + tooltipPercentage + '%)';
-          }
-        }
-      }
-    }
-
-
+          },
+        },
+      },
+    },
 
   });
 }
 
-  ionViewWillEnter() {
+  public ionViewWillEnter() {
     this.drawBarChart();
     this.randomize('monthly');
     this.displayChart();
   }
 
-  displayChart() {
+  public displayChart() {
     this.doughnutChartLabels =  [] ;
     this.demodoughnutChartData =  [] ;
     this.doughnutBackGroundColor = [] ;
     this.doughnutHoverColor =  [] ;
 
     this.service.getSchoolStats('17').then(
-      data => {
+      (data) => {
         data.forEach ( (key: { Category: any; Count: any; PieChartBackgroundColor: any; PierChartHoverColor: any; }) =>  {
           this.doughnutChartLabels.push(key.Category);
           this.demodoughnutChartData.push(key.Count);
@@ -107,12 +102,12 @@ export class StatsPage {
           this.doughnutHoverColor.push(key.PierChartHoverColor);
           this.doughnutChartMethod();
         });
-        }
-    ).catch(err => {
+        },
+    ).catch((err) => {
           console.log(err);
   });
 }
-  drawBarChart() {
+  public drawBarChart() {
           this.barChart = new Chart(this.barCanvas.nativeElement, {
               type: 'bar',
               data: {
@@ -126,7 +121,7 @@ export class StatsPage {
                           'rgba(255, 206, 86, 0.2)',
                           'rgba(75, 192, 192, 0.2)',
                           'rgba(153, 102, 255, 0.2)',
-                          'rgba(255, 159, 64, 0.2)'
+                          'rgba(255, 159, 64, 0.2)',
                       ],
                       borderColor: [
                           'rgba(255,99,132,1)',
@@ -134,41 +129,41 @@ export class StatsPage {
                           'rgba(255, 206, 86, 1)',
                           'rgba(75, 192, 192, 1)',
                           'rgba(153, 102, 255, 1)',
-                          'rgba(255, 159, 64, 1)'
+                          'rgba(255, 159, 64, 1)',
                       ],
-                      borderWidth: 1
-                  }]
+                      borderWidth: 1,
+                  }],
               },
               options: {
                 plugins: {
                   labels: {
-                    render: 'value'
-                  }
+                    render: 'value',
+                  },
                 },
                   scales: {
                       yAxes: [{
                           ticks: {
-                              beginAtZero: true
-                          }
-                      }]
+                              beginAtZero: true,
+                          },
+                      }],
                   },
                   onClick :  (evt: any, item: any) => {
                       if (item[0] == null) { return; }
                       const label = item[0]._model.label;
                       this.service.getRentalStatusDetails(this.choice, label).then(
-                          data => {
+                          (data) => {
                             this.transactions = data;
-                            }
-                        ).catch(err => {
+                            },
+                        ).catch((err) => {
                               console.log(err);
                       });
 
-                  }
-              }
+                  },
+              },
 
           });
     }
-    bookInfo( key: any) {
+    public bookInfo( key: any) {
       this.ms.setDestn(key);
       this.navCtrl.navigateForward('tabs/bookInfo');
     }
@@ -180,7 +175,7 @@ public randomize(choice: any): void {
   this.bookData.length = 0;
   this.choice = choice;
   this.service.getRentalStatus(choice, '17').then(
-    data => {
+    (data) => {
         this.books = data;
         this.bookData.length = 0;
         this.label.length = 0;
@@ -191,8 +186,8 @@ public randomize(choice: any): void {
           }
         });
         this.barChart.update();
-      }
-  ).catch(err => {
+      },
+  ).catch((err) => {
         console.log(err);
 });
 

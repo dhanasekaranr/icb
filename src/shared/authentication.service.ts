@@ -1,11 +1,11 @@
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse, HttpHeaders } from '@angular/common/http';
-import { AsyncSubject, throwError } from 'rxjs';
 import { Storage } from '@ionic/storage';
-import { Observable } from 'rxjs';
+import { AsyncSubject, Observable, throwError } from 'rxjs';
+
+import { catchError, map } from 'rxjs/operators';
 import { CredentialsAuthentication } from './credentialsAuthentication';
 import { GlobalSettings } from './globalSettings';
-import { map, catchError } from 'rxjs/operators';
 
 @Injectable()
 export class Authentication {
@@ -24,15 +24,14 @@ export class Authentication {
       this.isAdmin = '';
     }
 
-  getAccessToken() {
+  public getAccessToken() {
     return this.accessToken;
   }
-  getIsAdmin() {
+  public getIsAdmin() {
     return this.isAdmin;
   }
 
-
-  credentialsLogin(credentials) {
+  public credentialsLogin(credentials) {
     // IF the access token subject is already set, just return it again
 
     if (this.accessTokenSubject) {
@@ -61,13 +60,12 @@ export class Authentication {
             return this.accessTokenSubject;
           }), catchError(this.handleError));
 
-
         // return this.accessTokenSubject;
   }
     // Register
-    register(credentials) {
+    public register(credentials) {
       if (credentials.FirstName === null || credentials.Email === null || credentials.Password === null) {
-        return Observable.throw("Please insert credentials");
+        return Observable.throw('Please insert credentials');
       } else {
         return this.credentialsAuthentication.register(credentials)
         .pipe(map( (body: any) => {
@@ -77,20 +75,20 @@ export class Authentication {
       }
     }
 
-  handleError(error: Response) {
+  public handleError(error: Response) {
     // Clear the saved accessToken
 
     console.error(error);
     return throwError(error);
   }
 
-  logout() {
+  public logout() {
     // Construct request header
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type':  'application/json',
-        Authorization:  'Bearer ' + this.accessToken
-      })
+        Authorization:  'Bearer ' + this.accessToken,
+      }),
     };
     // const headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
     // headers.append('Authorization', 'Bearer ' + this.accessToken);

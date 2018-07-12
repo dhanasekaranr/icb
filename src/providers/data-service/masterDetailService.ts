@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class MasterDetailService {
   private destn: any;
@@ -13,7 +13,7 @@ export class MasterDetailService {
     this.destn = destn;
   }
 
-  getDestn() {
+  public getDestn() {
     return this.destn;
   }
 
@@ -21,7 +21,7 @@ export class MasterDetailService {
     this.home = home;
   }
 
-  getHome() {
+  public getHome() {
     return this.home;
   }
 
@@ -29,7 +29,7 @@ export class MasterDetailService {
     this.action = action;
   }
 
-  getAction() {
+  public getAction() {
     return this.action;
   }
 }

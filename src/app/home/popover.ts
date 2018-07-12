@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
+import { ModalController, NavParams, ToastController } from '@ionic/angular';
 import { ICBService } from '../../shared/service';
-import { ToastController, NavParams, ModalController } from '@ionic/angular';
 
 @Component({
     template: `
@@ -16,29 +16,29 @@ import { ToastController, NavParams, ModalController } from '@ionic/angular';
       </ion-list>
       </ion-content>
       `,
-    providers: [ICBService]
+    providers: [ICBService],
   })
   export class PopoverPage {
-    wishes: any;
+    public wishes: any;
     constructor(public viewCtrl: ModalController, private service: ICBService, public toastCtrl: ToastController, navParams: NavParams) {
      this.wishes = navParams.data.data;
     }
 
-    deleteFromWishList(ISBN: any , i: any ) {
+    public deleteFromWishList(ISBN: any , i: any ) {
       this.service.AddToWishList(ISBN).then(
-        async data => {
+        async (data) => {
           const toast = await this.toastCtrl.create({
            message: 'Removed from the Wish List!',
-           duration: 2000
+           duration: 2000,
          });
           toast.present();
          // this.viewCtrl.dismiss();
           this.wishes.splice(i, 1);
-        }
-    ); 
+        },
+    );
   }
 
-    async close() {
+    public async close() {
       const topLoader = await this.viewCtrl.getTop();
       if (topLoader ) {
         await topLoader.dismiss();

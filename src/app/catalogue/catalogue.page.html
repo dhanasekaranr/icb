@@ -19,15 +19,39 @@
               <ion-label class="ion-text-wrap"> 
                   <h2>{{book.Description}}</h2>
                   <p *ngIf="book.TotalCopies > 0" class="item-description">
-                    Available : {{book.TotalCopies - book.RentedCopies}}
-                  <span *ngIf="book.RentedCopies > 0">[Checked Out : {{book.RentedCopies}}]</span></p>
+                    Available : {{book.TotalCopies - book.RentedCopies - book.HoldedCopies}}
+                  <span *ngIf="book.RentedCopies > 0">[Checked Out : {{book.RentedCopies}}]</span>
+                  <span *ngIf="book.HoldedCopies > 0">[On Hold : {{book.HoldedCopies}}]</span>
+                </p>
                   <p *ngIf="book.TotalCopies == 1" style="color:green;">{{book.Code}} </p>
-              </ion-label>
+               </ion-label>
+<!--
+               <ion-icon name="checkmark-circle-outline" class="icon-circle" style="background-color: red;"></ion-icon>
+               <ion-icon name="checkmark-done-circle-outline" class="icon-circle" style="background-color:green;"></ion-icon>
+               <ion-icon *ngIf="book.WishList != 'Y'" name="heart-outline" (click)="AddToWishList(book,'Y','Added to Wish List!')" style="color:red" title="Add to Wish list"></ion-icon>
+               <ion-icon *ngIf="book.WishList === 'Y'" name="heart" (click)="AddToWishList(book,'N','Removed from your Wish List!')" style="color:red" title="Remove from Wish list"></ion-icon>
 
-          <ion-icon *ngIf="book.WishList != 'Y'" name="heart-empty" (click)="AddToWishList(book,'Y','Added to Wish List!')" style="color:red" title="Add to Wish list"></ion-icon>
-          <ion-icon *ngIf="book.WishList === 'Y'" name="heart" (click)="AddToWishList(book,'N','Removed from your Wish List!')" style="color:red" title="Remove from Wish list"></ion-icon>
+-->         <span *ngIf="this.authentication.getIsAdmin() != 'Y'" >
+              <span style="text-align:center;" class="ion-text-wrap" *ngIf="(book.TotalCopies - book.RentedCopies - book.HoldedCopies) > 0 && book.Hold!= 'Y' && book.HoldReady != 'Y' &&  book.HoldRejected !='Y'" >
+                <p><ion-icon name="archive-outline" class="icon-circle" style="color:blue;" (click)="AddToHold(book)"></ion-icon></p>
+                <p style="margin-top: 0px;color:blue;">Request Hold</p>
+              </span>
+              <span class="ion-text-wrap" *ngIf="book.Hold === 'Y'">
+                <p><ion-icon name="refresh-circle-outline" class="icon-circle" style="color:green;" ></ion-icon></p>
+                <p style="color:green;margin-top: 0px;">On Hold</p>
+              </span>
+              <span class="ion-text-wrap" *ngIf="book.HoldReady === 'Y'">
+                <p><ion-icon name="thumbs-up-outline" class="icon-circle" style="color:green;" ></ion-icon></p>
+                <p style="color:green;margin-top: 0px;">Ready for pickup</p>
+              </span>
+              <span class="ion-text-wrap" *ngIf="book.HoldRejected === 'Y'">
+                <p><ion-icon name="thumbs-down-outline" class="icon-circle" style="color:red;" ></ion-icon></p>
+                <p style="color:red;margin-top: 0px;">Denied</p>
+              </span>
+            </span>   
       </ion-item>
-        <ion-item-options *ngIf="this.authentication.getIsAdmin() == 'Y'" side="end">
+      
+        <ion-item-options *ngIf="this.authentication.getIsAdmin() === 'Y'" side="end">
           <button ion-button color="danger" style="background-color: red;color:white" (click)="returnBook(book)"  *ngIf="book.RentedCopies > 0 ">
               <ion-icon name="refresh"></ion-icon>
               Return ({{book.RentedCopies}})

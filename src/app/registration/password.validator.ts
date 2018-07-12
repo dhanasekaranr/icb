@@ -3,16 +3,16 @@ import { FormControl, FormGroup } from '@angular/forms';
 export class PasswordValidator {
 
   // Inspired on: http://plnkr.co/edit/Zcbg2T3tOxYmhxs7vaAm?p=preview
-  static areEqual(formGroup: FormGroup) {
+  public static areEqual(formGroup: FormGroup) {
     let val;
     let valid = true;
 
-    for (let key in formGroup.controls) {
+    for (const key in formGroup.controls) {
       if (formGroup.controls.hasOwnProperty(key)) {
-        let control: FormControl = <FormControl>formGroup.controls[key];
+        const control: FormControl =  formGroup.controls[key] as FormControl;
 
         if (val === undefined) {
-          val = control.value
+          val = control.value;
         } else {
           if (val !== control.value) {
             valid = false;
@@ -27,7 +27,7 @@ export class PasswordValidator {
     }
 
     return {
-      areEqual: true
+      areEqual: true,
     };
   }
 }

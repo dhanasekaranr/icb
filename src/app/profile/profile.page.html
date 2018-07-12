@@ -5,7 +5,25 @@
       <ion-icon name="information-circle-outline"></ion-icon> {{ validation }}
     </div>
   </ng-container>
+  <ion-list lines="none">
+    <form>
+      <ion-item *ngFor="let control of groups | keyvalue">
+        <ion-label position="floating" color="primary">School/Group:</ion-label>
+        <ion-input type="text" value="{{control.value.GroupName}}" disabled></ion-input>
+        <p>{{control.value.Location}}</p>
+      </ion-item>
+    </form>
+  </ion-list>
+
+  <ion-list  *ngIf="this.authentication.getIsAdmin() != 'Y'">
+      <ion-item *ngFor="let control of relationship | keyvalue">
+      <ion-label position="floating" color="primary">Student Name:</ion-label>
+      <ion-input type="text" value="{{control.value.FirstName}}  {{control.value.LastName}}" disabled></ion-input>
+    </ion-item>
+  </ion-list>
+
   <form  [formGroup]="registrationForm" (ngSubmit)="onSubmit(registrationForm.value)">
+    <!--
     <ion-item>
       <ion-label position="floating" color="primary">First name</ion-label>
       <ion-input type="text" formControlName="FirstName"></ion-input>
@@ -24,13 +42,41 @@
           <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
         </div>
       </ng-container>
+      -->
     <ion-item>
       <ion-label position="floating" color="primary">Email</ion-label>
       <ion-input type="text" formControlName="Email"></ion-input>
     </ion-item>
+    <ion-item>
+      <ion-label position="floating" color="primary">Phone</ion-label>
+      <ion-input type="text" formControlName="Phone"></ion-input>
+      <ng-container *ngFor="let validation of validation_messages.Phone">
+        <div class="error-message" *ngIf="registrationForm.get('Phone').hasError(validation.type) && (registrationForm.get('Phone').dirty || registrationForm.get('Phone').touched)">
+          <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+        </div>
+      </ng-container>      
+    </ion-item>
 
-      
-  
+   
+    <br/>
+    <ion-list>
+      <ion-radio-group formControlName="CommunicationPreference" value="{{this.val}}">
+        <ion-list-header>
+          <ion-label>Communication Preference
+          </ion-label>
+        </ion-list-header>
+        <ion-item>
+          <ion-label>Phone Text Message </ion-label>
+          <ion-radio value="0"></ion-radio>
+        </ion-item>
+        <ion-item>
+          <ion-label>Email</ion-label>
+          <ion-radio value="1"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+    </ion-list>
+
+    
     <br/>
    <ion-button type="submit" color="danger" [disabled]="!registrationForm.valid">Save</ion-button>
    <ion-button color="primary">Cancel</ion-button>

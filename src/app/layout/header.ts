@@ -1,7 +1,7 @@
 
+import { Location } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { NavController } from '@ionic/angular';
-import { Location } from '@angular/common';
 import { Authentication } from '../../shared/authentication.service';
 
 @Component({
@@ -10,19 +10,19 @@ import { Authentication } from '../../shared/authentication.service';
 
 })
 export class HeaderPage {
-    @Input() title: any;
+    @Input() public title: any;
 
   constructor(public navCtrl: NavController, public authentication: Authentication, private location: Location) {
 
       }
 
-  logOut() {
+  public logOut() {
          this.authentication.logout();
          this.navCtrl.navigateForward('tabs/login');
 
  }
 
- goBack() {
+ public goBack() {
     this.location.back();
 
 }

@@ -1,9 +1,8 @@
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { GlobalSettings } from './globalSettings';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { map, catchError } from 'rxjs/operators';
-
+import { catchError, map } from 'rxjs/operators';
+import { GlobalSettings } from './globalSettings';
 
 @Injectable()
 export class User {
@@ -17,8 +16,7 @@ export class User {
     this.baseUrl = this.globalSettings.getSettings().apiUrl;
   }
 
-
-  getUserInfo(accessToken: string) {
+  public getUserInfo(accessToken: string) {
     // Construct header that supplies the access token
 
     const headers = new HttpHeaders();
@@ -30,17 +28,17 @@ export class User {
         const body = JSON.parse(response._body);
         return body;
       }),
-      catchError(this.handleError)
+      catchError(this.handleError),
     );
   }
-  handleError(error: HttpErrorResponse) {
+  public handleError(error: HttpErrorResponse) {
     console.error(error);
     // tslint:disable-next-line: deprecation
     return Observable.throw(error);
   }
   // Registers a user in the Web Api using federated login provider (Facebook)
   // A user must be registered before it can retrieve protected resources.
-  registerExternalUser(accessToken: string, username: string) {
+  public registerExternalUser(accessToken: string, username: string) {
     // const headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
     // headers.append('Authorization', 'Bearer ' + accessToken);
     // const options = new RequestOptions({ headers: headers });
@@ -48,8 +46,8 @@ export class User {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type':  'application/x-www-form-urlencoded',
-        Authorization: 'Bearer ' + accessToken
-      })
+        Authorization: 'Bearer ' + accessToken,
+      }),
     };
 
     /*var registerUserData = {
@@ -62,7 +60,7 @@ export class User {
 
   // Registers a user in the Web Api using username/password.
   // A user must be registered before it can retrieve protected resources.
-  registerLocalUser(accessToken: string, userCredentials: { name?: string; email?: string;
+  public registerLocalUser(accessToken: string, userCredentials: { name?: string; email?: string;
     password: any; confirmation_password?: string; username?: any; }) {
     // const headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
     // headers.append('Authorization', 'Bearer ' + accessToken);
@@ -71,14 +69,14 @@ export class User {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type':  'application/x-www-form-urlencoded',
-        Authorization: 'Bearer ' + accessToken
-      })
+        Authorization: 'Bearer ' + accessToken,
+      }),
     };
 
     const registerUserData = {
       Email: userCredentials.username,
       Password: userCredentials.password,
-      ConfirmPassword: userCredentials.password
+      ConfirmPassword: userCredentials.password,
       };
 
     // Perform request

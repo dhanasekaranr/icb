@@ -26,9 +26,8 @@
           </ion-list>
         </ion-col>
       </ion-row>
-      <p class="ion-text-right">Forgot Password?</p>
+      <p class="ion-text-right" (click)="openWithInAppBrowser('http://icarebooks.com/Account/ForgotPassword')">Forgot Password?</p>
       <ion-row>
-        
         <ion-col class="signup-col">
           <ion-button class="submit-btn" (click)="credentialsLogin()">Login</ion-button>
         </ion-col>

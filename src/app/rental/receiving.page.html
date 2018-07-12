@@ -1,0 +1,79 @@
+<app-header [title]="'Receiving'"></app-header>
+
+<ion-content class="home" padding>
+  <ion-item>
+    <ion-searchbar
+      [showCancelButton]="true"
+      (ionInput)="FilterBookDB($event)"
+      (ionCancel)="searchTransDB()">
+    </ion-searchbar>
+  </ion-item>
+
+  <ion-list>
+    <ion-item-sliding *ngFor="let book of holds | search : DescriptionSearch : null" >
+      <ion-item>
+
+           <ion-avatar thumbnail  slot="start" (click)="bookInfo(book)">
+                <img src="{{book.PictureLink}}" />
+            </ion-avatar>
+            <ion-label class="ion-text-wrap"> 
+                <h2>{{book.Description}}</h2>
+                <p *ngIf="book.TotalCopies > 0" class="item-description">
+                  Available : {{book.TotalCopies - book.RentedCopies}}
+                <span *ngIf="book.RentedCopies > 0">[Checked Out : {{book.RentedCopies}}]</span></p>
+                <span *ngIf="book.TotalCopies - book.RentedCopies > 0 " style="color:green;">{{book.ProposedCode}} </span>
+                <p> {{book.RequestedUser}}</p>
+                <p> {{book.CreatedDate  | date: 'MM/dd/yyyy'}}</p>
+             </ion-label>
+                             
+             <span style="text-align:center;" class="ion-text-wrap" *ngIf="book.TotalCopies - book.RentedCopies > 0 && book.Status === 26" >
+              <p *ngIf="this.authentication.getIsAdmin() === 'Y'"><ion-icon name="archive-outline" class="icon-circle" style="color:blue;" (click)="readyforPickup(book)"></ion-icon></p>
+              <p><ion-icon *ngIf="this.authentication.getIsAdmin() != 'Y'" name="time-outline" class="icon-circle" style="color:green;"></ion-icon></p>
+              <p *ngIf="this.authentication.getIsAdmin() === 'Y'" style="margin-top: 0px;color:blue;">Approve Hold</p>
+              <p *ngIf="this.authentication.getIsAdmin() != 'Y'" style="margin-top: 0px;color:green;">Pending</p>
+            </span>
+            <span style="text-align:center;" class="ion-text-wrap" *ngIf="book.Status === 27">
+              <p *ngIf="this.authentication.getIsAdmin() === 'Y'" ><ion-icon name="thumbs-up-outline" class="icon-circle" style="color:green;" (click)="markPickedUp(book)"></ion-icon></p>
+              <p *ngIf="this.authentication.getIsAdmin() != 'Y'" ><ion-icon name="thumbs-up-outline" class="icon-circle" style="color:green;"></ion-icon></p>
+              <p style="color:green;margin-top: 0px;">Ready for pickup</p>
+            </span>
+            <span style="text-align:center;" class="ion-text-wrap" *ngIf="book.Status === 28 && this.authentication.getIsAdmin() === 'Y'">
+              <p><ion-icon name="walk-outline" class="icon-circle" style="color:green;"></ion-icon></p>
+              <p style="color:green;margin-top: 0px;">Picked Up</p>
+            </span>
+            <!--
+            <span style="text-align:center;" class="ion-text-wrap" *ngIf="book.Status === 29">
+              <p><ion-icon name="close-circle-outline" class="icon-circle" style="color:red;"></ion-icon></p>
+              <p style="color:red;margin-top: 0px;">Denied</p>
+            </span>
+            -->
+    </ion-item>
+      <ion-item-options side="end" *ngIf="this.authentication.getIsAdmin() === 'Y'">
+        <button ion-button  color="primary" style="background-color: red; color:white" (click)="denied(book)" *ngIf="book.Status != 29">
+          Mark Denied
+        </button>
+        <button ion-button  color="primary" style="background-color: green; color:white" (click)="rented(book)" *ngIf="book.Status === 27 ||  book.Status === 28">
+          Mark Rented
+        </button>        
+
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+</ion-content>
+
+<!-- 
+
+public string ISBN { get; set; }
+public string PictureLink { get; set; }
+public string Description { get; set; }
+public string Code { get; set; }
+public string TotalCopies { get; set; }
+public string RentedCopies { get; set; }
+public string RentedTransId { get; set; }
+public string StatusDesc { get; set; }
+public string RequestedUser { get; set; }
+
+public string CreatedDate { get; set; }
+public string Id { get; set; }
+
+-->

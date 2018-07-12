@@ -1,16 +1,15 @@
 <app-header [title]="'Book Information'"></app-header>
 <ion-content class="home" padding>
   <div *ngIf="book" class="selection">
-      <ion-item text-wrap>
-          <img src="{{this.book.PictureLink}}"/>
+      
           <h1>{{this.book.description}}</h1>
           <p>{{this.book.LanguageDesc}}</p>
-      </ion-item>
+      
       <ion-item *ngIf="this.author">
         <ion-icon name="document" item-left class="wrap"></ion-icon>
         <p class="item-description">{{this.author}}</p>
       </ion-item>
-      <ion-item text-wrap>
+      <ion-item *ngIf="this.title" text-wrap>
         <ion-icon name="bookmark" item-left></ion-icon>
         <p>{{this.title}}</p>
         <p>{{this.subtitle}}</p>
@@ -24,4 +23,21 @@
         <p>This book was read by {{this.ReadCountHistory}} folks till today.</p>
       </ion-item>
     </div>
+
+    <ion-slides *ngIf="book" [pager]="true" class="image-slider" loop="true" slidesPerView="4">
+      <ion-slide>
+        <img src="{{this.book.PictureLink}}" class="thumb-img"/>
+      </ion-slide>
+      <ion-slide>
+        <img src="http://icarebooks.com/images/book/{{this.isbn}}_front.jpg" class="thumb-img"/>
+      </ion-slide>
+      <ion-slide>
+        <img src="http://icarebooks.com/images/book/{{this.isbn}}_back.jpg" class="thumb-img"/>
+      </ion-slide>
+      <ion-slide>
+        <img src="http://icarebooks.com/images/book/{{this.isbn}}_preview.jpg" class="thumb-img"/>
+      </ion-slide>
+
+    </ion-slides>
+
 </ion-content>
