@@ -7,7 +7,7 @@ import { ScanPage } from '../scanner/scan';
 import { NavController, NavParams } from 'ionic-angular';
 import { User, Authentication } from '../../shared/shared';
 import { Login } from '../login/login';
-import {Storage} from "@ionic/Storage";
+import {Storage} from "@ionic/storage";
 @Component({
     templateUrl: 'tab.html'
 })

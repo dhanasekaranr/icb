@@ -13,7 +13,7 @@ import { MultiCopies } from '../pages/home/MultiCopies';
 import { ReturnPage } from '../pages/home/Return';
 import { Search} from '../shared/Search';
 import { BrowserModule } from '@angular/platform-browser';
-import { IonicStorageModule } from '@ionic/Storage';
+import { IonicStorageModule } from '@ionic/storage';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule} from "@angular/common/http";
 import { DashPage } from '../pages/dashboard/dash';

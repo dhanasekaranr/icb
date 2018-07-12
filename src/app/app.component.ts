@@ -12,7 +12,7 @@ import { BookInfo } from '../pages/home/BookInfo';
 import { ReturnPage } from '../pages/home/Return';
 import { CheckOutPage } from '../pages/home/CheckOut';
 import { MultiCopies } from '../pages/home/MultiCopies';
-import { IonicStorageModule } from '@ionic/Storage';
+import { IonicStorageModule } from '@ionic/storage';
 @Component({
   templateUrl: 'app.html',
   providers: [

@@ -3,7 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { Authentication, User } from '../../shared/shared';
 import { Tab } from '../tab/tab';
 //import { RegisterExternalUser } from '../registerExternalUser/registerExternalUser';
-import { Storage } from '@ionic/Storage';
+import { Storage } from '@ionic/storage';
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html'

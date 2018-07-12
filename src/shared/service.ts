@@ -1,7 +1,7 @@
 import { Headers } from '@angular/http';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
-import {Storage} from "@ionic/Storage";
+import {Storage} from "@ionic/storage";
 import { GlobalSettings } from "./shared";
 export class icbService {
   data:any;
