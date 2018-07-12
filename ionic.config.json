@@ -1,6 +1,6 @@
 {
-  "name": "ICBApp",
-  "app_id": "",
+  "name": "$safeappid$",
+  "app_id": "8c6418b5",
   "type": "ionic-angular",
   "integrations": {
     "cordova": {}
