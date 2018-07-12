@@ -2,9 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
 import { HttpModule } from '@angular/http';
-
 import { Authentication, FacebookAuthentication, CredentialsAuthentication, GlobalSettings, User} from '../shared/shared';
-
 import { Login } from '../pages/login/login';
 import { Tab } from '../pages/tab/tab';
 import { HomePage } from '../pages/home/home';
@@ -16,8 +14,6 @@ import { CheckOutPage } from '../pages/home/CheckOut';
 import { MultiCopies } from '../pages/home/MultiCopies';
 import { DashPage } from '../pages/dashboard/dash';
 import { ScanPage } from '../pages/scanner/scan';
-
-
 @Component({
   templateUrl: 'app.html',
   providers: [
