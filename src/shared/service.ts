@@ -15,9 +15,10 @@ export class ICBService {
 
     constructor(private http: HttpClient, private storage: Storage, private globalSettings: GlobalSettings, private func: GlobalFunctions) {
 
-       this.baseUrl = 'http://localhost:52146'; // globalSettings.getSettings().apiUrl;
+      // this.baseUrl = 'http://localhost:52146'; // globalSettings.getSettings().apiUrl;
 
-     // this.baseUrl =   this.func.getSettings().apiUrl; // 'http://api.icarebooks.com';
+    //  this.baseUrl =   this.func.getSettings().apiUrl; // 'http://api.icarebooks.com';
+    this.baseUrl =   'http://api.icarebooks.com';
     }
     public setDestn(destn) {
       this.destn = destn;

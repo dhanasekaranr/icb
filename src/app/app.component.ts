@@ -6,7 +6,6 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { PopoverPage } from './home/popover';
 import { NotificationPopoverPage } from './home/notificationPopover';
-
 import { IonicStorageModule } from '@ionic/storage';
 import { SettingPopover } from './home/settingPopover';
 import { Authentication } from '../shared/authentication.service';

@@ -5,7 +5,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { UsersPage } from './users.page';
-import { PipesModule } from 'src/shared/pipes.module';
+import { PipesModule } from '../../shared/pipes.module';
 @NgModule({
   imports: [
     IonicModule,

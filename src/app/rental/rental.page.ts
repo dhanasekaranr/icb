@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { Authentication } from 'src/shared/shared';
-import { MasterDetailService } from 'src/providers/data-service/masterDetailService';
 import { NavController, ToastController, Platform, LoadingController } from '@ionic/angular';
-import { ICBService } from 'src/shared/service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ICBService } from '../../shared/service';
+import { Authentication } from '../../shared/authentication.service';
+import { MasterDetailService } from '../../providers/data-service/masterDetailService';
 
 @Component({
   selector: 'app-rental',

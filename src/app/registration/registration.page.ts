@@ -1,11 +1,11 @@
-import { HeaderPage } from 'src/app/layout/header';
+
 import { Component, OnInit } from '@angular/core';
 import { NavController, ToastController, Platform, LoadingController, ActionSheetController, AlertController } from '@ionic/angular';
-import { ICBService } from 'src/shared/service';
-import { Authentication } from 'src/shared/shared';
-import { MasterDetailService } from 'src/providers/data-service/masterDetailService';
 import { FormGroup, FormControl, Validators,ReactiveFormsModule, FormBuilder  } from '@angular/forms';
 import { PasswordValidator } from './password.validator';
+import { ICBService } from '../../shared/service';
+import { Authentication } from '../../shared/authentication.service';
+import { MasterDetailService } from '../../providers/data-service/masterDetailService';
 
 
 
@@ -13,7 +13,7 @@ import { PasswordValidator } from './password.validator';
   selector: 'app-registration',
   templateUrl: 'registration.page.html',
   styleUrls: ['registration.page.scss'],
-  providers: [ICBService, HeaderPage]
+
 })
 
 export class RegistrationPage implements OnInit {

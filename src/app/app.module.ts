@@ -21,11 +21,11 @@ import { CredentialsAuthentication } from '../shared/credentialsAuthentication';
 import { ICBService } from '../shared/service';
 
 @NgModule({
-  declarations: [AppComponent, PopoverPage, NotificationPopoverPage,SettingPopover],
+  declarations: [AppComponent, PopoverPage, NotificationPopoverPage, SettingPopover],
   entryComponents: [PopoverPage, NotificationPopoverPage, SettingPopover],
   imports: [BrowserModule, IonicModule.forRoot(), IonicStorageModule.forRoot(), AppRoutingModule, HttpClientModule,
      ChartsModule, BrowserAnimationsModule],
-  providers: [GlobalSettings, GlobalFunctions, Authentication, CredentialsAuthentication, 
+  providers: [GlobalSettings, GlobalFunctions, Authentication, CredentialsAuthentication,
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, ICBService, InAppBrowser

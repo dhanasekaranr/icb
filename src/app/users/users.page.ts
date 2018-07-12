@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { NavController, Platform, ToastController, ActionSheetController, LoadingController } from '@ionic/angular';
-import { ICBService } from 'src/shared/service';
-import { Authentication } from 'src/shared/shared';
+import { ICBService } from '../../shared/service';
+import { Authentication } from '../../shared/authentication.service';
+
+
 
 @Component({
   selector: 'app-users',

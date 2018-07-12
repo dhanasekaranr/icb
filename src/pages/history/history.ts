@@ -3,7 +3,7 @@ import { NavController, LoadingController, AlertController, ToastController,NavP
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { ICBService } from '../../shared/service';
 import { Chart } from 'chart.js';
-import { BookInfo } from '../home/BookInfo';
+// import { BookInfo } from '../home/BookInfo';
 @Component({
   selector: 'page-history',
   templateUrl: 'history.html',
@@ -93,9 +93,9 @@ export class HistoryPage {
     }
     bookInfo( key)
     {
-      this.navCtrl.push(BookInfo, {
-        book:key
-      });
+     // this.navCtrl.push(BookInfo, {
+       // book:key
+     // });
     }
 
 public randomize(choice):void {

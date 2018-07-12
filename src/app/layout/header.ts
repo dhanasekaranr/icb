@@ -1,14 +1,13 @@
 
 import { Component, Input } from '@angular/core';
 import { NavController } from '@ionic/angular';
-import { ICBService } from 'src/shared/service';
-import { Authentication } from 'src/shared/shared';
 import { Location } from '@angular/common';
+import { Authentication } from '../../shared/authentication.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: 'header.html',
-  providers: [ICBService]
+
 })
 export class HeaderPage {
     @Input() title: any;

@@ -3,7 +3,8 @@ import { Component } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { ICBService } from '../../../shared/service';
 import { Authentication } from '../../../shared/authentication.service';
-import { MasterDetailService } from 'src/providers/data-service/masterDetailService';
+import { MasterDetailService } from '../../../providers/data-service/masterDetailService';
+
 
 @Component({
     selector: 'page-currentRentals',

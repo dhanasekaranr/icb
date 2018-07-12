@@ -10,7 +10,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { TabsPageRoutingModule } from './tabs.router.module';
 import { TabsPage } from './tabs.page';
-import { PipesModule } from 'src/shared/pipes.module';
+import { PipesModule } from '../../shared/pipes.module';
 import { CurrentRentalsPage } from '../home/currentRentals/currentRentals';
 import { CheckOutPage } from '../rental/checkout/CheckOut';
 import { MultiCopiesPage } from '../rental/checkout/MultiCopies';

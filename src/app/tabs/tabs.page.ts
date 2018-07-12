@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from '@ionic/angular';
-import { Authentication } from 'src/shared/shared';
 import { Storage } from '@ionic/storage';
+import { Authentication } from '../../shared/authentication.service';
 @Component({
   selector: 'app-tabs',
   templateUrl: 'tabs.page.html',
