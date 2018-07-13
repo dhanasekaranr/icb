@@ -44,7 +44,7 @@ export class ScanPage {
           this.productFound = true;
         } else {
           this.productFound = false;
-          this.toast.show(`Product not found`, '5000', 'center').subscribe(
+          this.toast.show(`Product not found:::` + barcodeData.text, '5000', 'center').subscribe(
             toast => {
               console.log(toast);
             }
