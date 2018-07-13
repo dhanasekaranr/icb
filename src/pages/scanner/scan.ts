@@ -17,7 +17,7 @@ export class ScanPage {
   products: any;
   selectedProduct: any;
   productFound:boolean = false;
-
+ barcodetext: any;
   constructor(public navCtrl: NavController,
     private barcodeScanner: BarcodeScanner,
     private toast: Toast,
@@ -38,6 +38,7 @@ export class ScanPage {
 
       if (this.platform.is('cordova')) {
       this.barcodeScanner.scan().then((barcodeData) => {
+        this.barcodetext = barcodeData.text;
         this.selectedProduct = this.products.find(product => product.plu === barcodeData.text);
         if(this.selectedProduct !== undefined) {
           this.productFound = true;
@@ -58,6 +59,7 @@ export class ScanPage {
       });
     }
     else {
+      this.barcodetext = 'not impleted - browser click';
       console.log('not impleted - browser click');
     }
 
