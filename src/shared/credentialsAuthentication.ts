@@ -23,10 +23,24 @@ export class CredentialsAuthentication {
     };
     const loginData = 'grant_type=password&username=' + credentials.username + '&password=' + credentials.password;
     // Construct POST Headers
+<<<<<<< HEAD
     return this.http.post(this.baseUrl + '/Token', loginData, httpOptions)
     .pipe(map( (response) => {
       return response;
     }) , catchError (this.handleError) );
+=======
+    let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded'  });
+
+
+
+
+    let options = new RequestOptions({ headers: headers });
+
+    // Perform request
+
+  //  var externalProviderUrl = this.baseUrl + "api/Account/ExternalLogin?provider=" + provider
+    //    + "&response_type=token&client_id=" + ngAuthSettings.clientId
+>>>>>>> Version 3.10
 
 }
 public register(credentials: { firstName: string; lastName: string; email: string; password: string; }) {
