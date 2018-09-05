@@ -21,12 +21,23 @@ import { DataServiceProvider } from '../providers/data-service/data-service';
 import { ScanPage } from '../pages/scanner/scan';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { Toast } from '@ionic-native/toast';
+import { PopoverPage } from '../pages/home/popover';
+import { NotificationPopoverPage } from '../pages/home/notificationPopover';
+import { RentalsPage } from '../pages/home/rentals';
+import { StatsPage } from '../pages/stats/stats';
+
+import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { TwitterConnect } from '@ionic-native/twitter-connect';
+import { TwitterService } from 'ng2-twitter';
+import { TwitterProvider } from '../providers/twitter/twitter';
+import { HistoryPage } from '../pages/history/history';
 @NgModule({
   declarations: [
     MyApp,
     RegisterExternalUser,
       Login,
-      Tab, HomePage, ContactPage, UserPage,BookInfo, CheckOutPage,ReturnPage, Search,MultiCopies,DashPage,ScanPage
+      Tab, HomePage, ContactPage, UserPage,BookInfo, CheckOutPage,ReturnPage, Search,MultiCopies,DashPage,ScanPage,
+      PopoverPage,NotificationPopoverPage,RentalsPage,StatsPage,HistoryPage
   ],
   imports: [
     IonicModule.forRoot(MyApp),BrowserModule,IonicStorageModule.forRoot(),HttpModule,HttpClientModule
@@ -36,10 +47,15 @@ import { Toast } from '@ionic-native/toast';
     MyApp,
     RegisterExternalUser,
     Login,
-      Tab, HomePage, ContactPage, UserPage, BookInfo, CheckOutPage,ReturnPage,MultiCopies,DashPage,ScanPage
+      Tab, HomePage, ContactPage, UserPage, BookInfo, CheckOutPage,ReturnPage,MultiCopies,DashPage,ScanPage,PopoverPage,
+      NotificationPopoverPage,RentalsPage,StatsPage,HistoryPage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},
-    DataServiceProvider, BarcodeScanner,
-    Toast]
+    DataServiceProvider, BarcodeScanner, TwitterConnect,
+    TwitterService,
+    InAppBrowser,
+    TwitterProvider,
+    Toast,
+    TwitterProvider]
 })
 export class AppModule {}

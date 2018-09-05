@@ -22,6 +22,10 @@ export class CredentialsAuthentication {
 
     // Construct POST Headers
     let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded'  });
+
+
+
+
     let options = new RequestOptions({ headers: headers });
 
     // Perform request

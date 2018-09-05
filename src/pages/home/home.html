@@ -22,21 +22,27 @@
     <ion-list>
 
       <ion-item-sliding *ngFor="let book of books | search : DescriptionSearch : null" >
-        <ion-item (click)="bookInfo(book)" text-wrap>
-          <ion-avatar item-left>
-            <img src="{{book.PictureLink}}" />
-        </ion-avatar>
-        <h3>{{book.Description}}</h3>
 
-        <p *ngIf="book.TotalCopies > 0" class="item-description" style="color:red">
-          Available : {{book.TotalCopies - book.RentedCopies}}
-          <span *ngIf="book.RentedCopies > 0">[Checked Out : {{book.RentedCopies}}]</span></p>
-          <p *ngIf="book.TotalCopies == 1" style="color:green;">{{book.Code}} </p>
+        <ion-item text-wrap>
+            <div (click)="bookInfo(book)" >
+                <ion-thumbnail item-left>
+                  <img src="{{book.PictureLink}}" />
+              </ion-thumbnail>
+              <h3>{{book.Description}}</h3>
+
+              <p *ngIf="book.TotalCopies > 0" class="item-description" style="color:red">
+
+                Available : {{book.TotalCopies - book.RentedCopies}}
+                <span *ngIf="book.RentedCopies > 0">[Checked Out : {{book.RentedCopies}}]</span></p>
+                <p *ngIf="book.TotalCopies == 1" style="color:green;">{{book.Code}} </p>
+              </div>
+          <ion-icon *ngIf="book.WishList != 'Y'" name="heart" (click)="AddToWishList(book,'Y','Added to Wish List!')" style="color:red" title="Add to Wish list"></ion-icon>
+          <ion-icon *ngIf="book.WishList == 'Y'" name="heart-outline" (click)="AddToWishList(book,'N','Removed from your Wish List!')" title="Remove from Wish list"></ion-icon>
       </ion-item>
         <ion-item-options>
           <button ion-button color="danger" (click)="returnBook(book)" icon-start *ngIf="book.RentedCopies > 0 ">
               <ion-icon name="refresh"></ion-icon>
-              Return Book ({{book.RentedCopies}})
+              Return ({{book.RentedCopies}})
           </button>
           <button ion-button color="primary" (click)="checkout(book)" icon-start *ngIf="(book.TotalCopies - book.RentedCopies) > 0">
               <ion-icon name="cart"></ion-icon>

@@ -19,7 +19,7 @@ export class BookInfo {
         this.bookService.GetBookInfo(navParams.get('book').ISBN).then(
           data => {
             if(!data.items) return;
-            console.log(data.items);
+           // console.log(data.items);
 
             this.title = data.items[0].volumeInfo.title;
             this.subtitle = data.items[0].volumeInfo.subtitle;

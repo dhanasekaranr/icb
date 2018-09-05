@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
 
-import { NavController, Platform, ActionSheetController } from 'ionic-angular';
+import { NavController, Platform, ActionSheetController,ToastController,LoadingController } from 'ionic-angular';
 import { icbService } from '../../shared/service';
 import { ReturnPage } from '../home/Return';
 import { CheckOutPage } from '../home/CheckOut';
-import { ToastController } from 'ionic-angular';
 import { Authentication } from '../../shared/shared';
-import { LoadingController } from 'ionic-angular';
+
 import { Login } from '../login/login';
 @Component({
   selector: 'page-contact',
@@ -24,7 +23,7 @@ searchTransDB() {
       this.icbservice.searchTrans('book','GetBookCodes').then(
           data => {
               this.books = data;
-              console.log(data);
+           //   console.log(data);
           }
       );
 

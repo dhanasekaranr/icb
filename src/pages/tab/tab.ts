@@ -17,7 +17,7 @@ export class Tab {
     tab1Root: any = HomePage;
     tab2Root: any = UserPage;
     tab3Root: any = ContactPage;
-    tab4Root: any = ScanPage;
+    tab4Root: any = DashPage;
     constructor(public navCtrl: NavController,
         public navParams: NavParams,
         private authentication: Authentication,

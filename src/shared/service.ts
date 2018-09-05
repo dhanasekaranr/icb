@@ -13,9 +13,9 @@ export class icbService {
     constructor(private http: Http, private storage: Storage,private globalSettings: GlobalSettings) {
 
    //   this.baseUrl = 'http://localhost:52146';//globalSettings.getSettings().apiUrl;
-   //   this.baseUrl = 'http://localhost:52146';//globalSettings.getSettings().apiUrl;
+      this.baseUrl = 'http://localhost:52146';//globalSettings.getSettings().apiUrl;
 
-   this.baseUrl =   'http://api.icarebooks.com';
+   //this.baseUrl =   'http://api.icarebooks.com';
     }
 
 
@@ -145,4 +145,114 @@ export class icbService {
       });
   }
 
+  getRentalStatus(id,stat) {
+    var url = this.baseUrl + '/api/dash/GetRentalStatus/' + id + '/' + stat + '/';
+    return new Promise<any>( resolve => {
+        this.storage.get('accessToken').then((token) => {
+          let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+          headers.append('Authorization', 'Bearer ' + token);
+          this.http.get(url, {headers : headers})
+          .map(res => res.json())
+          .subscribe( data =>{
+              this.data = data;
+              resolve(this.data);
+          });
+        });
+      });
+  }
+  getRentalStatusDetails(choice, labelvalue) {
+    var url = this.baseUrl + '/api/dash/GetRentalStatusDetail/' + choice + '/' + labelvalue + '/';
+    return new Promise<any>( resolve => {
+        this.storage.get('accessToken').then((token) => {
+          let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+          headers.append('Authorization', 'Bearer ' + token);
+          this.http.get(url, {headers : headers})
+          .map(res => res.json())
+          .subscribe( data =>{
+              this.data = data;
+              resolve(this.data);
+          });
+        });
+      });
+  }
+
+  getActiveWishList() {
+    var url = this.baseUrl + '/api/wish';
+    return new Promise<any>( resolve => {
+        this.storage.get('accessToken').then((token) => {
+          let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+          headers.append('Authorization', 'Bearer ' + token);
+          this.http.get(url, {headers : headers})
+          .map(res => res.json())
+          .subscribe( data =>{
+              this.data = data;
+              resolve(this.data);
+          });
+        });
+      });
+  }
+  getRentalTransactions() {
+    var url = this.baseUrl + '/api/trans';
+    return new Promise<any>( resolve => {
+        this.storage.get('accessToken').then((token) => {
+          let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+          headers.append('Authorization', 'Bearer ' + token);
+          this.http.get(url, {headers : headers})
+          .map(res => res.json())
+          .subscribe( data =>{
+              this.data = data;
+              resolve(this.data);
+          });
+        });
+      });
+  }
+
+  getNotificationList() {
+    var url = this.baseUrl + '/api/dash';
+    return new Promise<any>( resolve => {
+        this.storage.get('accessToken').then((token) => {
+          let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+          headers.append('Authorization', 'Bearer ' + token);
+          this.http.get(url, {headers : headers})
+          .map(res => res.json())
+          .subscribe( data =>{
+              this.data = data;
+              resolve(this.data);
+          });
+        });
+      });
+  }
+  AddToWishList(isbn) {
+    var url = this.baseUrl + '/api/wish/' + isbn;
+    //console.log("search: " + search);
+    return new Promise<any>( resolve => {
+        this.storage.get('accessToken').then((token) => {
+          let body = JSON.stringify({isbn:isbn});
+          let headers = new Headers({ 'Content-Type': 'application/json' });
+          headers.append('Authorization', 'Bearer ' + token);
+          this.http.put (url, body, {headers : headers}).map(res => res.json())
+          .subscribe( data =>{
+              this.data = data;
+              resolve(this.data);
+          });
+        });
+      });
+  }
+
+
+  getTweets() {
+    var url = this.baseUrl + '/api/tweet';
+    return new Promise<any>( resolve => {
+        this.storage.get('accessToken').then((token) => {
+          let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+          headers.append('Authorization', 'Bearer ' + token);
+          this.http.get(url, {headers : headers})
+          .map(res => res.json())
+          .subscribe( data =>{
+              this.data = data;
+              resolve(this.data);
+          });
+        });
+      });
+  }
 }

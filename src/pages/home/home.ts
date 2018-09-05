@@ -1,13 +1,12 @@
 import { ReturnPage } from './Return';
 import { Tab } from '../tab/tab';
 import { Component } from '@angular/core';
-import { NavController, Platform, ActionSheetController } from 'ionic-angular';
+import { NavController, Platform, ActionSheetController,LoadingController,ToastController } from 'ionic-angular';
 import { icbService } from '../../shared/service';
 import { BookInfo } from './BookInfo';
 import { CheckOutPage } from './CheckOut';
 import { User,Authentication } from '../../shared/shared';
 import { Login } from '../login/login';
-import { LoadingController } from 'ionic-angular';
 import { MultiCopies} from './MultiCopies';
 
 @Component({
@@ -25,7 +24,7 @@ export class HomePage {
 
     constructor(public navCtrl: NavController, private service: icbService, public platform: Platform,
         public actionsheetCtrl: ActionSheetController,public authentication: Authentication,
-        public loading: LoadingController) {
+        public loading: LoadingController,public toastCtrl: ToastController) {
 
         }
 
@@ -93,6 +92,19 @@ export class HomePage {
       this.navCtrl.push(BookInfo, {
         book:key
       });
+    }
+    AddToWishList(key,flag,message)
+    {
+      this.service.AddToWishList(key.ISBN).then(
+        data => {
+          let toast = this.toastCtrl.create({
+           message: message,
+           duration: 2000
+         });
+         toast.present();
+         key.WishList = flag;
+        }
+  );
     }
     returnBook( key)
     {
@@ -162,7 +174,7 @@ export class HomePage {
                     role: 'cancel', // will always sort to be on the bottom
                     icon: !this.platform.is('ios') ? 'close' : null,
                     handler: () => {
-                        console.log('Cancel clicked');
+                       // console.log('Cancel clicked');
                     }
                 }
             ]

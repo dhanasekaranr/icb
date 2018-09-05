@@ -17,14 +17,26 @@ export class UserPage {
   constructor(public navCtrl: NavController, private icbservice: icbService, public platform: Platform,
     public actionsheetCtrl: ActionSheetController, public toastCtrl: ToastController,public loading: LoadingController,
     public authentication: Authentication) {
-      this.loader = this.loading.create({content: 'Getting Users...'});
-      this.searchUserDB(null);
+      if( this.authentication.getAccessToken() != null){
+        this.loader = this.loading.create({content: 'Getting Users...'});
+        this.searchUserDB(null);
+      }
+      else{
+        this.navCtrl.push(Login);
+      }
 }
 ionViewWillEnter(){
-   if(this.users) { //reload the data.{
-    this.loader = this.loading.create({content: 'Getting Users...'});
-    this.icbservice.searchTrans('user',this.queryval).then(data => {this.users = data;});
+
+  if( this.authentication.getAccessToken() != null){
+    if(this.users) { //reload the data.{
+        this.loader = this.loading.create({content: 'Getting Users...'});
+        this.icbservice.searchTrans('user',this.queryval).then(data => {this.users = data;});
+      }
+    }
+  else{
+    this.navCtrl.push(Login);
   }
+
  }
 searchUserDB(event) {
   this.queryval = "";

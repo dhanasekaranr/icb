@@ -13,6 +13,11 @@ import { ReturnPage } from '../pages/home/Return';
 import { CheckOutPage } from '../pages/home/CheckOut';
 import { MultiCopies } from '../pages/home/MultiCopies';
 import { IonicStorageModule } from '@ionic/storage';
+import { PopoverPage } from '../pages/home/popover';
+import { NotificationPopoverPage } from '../pages/home/notificationPopover';
+import { RentalsPage } from '../pages/home/rentals';
+import { StatsPage } from '../pages/stats/stats';
+import { HistoryPage } from '../pages/history/history';
 @Component({
   templateUrl: 'app.html',
   providers: [
@@ -23,7 +28,7 @@ import { IonicStorageModule } from '@ionic/storage';
     CredentialsAuthentication,
     User,
     GlobalSettings,
-      Tab, HomePage, ContactPage, UserPage, BookInfo, ReturnPage,CheckOutPage,MultiCopies
+      Tab, HomePage, ContactPage, UserPage, BookInfo, ReturnPage,CheckOutPage,MultiCopies,PopoverPage,NotificationPopoverPage,Login,RentalsPage,StatsPage,HistoryPage
   ]
 })
 export class MyApp {
