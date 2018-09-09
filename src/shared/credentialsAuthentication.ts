@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Http, Response, Headers, RequestOptions } from "@angular/http";
 import { ReplaySubject } from 'rxjs';
-
+import { Observable } from 'rxjs/Observable';
 import { GlobalSettings } from "./shared";
 
 @Injectable()
@@ -18,27 +18,23 @@ export class CredentialsAuthentication {
   login (credentials) {
     // Construct data
     let loginData = 'grant_type=password&username=' + credentials.username + '&password=' + credentials.password;
-
-
     // Construct POST Headers
     let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded'  });
-
-
-
-
     let options = new RequestOptions({ headers: headers });
-
     // Perform request
-
   //  var externalProviderUrl = this.baseUrl + "api/Account/ExternalLogin?provider=" + provider
     //    + "&response_type=token&client_id=" + ngAuthSettings.clientId
-
-
     return this.http.post(this.baseUrl + '/Token', loginData, options)
     .map( response => {
       let body = JSON.parse(response["_body"]);
       return body.access_token;
-    });
-  }
+    }).catch(this.handleError);
+
+}
+
+handleError(error:Response){
+  console.error(error);
+  return Observable.throw(error);
+}
 }
 

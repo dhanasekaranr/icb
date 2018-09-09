@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Http, Response, Headers, RequestOptions } from "@angular/http";
 import { ReplaySubject } from 'rxjs';
-
+import { Observable } from 'rxjs/Observable';
 import { GlobalSettings } from "./shared";
 
 @Injectable()
@@ -26,9 +26,12 @@ export class User {
     .map( response => {
       let body = JSON.parse(response["_body"]);
       return body;
-    });
+    }).catch(this.handleError);
   }
-
+  handleError(error:Response){
+    console.error(error);
+    return Observable.throw(error);
+  }
   // Registers a user in the Web Api using federated login provider (Facebook)
   // A user must be registered before it can retrieve protected resources.
   registerExternalUser (accessToken, username) {

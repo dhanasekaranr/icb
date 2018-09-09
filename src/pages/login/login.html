@@ -22,7 +22,6 @@
     <ion-col></ion-col>
   </ion-row>
   <div class="login-box">
-    <p class="item-description">{{this.errMessage}}</p>
       <ion-row>
         <ion-col>
           <ion-list inset>
@@ -41,7 +40,10 @@
 
         </ion-col>
       </ion-row>
-  </div>
+      <p class="item-description" style="color: red">{{this.errMessage}}</p>
+
+    </div>
+
 </ion-content>
 <ion-footer>
     <ion-toolbar>

@@ -2,8 +2,9 @@ import { Injectable } from "@angular/core";
 import { Http, Response, Headers, RequestOptions } from "@angular/http";
 import { ReplaySubject, AsyncSubject } from 'rxjs';
 import { Storage } from '@ionic/storage';
-
+import { Observable } from 'rxjs/Observable';
 import { FacebookAuthentication, CredentialsAuthentication, GlobalSettings } from "./shared";
+import 'rxjs/Observable/throw';
 
 @Injectable()
 export class Authentication {
@@ -52,29 +53,38 @@ export class Authentication {
 
   credentialsLogin (credentials) {
     // IF the access token subject is already set, just return it again
+
     if (this.accessTokenSubject) {
+      if (this.accessTokenSubject.isStopped) {
+      console.log("set");
       return this.accessTokenSubject;
+      }
     }
     // Else instantiate a new subject and perform login request
-    this.accessTokenSubject = new AsyncSubject();
+     this.accessTokenSubject = new AsyncSubject();
 
-    this.credentialsAuthentication.login(credentials)
-    .subscribe(accessToken => {
-      // Cache the access token in the service
-      this.accessToken = accessToken;
+     return this.credentialsAuthentication.login(credentials)
+          .map(accessToken => {
+            // Cache the access token in the service
+            this.accessToken = accessToken;
+            // Save the access token in storage
+            this.storage.set('accessToken', accessToken);
+            this.storage.set('username', credentials.username);
+            this.storage.set('password', credentials.password);
+            // Set the access token as the result for the observerable
+            this.accessTokenSubject.next(accessToken);
+            this.accessTokenSubject.complete();
+            return this.accessTokenSubject;
 
-      // Save the access token in storage
-      this.storage.set('accessToken', accessToken);
+          }).catch(this.handleError);
 
-      this.storage.set('username', credentials.username);
-      this.storage.set('password', credentials.password);
+        // return this.accessTokenSubject;
+  }
+  handleError(error:Response){
+    // Clear the saved accessToken
 
-      // Set the access token as the result for the observerable
-      this.accessTokenSubject.next(accessToken);
-      this.accessTokenSubject.complete();
-    });
-
-    return this.accessTokenSubject;
+    console.error(error);
+    return Observable.throw(error);
   }
 
   logout () {
