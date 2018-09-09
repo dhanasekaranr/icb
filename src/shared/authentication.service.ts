@@ -4,7 +4,7 @@ import { ReplaySubject, AsyncSubject } from 'rxjs';
 import { Storage } from '@ionic/storage';
 import { Observable } from 'rxjs/Observable';
 import { FacebookAuthentication, CredentialsAuthentication, GlobalSettings } from "./shared";
-import 'rxjs/Observable/throw';
+
 
 @Injectable()
 export class Authentication {
