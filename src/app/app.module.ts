@@ -1,3 +1,4 @@
+import { ForgotPassword } from '../pages/forgotPassword/forgotPassword';
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
@@ -37,7 +38,7 @@ import { HistoryPage } from '../pages/history/history';
     RegisterExternalUser,
       Login,
       Tab, HomePage, ContactPage, UserPage,BookInfo, CheckOutPage,ReturnPage, Search,MultiCopies,DashPage,ScanPage,
-      PopoverPage,NotificationPopoverPage,RentalsPage,StatsPage,HistoryPage
+      PopoverPage,NotificationPopoverPage,RentalsPage,StatsPage,HistoryPage,ForgotPassword
   ],
   imports: [
     IonicModule.forRoot(MyApp),BrowserModule,IonicStorageModule.forRoot(),HttpModule,HttpClientModule
@@ -48,7 +49,7 @@ import { HistoryPage } from '../pages/history/history';
     RegisterExternalUser,
     Login,
       Tab, HomePage, ContactPage, UserPage, BookInfo, CheckOutPage,ReturnPage,MultiCopies,DashPage,ScanPage,PopoverPage,
-      NotificationPopoverPage,RentalsPage,StatsPage,HistoryPage
+      NotificationPopoverPage,RentalsPage,StatsPage,HistoryPage,ForgotPassword
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},
     DataServiceProvider, BarcodeScanner, TwitterConnect,

@@ -136,6 +136,7 @@ export class DashPage {
         });
     }
    getRentalStatus() {
+     console.log("in");
         this.service.getRentalStatus('monthly', '3').then(
             data => {
               this.booksStat =data;

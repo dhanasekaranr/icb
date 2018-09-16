@@ -1,3 +1,5 @@
+import { ForgotPassword } from '../forgotPassword/forgotPassword';
+import { RegisterExternalUser } from '../registerExternalUser/registerExternalUser';
 import { Component } from '@angular/core';
 import { NavController, NavParams,LoadingController } from 'ionic-angular';
 import { Authentication, User } from '../../shared/shared';
@@ -50,7 +52,14 @@ export class Login {
       })
     });
   }
-
+  createAccount(){
+      this.navCtrl.push(RegisterExternalUser, {
+      });
+  }
+  ForgotPassword(){
+    this.navCtrl.push(ForgotPassword, {
+    });
+}
   credentialsLogin () {
     // Credentials should be fetched through input fields, but they are hardcoded here for clarity
 

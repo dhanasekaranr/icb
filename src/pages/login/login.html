@@ -43,8 +43,15 @@
       <p class="item-description" style="color: red">{{this.errMessage}}</p>
 
     </div>
+    <ion-row>
+      <button ion-button class="register-btn" block clear (click)="this.createAccount()">Create New Account</button>
+    </ion-row>
 
+    <ion-row>
+      <button ion-button class="register-btn" block clear (click)="this.ForgotPassword()">Forgot Password</button>
+    </ion-row>
 </ion-content>
+
 <ion-footer>
     <ion-toolbar>
       <ion-title style="text-align: center"><span style="color: blue; font-size: .5em">Powered by <a href="http://www.secantsoft.com">Secant Software Solutions</a></span></ion-title>

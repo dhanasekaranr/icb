@@ -42,7 +42,7 @@
                 <ion-badge id="notifications-badge" color="danger">{{this.AvailableCount}}</ion-badge>
               </ion-icon>
             </h1>
-            <p style="color:black; font-weight:lighter;font-size: 1.5ex">Books({{this.RentedOut}})</p>
+            <p style="color:black; font-weight:lighter;font-size: 1.4ex">Books({{this.RentedOut}})</p>
           </ion-card>
         </ion-col>
 
@@ -68,8 +68,8 @@
       </ion-row>
     </div>
   </div>
-  <ion-scroll style="width:100%;height:50vh" scrollY="true">
-    <ion-list scroll="true">
+
+    <ion-list>
         <ion-list-header>
             Current Rental List
           </ion-list-header>
@@ -82,5 +82,5 @@
         <button ion-button clear item-end >View </button>
         </ion-item>
     </ion-list>
-</ion-scroll>
+
 </ion-content>

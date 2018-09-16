@@ -4,10 +4,10 @@ import { User, Authentication  } from '../../shared/shared';
 
 
 @Component({
-  selector: 'page-register-user',
-  templateUrl: 'registerExternalUser.html'
+  selector: 'page-forgotPassword',
+  templateUrl: 'forgotPassword.html'
 })
-export class RegisterExternalUser {
+export class ForgotPassword {
 
   constructor(public nav: NavController,
               public navParams: NavParams,
