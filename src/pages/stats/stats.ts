@@ -1,6 +1,6 @@
 import { TwitterProvider } from './../../providers/twitter/twitter';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, Loading, LoadingController, AlertController, ToastController } from 'ionic-angular';
+import { NavController, Loading, LoadingController, AlertController, ToastController } from 'ionic-angular';
 import { Observable } from 'rxjs/Observable';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { icbService } from '../../shared/service';

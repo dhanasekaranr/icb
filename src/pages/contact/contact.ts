@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
-
-import { NavController, Platform, ActionSheetController,ToastController,LoadingController } from 'ionic-angular';
+import { NavController, Platform, ToastController,LoadingController } from 'ionic-angular';
 import { icbService } from '../../shared/service';
-import { ReturnPage } from '../home/Return';
 import { CheckOutPage } from '../home/CheckOut';
 import { Authentication } from '../../shared/shared';
 

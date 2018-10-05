@@ -1,11 +1,10 @@
 import { ReturnPage } from './Return';
-import { Tab } from '../tab/tab';
 import { Component } from '@angular/core';
 import { NavController, Platform, ActionSheetController,LoadingController,ToastController } from 'ionic-angular';
 import { icbService } from '../../shared/service';
 import { BookInfo } from './BookInfo';
 import { CheckOutPage } from './CheckOut';
-import { User,Authentication } from '../../shared/shared';
+import { Authentication } from '../../shared/shared';
 import { Login } from '../login/login';
 import { MultiCopies} from './MultiCopies';
 

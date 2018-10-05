@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, Platform, ActionSheetController,ToastController,LoadingController } from 'ionic-angular';
 import { icbService } from '../../shared/service';
-import { HomePage } from '../home/home';
 import { Authentication } from '../../shared/shared';
 import { Login } from '../login/login';
 @Component({

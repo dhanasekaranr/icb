@@ -1,6 +1,5 @@
 import { Component,ViewChild } from '@angular/core';
-import { IonicPage, NavController, Loading, LoadingController, AlertController, ToastController,NavParams } from 'ionic-angular';
-import { Observable } from 'rxjs/Observable';
+import { NavController, LoadingController, AlertController, ToastController,NavParams } from 'ionic-angular';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { icbService } from '../../shared/service';
 import { Chart } from 'chart.js';

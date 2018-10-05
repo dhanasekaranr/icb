@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Http, Response, Headers, RequestOptions } from "@angular/http";
-import { ReplaySubject, AsyncSubject } from 'rxjs';
+import { AsyncSubject } from 'rxjs';
 import { Storage } from '@ionic/storage';
 import { Observable } from 'rxjs/Observable';
 import { FacebookAuthentication, CredentialsAuthentication, GlobalSettings } from "./shared";

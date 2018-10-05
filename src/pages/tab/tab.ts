@@ -3,7 +3,6 @@ import { HomePage } from '../home/home';
 import { UserPage } from '../user/user';
 import { ContactPage } from '../contact/contact';
 import { DashPage } from '../dashboard/dash';
-import { ScanPage } from '../scanner/scan';
 import { NavController, NavParams } from 'ionic-angular';
 import { User, Authentication } from '../../shared/shared';
 import { Login } from '../login/login';
