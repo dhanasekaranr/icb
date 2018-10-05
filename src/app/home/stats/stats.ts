@@ -82,9 +82,14 @@ export class StatsPage {
 }
 
   public ionViewWillEnter() {
-    this.drawBarChart();
-    this.randomize('monthly');
-    this.displayChart();
+    if ( this.authentication.getAccessToken() != null) {
+      this.drawBarChart();
+      this.randomize('monthly');
+      this.displayChart();
+     } else {
+       this.navCtrl.navigateForward('tabs/login');
+     }
+
   }
 
   public displayChart() {

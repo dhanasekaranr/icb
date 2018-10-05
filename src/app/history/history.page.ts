@@ -23,7 +23,12 @@ export class HistoryPage {
               public authentication: Authentication, public ms: MasterDetailService) {
     }
     public ionViewWillEnter() {
-      this.getBookRead();
+
+        if ( this.authentication.getAccessToken() != null) {
+            this.getBookRead();
+           } else {
+             this.navCtrl.navigateForward('tabs/login');
+           }
     }
     public getBookRead() {
         this.bookService.getBookRead().then(

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
@@ -14,9 +14,6 @@ import { RentalPage } from './rental.page';
     FormsModule,
     RouterModule.forChild([{ path: '', component: RentalPage }]), PipesModule, LayoutModule,
   ],
-  declarations: [RentalPage],
-  schemas: [
-    CUSTOM_ELEMENTS_SCHEMA,
-  ],
+  declarations: [RentalPage]
 })
 export class RentalPageModule {}
