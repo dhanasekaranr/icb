@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.secantsoft.icarebooks" version="9.0.3" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.secantsoft.icarebooks" version="9.0.4" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>ICBApp</name>
     <description>App for online sharing books between friends and local groups.</description>
     <author email="Dhana.Ramaswami@secantsoft.com" href="http://secantsoft.com">Secant Software Team</author>

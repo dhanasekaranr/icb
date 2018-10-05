@@ -24,7 +24,7 @@ export class BookInfoPage {
     public ionViewWillEnter() {
       if ( this.authentication.getAccessToken() != null) {
           this.book = this.ms.getDestn();
-          console.log(this.book);
+         // console.log(this.book);
           this.description = this.book.Description;
           this.ReadCountHistory = this.book.ReadCountHistory;
           this.isbn = this.book.ISBN;

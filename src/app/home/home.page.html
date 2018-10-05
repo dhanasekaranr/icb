@@ -39,7 +39,7 @@
         <ion-col class="ion-align-self-start">
           <p style="text-align: center">
           <a class="icon-circle-large" style="background-color:#117A65" (click)="this.holdsCount > 0 && showReceiving(this.holds)">
-            <ion-badge id="notifications-badge-large" >9{{this.holdsCount}}</ion-badge>
+            <ion-badge *ngIf="this.holdsCount > 0 " id="notifications-badge-large">{{this.holdsCount}}</ion-badge>
             <ion-icon name="archive">
             </ion-icon>
           </a>

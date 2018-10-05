@@ -56,7 +56,7 @@ export class NewsPage {
       this.service.getTweets().then(
         (data) => {
           this.tweets = data;
-          console.log(data);
+         // console.log(data);
           // this.NotificationCount = this.notification.length;
           this.loading.dismiss();
       });

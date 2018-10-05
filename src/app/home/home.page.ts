@@ -81,7 +81,11 @@ export class HomePage {
 
   public async notificationPopover(myEvent: any) {
 
-    const popover = await this.popoverCtrl.create({ component: NotificationPopoverPage, componentProps : { data: this.notification }});
+    const popover = await this.popoverCtrl.create({ component: NotificationPopoverPage, 
+      componentProps : { data: this.notification },
+      event: myEvent,
+      translucent: true,
+    });
     popover.present();
     popover.onDidDismiss();
   }

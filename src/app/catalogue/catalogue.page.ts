@@ -53,7 +53,7 @@ export class CataloguePage {
         this.loader.present().then(() => {
           this.service.searchTrans('book', this.queryval).then(
             (data) => {
-              console.log(data);
+              // console.log(data);
               this.books = data;
               this.RentedOut =  this.books.reduce((previous, current) => {
                 return previous + parseInt(current.RentedCopies, 10);

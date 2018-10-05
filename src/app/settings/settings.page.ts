@@ -47,7 +47,7 @@ export class SettingsPage implements OnInit {
   public ngOnInit() {
     this.service.getGroups().then(
       (data) => {
-        console.log(data);
+        (data);
         this.groups = data;
         // this.editedItem.push('1');
 
@@ -59,7 +59,7 @@ export class SettingsPage implements OnInit {
 
     this.service.getRelationShips().then(
         (data) => {
-          console.log(data);
+        //  console.log(data);
           this.relationship = data;
          // this.loader.dismiss();
               },

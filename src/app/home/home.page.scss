@@ -25,9 +25,7 @@
   top:0px;
   right: -5px;
   border-radius: 100%;
-  font-weight: 100;
   color:white;
-  font-size:.5em;
   background-color: red;
 }
 
@@ -147,10 +145,13 @@ page-home {
     font-size: 64px; /* 64, originally 60 */
     padding: 16px;
   }
+
+  
   #notifications-badge-large {
     text-align: center;
     //padding-top: 1.4ex;
     width: 4ex;
+    
   }
 
 }
