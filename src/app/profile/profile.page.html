@@ -79,7 +79,7 @@
     
     <br/>
    <ion-button type="submit" color="danger" [disabled]="!registrationForm.valid">Save</ion-button>
-   <ion-button color="primary">Cancel</ion-button>
+   <ion-button color="primary" (click)=this.goBack();>Cancel</ion-button>
   </form>
 
 

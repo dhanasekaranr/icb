@@ -1,6 +1,8 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators  } from '@angular/forms';
-import { ActionSheetController, LoadingController, NavController, Platform, ToastController } from '@ionic/angular';
+import { FormBuilder, FormControl, FormGroup, Validators  } from '@angular/forms';
+import { ActionSheetController, LoadingController, NavController, Platform } from '@ionic/angular';
+import { ToastService } from 'src/shared/toaster.service';
 import { MasterDetailService } from '../../providers/data-service/masterDetailService';
 import { Authentication } from '../../shared/authentication.service';
 import { ICBService } from '../../shared/service';
@@ -15,8 +17,8 @@ import { ICBService } from '../../shared/service';
 export class ProfilePage implements OnInit {
   constructor(public navCtrl: NavController, private service: ICBService, public platform: Platform,
               public actionsheetCtrl: ActionSheetController, public authentication: Authentication,
-              public loading: LoadingController, public toastCtrl: ToastController, private ms: MasterDetailService,
-              public formBuilder: FormBuilder) {
+              public loading: LoadingController, public toastCtrl: ToastService, private ms: MasterDetailService,
+              public formBuilder: FormBuilder, private location: Location) {
       }
   public loader: any ;
   public registrationForm: FormGroup;
@@ -53,6 +55,11 @@ export class ProfilePage implements OnInit {
       { type: 'areEqual', message: 'Password mismatch.' },
     ],
   };
+
+  public goBack() {
+    this.location.back();
+
+}
 
    public ngOnInit() {
     if ( this.authentication.getAccessToken() != null) {
@@ -114,13 +121,8 @@ export class ProfilePage implements OnInit {
     this.loader = await this.loading.create({message: 'Registering...'});
     this.loader.present().then(() => {
       this.service.UpdateProfile(this.registrationForm.value).then(async (success) => {
-        const toast = await this.toastCtrl.create({
-          message: 'Profile Updated successfully !',
-          duration: 2000,
-          cssClass: 'toast-mess',
-        });
-        toast.present();
-        this.loader.dismiss();
+      this.toastCtrl.showToast('Profile Updated successfully !');
+      this.loader.dismiss();
     },
       async (error) => {
       if (error.error.ModelState) {
@@ -129,12 +131,7 @@ export class ProfilePage implements OnInit {
         this.validationMessage.push(error.statusText);
       }
       this.loader.dismiss();
-      const toast = await this.toastCtrl.create({
-          message: 'Profile Updated Failed, try again latter !',
-          duration: 2000,
-          cssClass: 'toast-mess',
-        });
-      toast.present();
+      this.toastCtrl.showToastException('Profile Updated Failed, try again latter !');
     },
     ); });
 

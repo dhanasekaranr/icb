@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { LoadingController, NavController, Platform, ToastController } from '@ionic/angular';
+import { LoadingController, NavController, Platform } from '@ionic/angular';
+import { ToastService } from 'src/shared/toaster.service';
 import { MasterDetailService } from '../../providers/data-service/masterDetailService';
 import { Authentication } from '../../shared/authentication.service';
 import { ICBService } from '../../shared/service';
@@ -15,7 +16,7 @@ export class RentalPage {
   public books: Array<any>;
   public loader: any; public CodeSearch = '';
   constructor(public navCtrl: NavController, private icbservice: ICBService, public platform: Platform,
-              public toastCtrl: ToastController, public authentication: Authentication, public loading: LoadingController,
+              public toastCtrl: ToastService, public authentication: Authentication, public loading: LoadingController,
               private ms: MasterDetailService, private route: ActivatedRoute,
               private router: Router) {
 }
@@ -65,11 +66,7 @@ public async ionViewWillEnter() {
 public markReturn(trasnsId: any) {
   this.icbservice.markReturn(trasnsId).then(
     async (data) => {
-      const toast = await this.toastCtrl.create({
-       message: 'Returned successfully !',
-       duration: 2000,
-     });
-      toast.present();
+      this.toastCtrl.showToast('Returned successfully !');
       this.searchTransDB();
   });
 }

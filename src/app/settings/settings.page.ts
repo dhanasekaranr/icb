@@ -1,7 +1,8 @@
 
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators  } from '@angular/forms';
-import { ActionSheetController, LoadingController, NavController, Platform, ToastController } from '@ionic/angular';
+import { ActionSheetController, LoadingController, NavController, Platform } from '@ionic/angular';
+import { ToastService } from 'src/shared/toaster.service';
 import { MasterDetailService } from '../../providers/data-service/masterDetailService';
 import { Authentication } from '../../shared/authentication.service';
 import { ICBService } from '../../shared/service';
@@ -27,7 +28,7 @@ export class SettingsPage implements OnInit {
   }
   constructor(public navCtrl: NavController, private service: ICBService, public platform: Platform,
               public actionsheetCtrl: ActionSheetController, public authentication: Authentication,
-              public loading: LoadingController, public toastCtrl: ToastController,
+              public loading: LoadingController, public toastCtrl: ToastService,
               private ms: MasterDetailService, private formBuilder: FormBuilder,
             ) {
       this.myForm = formBuilder.group({

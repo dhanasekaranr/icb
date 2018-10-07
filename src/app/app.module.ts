@@ -8,6 +8,7 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { IonicStorageModule } from '@ionic/storage';
+import { ToastService } from 'src/shared/toaster.service';
 import { Authentication } from '../shared/authentication.service';
 import { CredentialsAuthentication } from '../shared/credentialsAuthentication';
 import { GlobalFunctions } from '../shared/globalFunctions';
@@ -26,7 +27,7 @@ import { settingPopoverPage } from './home/settingPopover';
   providers: [GlobalSettings, GlobalFunctions, Authentication, CredentialsAuthentication,
     StatusBar,
     SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, ICBService, InAppBrowser,
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, ICBService, InAppBrowser, ToastService,
   ],
   bootstrap: [AppComponent],
   exports:      [],

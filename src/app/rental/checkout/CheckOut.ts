@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { NavController, ToastController } from '@ionic/angular';
+import { NavController } from '@ionic/angular';
+import { ToastService } from 'src/shared/toaster.service';
 import { MasterDetailService } from '../../../providers/data-service/masterDetailService';
 import { Authentication } from '../../../shared/authentication.service';
 import { ICBService } from '../../../shared/service';
@@ -17,7 +18,7 @@ export class CheckOutPage {
   public NameSearch = '';
   public HomePage = 'N';
     constructor(public navCtrl: NavController,  private bookService: ICBService,
-                public authentication: Authentication, public toastCtrl: ToastController, private ms: MasterDetailService) {
+                public authentication: Authentication, public toastCtrl: ToastService, private ms: MasterDetailService) {
 
     }
     public ionViewWillEnter() {
@@ -52,13 +53,7 @@ export class CheckOutPage {
   public updateStat(id: any) {
       this.bookService.markRent(this.queryval, id, this.code).then(
         async (data) => {
-          const toast = await this.toastCtrl.create({
-          message: 'Checked out successfully !',
-          duration: 2000,
-        });
-          if (data) {
-          toast.present();
-        }
+          this.toastCtrl.showToast('Checked out successfully !');
           this.navCtrl.pop();
           if (this.HomePage === 'N') {
             this.navCtrl.navigateForward('tabs/rental', { queryParams: { refresh:  1 }} ); } else if (this.HomePage === 'C') {

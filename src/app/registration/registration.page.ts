@@ -1,10 +1,9 @@
 
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators  } from '@angular/forms';
-import { ActionSheetController, AlertController, LoadingController, NavController, Platform, ToastController } from '@ionic/angular';
-import { MasterDetailService } from '../../providers/data-service/masterDetailService';
+import { FormBuilder, FormControl, FormGroup, Validators  } from '@angular/forms';
+import { ActionSheetController, LoadingController, NavController, Platform } from '@ionic/angular';
+import { ToastService } from 'src/shared/toaster.service';
 import { Authentication } from '../../shared/authentication.service';
-import { ICBService } from '../../shared/service';
 import { PasswordValidator } from './password.validator';
 
 @Component({
@@ -15,10 +14,9 @@ import { PasswordValidator } from './password.validator';
 })
 
 export class RegistrationPage implements OnInit {
-  constructor(public navCtrl: NavController, private service: ICBService, public platform: Platform,
+  constructor(public navCtrl: NavController, public platform: Platform,
               public actionsheetCtrl: ActionSheetController, public authentication: Authentication,
-              public loading: LoadingController, public toastCtrl: ToastController, private ms: MasterDetailService,
-              public formBuilder: FormBuilder) {
+              public loading: LoadingController, public toastCtrl: ToastService, public formBuilder: FormBuilder) {
       }
   public loader: any ;
   public registrationForm: FormGroup;
@@ -40,7 +38,7 @@ export class RegistrationPage implements OnInit {
     Phone: [
       { type: 'required', message: 'Phone is required.' },
       { type: 'pattern', message: 'Please enter a valid phone.' },
-    ],    
+    ],
     Password: [
       { type: 'required', message: 'Password is required.' },
       { type: 'minlength', message: 'Password must be at least 8 characters long.' },
@@ -85,17 +83,12 @@ export class RegistrationPage implements OnInit {
     this.navCtrl.navigateForward('tabs/login');
   }
 
-  public async onSubmit(values) {
+  public async onSubmit() {
     this.validationMessage = Array<any>();
     this.loader = await this.loading.create({message: 'Registering...'});
     this.loader.present().then(() => {
-      this.authentication.register(this.registrationForm.value).subscribe(async (success) => {
-        const toast = await this.toastCtrl.create({
-          message: 'Registration successfully, check your inbox for approval email !',
-          duration: 2000,
-          cssClass: 'toast-mess',
-        });
-        toast.present();
+      this.authentication.register(this.registrationForm.value).subscribe(async () => {
+        this.toastCtrl.showToast('Registration successfully, check your inbox for approval email !');
         this.loader.dismiss();
     },
       async (error) => {
@@ -104,15 +97,10 @@ export class RegistrationPage implements OnInit {
       } else {
         this.validationMessage.push(error.statusText);
       }
+      this.toastCtrl.showToastException('Registration Failed, try again latter !');
       this.loader.dismiss();
-      const toast = await this.toastCtrl.create({
-          message: 'Registration Failed, try again latter !',
-          duration: 2000,
-          cssClass: 'toast-mess',
-        });
-      toast.present();
     },
-    );});
+    ); });
 
 }
 

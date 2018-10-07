@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ToastController } from '@ionic/angular';
+import { NavController, NavParams } from '@ionic/angular';
+import { ToastService } from 'src/shared/toaster.service';
 import { Authentication } from '../../shared/authentication.service';
 import { ICBService } from '../../shared/service';
 
@@ -13,7 +14,7 @@ export class ReturnPage {
   public book: any;
   public trans: Array<any>;
     constructor(public navCtrl: NavController, private navParams: NavParams, private bookService: ICBService,
-                public toastCtrl: ToastController, public authentication: Authentication) {
+                public toastCtrl: ToastService, public authentication: Authentication) {
         this.book = navParams.get('book');
         this.bookService.getTransaction(navParams.get('isbn')).then(
           (data) => {
@@ -26,11 +27,7 @@ export class ReturnPage {
            this.bookService.markReturn(trasnsId).then(
              async (data) => {
                this.trans = data;
-               const toast = await this.toastCtrl.create({
-                 message: 'Returned successfully !',
-                 duration: 2000,
-               });
-               toast.present();
+               this.toastCtrl.showToast('Returned successfully !');
                if (this.trans.length === 0) {
                 this.navCtrl.navigateBack('tabs/home');
               }

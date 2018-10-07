@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ActionSheetController, LoadingController, NavController, Platform, ToastController } from '@ionic/angular';
+import { ActionSheetController, LoadingController, NavController, Platform } from '@ionic/angular';
 import { MasterDetailService } from '../../providers/data-service/masterDetailService';
 import { Authentication } from '../../shared/authentication.service';
 import { ICBService } from '../../shared/service';
+import { ToastService } from 'src/shared/toaster.service';
 
 @Component({
   selector: 'app-receiving',
@@ -15,16 +15,22 @@ export class ReceivingPage  {
   public holds: Array<any>;
   public loader: any; public DescriptionSearch = '';
   constructor(public navCtrl: NavController, private icbservice: ICBService, public platform: Platform,
-              public toastCtrl: ToastController, public authentication: Authentication, public loading: LoadingController,
-              private ms: MasterDetailService, private route: ActivatedRoute, public actionSheetCtrl: ActionSheetController,
-              private router: Router) {
+              public toastCtrl: ToastService, public authentication: Authentication, public loading: LoadingController,
+              private ms: MasterDetailService, public actionSheetCtrl: ActionSheetController) {
 }
 public searchTransDB() {
-      this.icbservice.searchTrans('hold', '').then(
-          (data) => {
-           // console.log(data);
-            this.holds = data;
-          });
+  this.loader.present().then(() => {
+    this.icbservice.searchTrans('hold', '').then(
+        (data) => {
+          this.holds = data;
+          this.loader.dismiss();
+      },
+      ).catch((err) => {
+        console.log(err);
+        this.loader.dismiss();
+    });
+
+    });
 }
 public bookInfo( key: any ) {
   this.ms.setDestn(key);
@@ -39,94 +45,59 @@ public OnDestroy() {
   this.sub.unsubscribe();
 }
 
-public ionViewWillEnter() {
- this.sub  = this.route
-      .queryParams
-      .subscribe((params) => {
-        if ( params.refresh) {
-          this.holds = null;
-        }
-      });
-
- if (this.holds != null) {return; }
- if ( this.authentication.getAccessToken() != null) {
-      this.loader = this.loading.create({
-        message: 'Getting books...',
-      });
-      this.searchTransDB();
+public async ionViewWillEnter() {
+if ( this.authentication.getAccessToken() != null) {
+     this.loader = await this.loading.create({message: 'Getting Holds...'});
+     this.searchTransDB();
     } else {
      this.navCtrl.navigateForward('tabs/login');
     }
 }
 
 public async denied( key: any ) {
-    this.loader = await this.loading.create({message: 'Updating...'});
 
-    (await this.loader).present().then(() => {
       this.icbservice.updateHold(key.HolderId, key.Id, key.Code, key.ISBN, 29).then(
         async (data) => {
-          const toast = await this.toastCtrl.create({
-          message: 'Denied !',
-          duration: 2000,
-        });
+          this.toastCtrl.showToastException('Hold Denied. Notified!')
           key.Status = 29;
-          toast.present();
-          this.loader.dismiss();
+          this.searchTransDB();
       });
-    });
-    this.searchTransDB();
+
+
   }
 
   public async markPickedUp( key: any ) {
-    this.loader = await this.loading.create({message: 'Saving...'});
 
-    (await this.loader).present().then(() => {
     this.icbservice.updateHold(key.HolderId, key.Id, key.Code, key.ISBN, 28).then(
       async (data) => {
-        const toast = await this.toastCtrl.create({
-         message: 'Picked Up !',
-         duration: 2000,
-       });
+        this.toastCtrl.showToast('Picked Up !');
         key.Status = 28;
-        toast.present();
-        this.loader.dismiss();
+        this.searchTransDB();
+
       });
-   // this.searchTransDB();
-    });
+   //
+
 
   }
 
   public async rented( key: any ) {
-    this.loader = await this.loading.create({message: 'Saving...'});
-    (await this.loader).present().then(() => {
     this.icbservice.updateHold(key.HolderId, key.Id, key.Code, key.ISBN, 30).then(
       async (data) => {
-        const toast = await this.toastCtrl.create({
-         message: 'Closed !',
-         duration: 2000,
-       });
+        this.toastCtrl.showToast('Request Closed and Rented out!');
         key.Status = 30;
-        toast.present();
-        this.loader.dismiss();
-    //    this.searchTransDB();
+        this.searchTransDB();
+
       });
-    });
+
   }
   public async readyforPickup( key: any ) {
-    this.loader = await this.loading.create({message: 'Saving...'});
-    (await this.loader).present().then(() => {
       this.icbservice.updateHold(key.HolderId, key.Id, key.Code, key.ISBN, 27).then(
         async (data) => {
-          const toast = await this.toastCtrl.create({
-           message: 'Notified, Ready for PickUp !',
-           duration: 2000,
-         });
+          this.toastCtrl.showToast('Notified, Ready for PickUp !');
           key.Status = 27;
-          toast.present();
-          this.loader.dismiss();
-        //  this.searchTransDB();
+          this.searchTransDB();
+
       });
-    });
     }
 
 }

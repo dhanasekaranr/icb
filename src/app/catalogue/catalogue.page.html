@@ -32,8 +32,8 @@
                <ion-icon *ngIf="book.WishList === 'Y'" name="heart" (click)="AddToWishList(book,'N','Removed from your Wish List!')" style="color:red" title="Remove from Wish list"></ion-icon>
 
 -->         <span *ngIf="this.authentication.getIsAdmin() != 'Y'" >
-              <span style="text-align:center;" class="ion-text-wrap" *ngIf="(book.TotalCopies - book.RentedCopies - book.HoldedCopies) > 0 && book.Hold!= 'Y' && book.HoldReady != 'Y' &&  book.HoldRejected !='Y'" >
-                <p><ion-icon name="archive-outline" class="icon-circle" style="color:blue;" (click)="AddToHold(book)"></ion-icon></p>
+              <span (click)="AddToHold(book)" style="text-align:center;" class="ion-text-wrap" *ngIf="(book.TotalCopies - book.RentedCopies - book.HoldedCopies) > 0 && book.Hold!= 'Y' && book.HoldReady != 'Y' &&  book.HoldRejected !='Y'" >
+                <p><ion-icon name="archive-outline" class="icon-circle" style="color:blue;"></ion-icon></p>
                 <p style="margin-top: 0px;color:blue;">Request Hold</p>
               </span>
               <span class="ion-text-wrap" *ngIf="book.Hold === 'Y'">
