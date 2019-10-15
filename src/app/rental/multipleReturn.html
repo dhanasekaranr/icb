@@ -1,0 +1,32 @@
+<app-header [title]="'Multi Returns'"></app-header>
+
+  <ion-content class="home" padding>
+    <div *ngIf="this.book" class="selection">
+      <ion-card>
+        <ion-item text-wrap>
+          <ion-avatar item-left image-large>
+            <img src="{{this.book.PictureLink}}" />
+          </ion-avatar>
+          <p class="item-description">{{book.Description}}</p>
+
+        </ion-item>
+      </ion-card>
+    </div>
+      <ion-list>
+          <ion-item *ngFor="let tran of trans" >
+              <ion-avatar slot="start"> 
+                  <ion-icon name="person" ></ion-icon>
+              </ion-avatar>
+              <ion-label text-wrap>
+                  <h2>{{tran.Code}}</h2>
+                  <p>Rented Date : {{tran.Description}}</p>
+                  <p>Rented By : {{tran.RenterName}}</p>
+                </ion-label>    
+              <ion-button slot="end" color="primary" (click)="markReturn(tran.TransactionId)">
+                Return</ion-button>
+                <label>
+                 
+            </label>
+          </ion-item>
+        </ion-list>
+  </ion-content>

@@ -1,0 +1,44 @@
+<ion-header> 
+  <ion-toolbar hideBackButton="true" color="head">
+    <ion-title class="ion-text-center">Welcome to iCareBooks</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="login-content" padding  no-bounce>
+  <ion-row class="logo-row">
+    <ion-col></ion-col>
+    <ion-col width-67>
+      <img src="assets/imgs/imageedit_2_9152135781_collapse.png" />
+    </ion-col>
+    <ion-col></ion-col>
+  </ion-row>
+  <div>
+      <ion-row>
+        <ion-col>
+          <ion-list inset>
+            <ion-item>
+                <ion-label position="floating">Email</ion-label>
+              <ion-input type="text" [(ngModel)]="email" placeholder="Email" name="email"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label position="floating">Password</ion-label>
+              <ion-input type="password" [(ngModel)]="pwd"  placeholder="Password" name="pwd"></ion-input>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col class="signup-col">
+          <ion-button class="submit-btn" (click)="credentialsLogin()">Login</ion-button>
+        </ion-col>
+      </ion-row>
+      <p class="item-description" style="color: red">{{this.errMessage}}</p>
+    </div>
+    <p class="ion-text-center">Don't have a account?</p>
+    <ion-button expand="full" color="danger" (click)="this.ForgotPassword()">Register</ion-button>
+</ion-content>
+
+<ion-footer>
+    <ion-toolbar>
+      <ion-title class="ion-text-center"><span style="color: blue; font-size: .5em">Powered by <a href="http://www.secantsoft.com">Secant Software Solutions</a></span></ion-title>
+    </ion-toolbar>
+  </ion-footer>

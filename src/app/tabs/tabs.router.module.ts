@@ -1,6 +1,16 @@
+
+import { CheckOutPage } from '../rental/checkout/CheckOut';
+import { CurrentRentalsPage } from './../home/currentRentals/currentRentals';
+import { NewsPage } from '../home/news/news';
+import { LoginPage } from '../login/login';
+import { BookInfoPage } from '../BookInfo/BookInfo';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TabsPage } from './tabs.page';
+import { StatsPage } from '../home/stats/stats';
+import { MultiCopiesPage } from '../rental/checkout/MultiCopies';
+import { MultipleReturnPage } from '../rental/multipleReturn';
+
 
 const routes: Routes = [
   {
@@ -8,45 +18,73 @@ const routes: Routes = [
     component: TabsPage,
     children: [
       {
-        path: 'tab1',
+        path: 'home',
         children: [
           {
             path: '',
             loadChildren: () =>
-              import('../tab1/tab1.module').then(m => m.Tab1PageModule)
+              import('../home/home.module').then(m => m.HomePageModule)
           }
         ]
       },
       {
-        path: 'tab2',
+        path: 'catalogue',
         children: [
           {
             path: '',
             loadChildren: () =>
-              import('../tab2/tab2.module').then(m => m.Tab2PageModule)
+              import('../catalogue/catalogue.module').then(m => m.CataloguePageModule)
           }
         ]
       },
       {
-        path: 'tab3',
+        path: 'rental',
         children: [
           {
             path: '',
             loadChildren: () =>
-              import('../tab3/tab3.module').then(m => m.Tab3PageModule)
+              import('../rental/rental.module').then(m => m.RentalPageModule)
           }
         ]
       },
+      {
+        path: 'history',
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+              import('../history/history.module').then(m => m.HistoryPageModule)
+          }
+        ]
+      },
+      {
+        path: 'users',
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+              import('../users/users.module').then(m => m.UsersPageModule)
+          }
+        ]
+      },
+      {path: 'login', component: LoginPage},
+      {path: 'bookInfo', component: BookInfoPage},
+      {path: 'rentalsPage', component: CurrentRentalsPage},
+      {path: 'statsPage', component: NewsPage},
+      {path: 'historyPage', component: StatsPage},
+      {path: 'checkoutPage', component: CheckOutPage},
+      {path: 'multiCopiesPage', component: MultiCopiesPage},
+      {path: 'multipleReturnPage', component: MultipleReturnPage},
       {
         path: '',
-        redirectTo: '/tabs/tab1',
+        redirectTo: '/tabs/home',
         pathMatch: 'full'
       }
     ]
   },
   {
     path: '',
-    redirectTo: '/tabs/tab1',
+    redirectTo: '/tabs/home',
     pathMatch: 'full'
   }
 ];

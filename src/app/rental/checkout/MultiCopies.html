@@ -1,0 +1,25 @@
+<app-header [title]="'Multi Copies Checkout'"></app-header>
+  <ion-content class="home" padding>
+    <ion-item>
+        <ion-searchbar
+        [showCancelButton]="true"
+        (ionInput)="FilterBookDB($event)"
+        ></ion-searchbar>
+        <!-- (ionCancel)="searchUserDB($event)">-->
+
+    </ion-item>
+
+    <p>{{this.description}}</p>
+      <ion-list>
+           <ion-item *ngFor="let book of books | search: null:CodeSearch">
+              <ion-label text-wrap>
+                <h2>{{book.Code}}</h2>
+                <p class="item-description">{{book.Description}}</p>
+              </ion-label>    
+              <ion-button color="primary" (click)="updateStat(book)" slot="end">
+                  <ion-icon name="cart"></ion-icon>
+                  Check out
+              </ion-button>          
+            </ion-item>
+        </ion-list>
+  </ion-content>
