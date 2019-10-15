@@ -1,18 +1,12 @@
-import { Values } from './../../shared/values';
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
-import { icbService } from '../../shared/service';
-import { HomePage } from '../home/home';
-import { Tab } from '../tab/tab';
-import { Authentication } from '../../shared/shared';
-import { Login } from '../login/login';
-import { ToastController } from 'ionic-angular';
-import { CheckOutPage } from './CheckOut';
+import { NavController, NavParams, ToastController } from '@ionic/angular';
+import { ICBService } from '../../shared/service';
+import { Authentication } from '../../shared/authentication.service';
 
 @Component({
     selector: 'page-MultiCopies',
     templateUrl: 'MultiCopies.html',
-    providers: [icbService]
+    providers: [ICBService]
 })
 export class MultiCopies {
   queryval: any;
@@ -20,14 +14,14 @@ export class MultiCopies {
   books: Array<any>;
   isbn: any;
   copy = 0;
-  code :string = "";
-  CodeSearch: string = "";
-  description: string = "";
+  code = '';
+  CodeSearch = '';
+  description = '';
 
-  constructor(public navCtrl: NavController, private navParams: NavParams, private bookService: icbService,
-      public authentication: Authentication,public toastCtrl: ToastController) {
-      this.book = navParams.get('book');
-      this.isbn = navParams.get('isbn');
+  constructor(public navCtrl: NavController, private navParams: NavParams, private bookService: ICBService,
+              public authentication: Authentication, public toastCtrl: ToastController) {
+      this.book = this.navParams.get('book');
+      this.isbn = this.navParams.get('isbn');
       this.description = navParams.get('desc');
       this.code = navParams.get('code');
       this.getBookProfile();
@@ -41,17 +35,14 @@ export class MultiCopies {
         );
 
   }
-  FilterBookDB(event){
+  FilterBookDB(event: any) {
       this.CodeSearch = event.target.value;
   }
-  updateStat(selcode,seldesc){
-      this.navCtrl.push(CheckOutPage, {
-          code: selcode,desc: seldesc,action: 'Out'
-       });
+  updateStat(selcode: any, seldesc: any) {
+      /*this.navCtrl.push(CheckOutPage, {
+          code: selcode, desc: seldesc, action: 'Out'
+       });*/
+      this.navCtrl.navigateForward('Login');
    }
-   logOut() {
-    // console.log(event.target.value);
-         this.authentication.logout();
-         this.navCtrl.push(Login);
-  }
+
 }

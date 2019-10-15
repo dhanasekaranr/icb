@@ -1,40 +1,40 @@
-import { Injectable } from "@angular/core";
-import { Http, Response, Headers, RequestOptions } from "@angular/http";
-import { ReplaySubject } from 'rxjs/Rx';
-
-import { GlobalSettings } from "./shared";
-
+import { Injectable } from '@angular/core';
+import { Observable, throwError } from 'rxjs';
+import { GlobalSettings } from './globalSettings';
+import { map, catchError } from 'rxjs/operators';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 @Injectable()
 export class CredentialsAuthentication {
 
-  private baseUrl;
-  private accessTokenSubject:ReplaySubject<any> = new ReplaySubject(1);
+  private baseUrl: string;
+  // private accessTokenSubject:ReplaySubject<any> = new ReplaySubject(1);
 
-  constructor (private http: Http, private globalSettings: GlobalSettings) {
+  constructor(private http: HttpClient, private globalSettings: GlobalSettings) {
     // Set the baseUrl variable to the Api Url from the GlobalSettings
-    this.baseUrl = globalSettings.getSettings().apiUrl;
+    this.baseUrl = this.globalSettings.getSettings().apiUrl;
   }
 
-  login (credentials) {
+  login(credentials: { username: string; password: string; }) {
     // Construct data
-    let loginData = 'grant_type=password&username=' + credentials.username + '&password=' + credentials.password;
-
-
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json'
+//        'Authorization': 'my-auth-token'
+      })
+    };
+    const loginData = 'grant_type=password&username=' + credentials.username + '&password=' + credentials.password;
     // Construct POST Headers
-    let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded'  });
-    let options = new RequestOptions({ headers: headers });
 
-    // Perform request
+    return this.http.post(this.baseUrl + '/Token', loginData, httpOptions)
+    .pipe(map( response => {
+      return response;
+    }) , catchError (this.handleError) );
 
-  //  var externalProviderUrl = this.baseUrl + "api/Account/ExternalLogin?provider=" + provider
-    //    + "&response_type=token&client_id=" + ngAuthSettings.clientId
+}
 
-
-    return this.http.post(this.baseUrl + '/Token', loginData, options)
-    .map( response => {
-      let body = JSON.parse(response["_body"]);
-      return body.access_token;
-    });
-  }
+handleError(error: Response) {
+  console.error(error);
+  return throwError(error);
+}
 }
 

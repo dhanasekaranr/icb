@@ -1,0 +1,34 @@
+ <app-header title="Completed Book List"></app-header> 
+  <ion-content class="home" padding>
+    <ion-item>
+        <ion-searchbar
+        [showCancelButton]="true"
+        (ionInput)="FilterBookDB($event)"
+        (ionCancel)="searchUserDB()">
+      </ion-searchbar>
+    </ion-item>
+    <span style="color:red" *ngIf="books"><p>Total Books completed : {{books.length}}</p> </span>
+<!--
+    <ion-row radio-group>
+      <ion-col *ngFor="let name of renters">
+        <ion-item>
+          <ion-label><p>{{name}}</p></ion-label>
+          <ion-radio value="{{name}}"></ion-radio>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+-->
+    <ion-list>
+      <ion-item *ngFor="let book of books | search: null:null:null:CodeSearch">
+        <ion-avatar slot="start" (click)="bookInfo(book)" >
+          <img src="{{book.PictureLink}}">
+        </ion-avatar>
+        <ion-label>
+        <h2>{{book.Description}}</h2>
+        <p>{{book.BorrowerName}}</p>
+        <p>Rented on {{book.RentedDate | date: 'MM/dd/yyyy'}}</p>
+        <p *ngIf="book.DaysRented > 0 "> Returned in {{book.DaysRented}} days</p>
+      </ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-content>

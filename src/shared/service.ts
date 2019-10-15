@@ -1,70 +1,88 @@
-import { Headers } from '@angular/http';
-import { Http } from '@angular/http';
-import 'rxjs/add/operator/map';
-import {Storage} from "@ionic/storage";
-import { GlobalSettings } from "./shared";
-export class icbService {
-  data:any;
+import { GlobalFunctions } from './globalFunctions';
+import { HttpHeaders, HttpClient } from '@angular/common/http';
+import { Storage} from '@ionic/storage';
+import { GlobalSettings } from './globalSettings';
+import { Injectable } from '@angular/core';
+
+@Injectable()
+export class ICBService {
+  data: any;
   private baseUrl;
+  private destn: any;
     static get parameters() {
-        return [[Http], [Storage]];
+        return [[HttpClient], [Storage]];
     }
 
-    constructor(private http: Http, private storage: Storage,private globalSettings: GlobalSettings) {
+    constructor(private http: HttpClient, private storage: Storage, private globalSettings: GlobalSettings, private func: GlobalFunctions) {
 
-   //   this.baseUrl = 'http://localhost:52146';//globalSettings.getSettings().apiUrl;
-   //   this.baseUrl = 'http://localhost:52146';//globalSettings.getSettings().apiUrl;
+       this.baseUrl = 'http://localhost:52146'; // globalSettings.getSettings().apiUrl;
 
-   this.baseUrl =   'http://api.icarebooks.com';
+     // this.baseUrl =   this.func.getSettings().apiUrl; // 'http://api.icarebooks.com';
+    }
+    public setDestn(destn) {
+      this.destn = destn;
     }
 
-
+    getDestn() {
+      return this.destn;
+    }
+    getHeaders(token: any) {
+      return new HttpHeaders({
+        'Content-Type':  'application/x-www-form-urlencoded',
+        Authorization: 'Bearer ' + token
+      });
+    }
+    getJSONHeaders(token: any) {
+      return new HttpHeaders({
+        'Content-Type':  'application/json',
+        Authorization: 'Bearer ' + token
+      });
+    }
   searchTrans(action, name) {
-    var url =this.baseUrl + '/api/' + action +'/' + name ;
+    const url = this.baseUrl + '/api/' + action + '/' + name ;
     return new Promise<any>( resolve => {
         this.storage.get('accessToken').then((token) => {
-          if(token == null) return;
-          let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-          headers.append('Authorization', 'Bearer ' + token);
-          this.http.get(url, {headers : headers})
-          .map(res => res.json())
-          .subscribe( data =>{
+          if (token == null) { return; }
+          this.http.get(url, {headers : this.getHeaders(token)})
+          .subscribe( data => {
               this.data = data;
               resolve(this.data);
-          },err => {
-            //this.showAlert(err);
-            //reject(err);
+          }, err => {
             console.log(err);
         });
         });
       });
   }
   getBookProfile(isbn) {
-    var url = this.baseUrl + '/api/book/get/2/' + isbn ;
+    const url = this.baseUrl + '/api/book/get/2/' + isbn ;
     return new Promise<any>( resolve => {
         this.storage.get('accessToken').then((token) => {
-          let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-          headers.append('Authorization', 'Bearer ' + token);
-          this.http.get(url, {headers : headers})
-          .map(res => res.json())
-          .subscribe( data =>{
+          this.http.get(url, {headers : this.getHeaders(token)})
+          .subscribe( data => {
               this.data = data;
               resolve(this.data);
           });
         });
       });
   }
-
-
-  getUserByISBN(id,isbn) {
-    var url = this.baseUrl + '/api/User/get/' + id + '/' + isbn + '/';
+  getBookRead() {
+    const url = this.baseUrl + '/api/history' ;
     return new Promise<any>( resolve => {
         this.storage.get('accessToken').then((token) => {
-          let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-          headers.append('Authorization', 'Bearer ' + token);
-          this.http.get(url, {headers : headers})
-          .map(res => res.json())
-          .subscribe( data =>{
+          this.http.get(url, {headers : this.getHeaders(token)})
+          .subscribe( data => {
+              this.data = data;
+              resolve(this.data);
+          });
+        });
+      });
+  }
+  getUserByISBN(id, isbn) {
+    const url = this.baseUrl + '/api/User/get/' + id + '/' + isbn + '/';
+    return new Promise<any>( resolve => {
+        this.storage.get('accessToken').then((token) => {
+          this.http.get(url, {headers : this.getHeaders(token)})
+          .subscribe( data => {
               this.data = data;
               resolve(this.data);
           });
@@ -72,29 +90,36 @@ export class icbService {
       });
   }
   getTransaction(isbn) {
-    var url = this.baseUrl + '/api/book/get/' + isbn ;
+    const url = this.baseUrl + '/api/book/get/' + isbn ;
     return new Promise<any>( resolve => {
         this.storage.get('accessToken').then((token) => {
-          let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-          headers.append('Authorization', 'Bearer ' + token);
-          this.http.get(url, {headers : headers})
-          .map(res => res.json())
-          .subscribe( data =>{
+          this.http.get(url, {headers : this.getHeaders(token)})
+          .subscribe( data => {
               this.data = data;
               resolve(this.data);
           });
         });
       });
   }
-  markReturn(transId) {
-    var url = this.baseUrl + '/api/book';
+  getTransactionByISBN(isbn) {
+    const url = this.baseUrl + '/api/trans/get/3/' + isbn ;
     return new Promise<any>( resolve => {
         this.storage.get('accessToken').then((token) => {
-          let body = JSON.stringify({id:transId});
-          let headers = new Headers({ 'Content-Type': 'application/json' });
-          headers.append('Authorization', 'Bearer ' + token);
-          this.http.put(url, transId, {headers : headers}).map(res => res.json())
-          .subscribe( data =>{
+          this.http.get(url, {headers : this.getHeaders(token)})
+          .subscribe( data => {
+              this.data = data;
+              resolve(this.data);
+          });
+        });
+      });
+  }
+  markReturn(transId: any) {
+    const url = this.baseUrl + '/api/book';
+    return new Promise<any>( resolve => {
+        this.storage.get('accessToken').then((token) => {
+         // let body = JSON.stringify({id:transId});
+          this.http.put(url, transId, {headers : this.getJSONHeaders(token)})
+          .subscribe( data => {
               this.data = data;
               resolve(this.data);
           });
@@ -103,30 +128,25 @@ export class icbService {
       });
   }
   markRent(search, userid, code) {
-    var url = this.baseUrl + '/api/user';
-    //console.log("search: " + search);
+    const url = this.baseUrl + '/api/user';
     return new Promise<any>( resolve => {
         this.storage.get('accessToken').then((token) => {
-          let body = JSON.stringify({id:userid,search:search, code:code});
-          let headers = new Headers({ 'Content-Type': 'application/json' });
-          headers.append('Authorization', 'Bearer ' + token);
-          this.http.put (url, body, {headers : headers}).map(res => res.json())
-          .subscribe( data =>{
+          const body = JSON.stringify({id: userid, search, code}) ;
+          this.http.put (url, body, {headers : this.getJSONHeaders(token)})
+          .subscribe( data => {
               this.data = data;
               resolve(this.data);
           });
         });
       });
   }
-  notify(userId, BookId, transactions,search) {
-    var url = this.baseUrl + '/api/User';
+  notify(userId, BookId, transactions, search) {
+    const url = this.baseUrl + '/api/User';
     return new Promise<any>( resolve => {
         this.storage.get('accessToken').then((token) => {
-          let body = JSON.stringify({id:userId, bookId:BookId,transaction:transactions,search:search});
-          let headers = new Headers({ 'Content-Type': 'application/json' });
-          headers.append('Authorization', 'Bearer ' + token);
-          this.http.post(url, body,{headers : headers}).map(res => res.json())
-          .subscribe( data =>{
+          const body = JSON.stringify({id: userId, bookId: BookId, transaction: transactions, search});
+          this.http.post(url, body, {headers : this.getJSONHeaders(token)})
+          .subscribe( data => {
               this.data = data;
               resolve(this.data);
           });
@@ -135,15 +155,116 @@ export class icbService {
       });
   }
   GetBookInfo(isbn) {
-    var url = 'https://www.googleapis.com/books/v1/volumes?q=isbn:' + isbn;
+    const url = 'https://www.googleapis.com/books/v1/volumes?q=isbn:' + isbn;
     return new Promise<any>( resolve => {
       this.http.get(url)
-      .map(res => res.json())
-      .subscribe( data =>{
+      .subscribe( data => {
           this.data = data;
           resolve(this.data);
       });
       });
   }
 
+  getRentalStatus(id, stat) {
+    const url = this.baseUrl + '/api/dash/GetRentalStatus/' + id + '/' + stat + '/';
+    return new Promise<any>( resolve => {
+        this.storage.get('accessToken').then((token) => {
+          this.http.get(url, {headers : this.getHeaders(token)})
+          .subscribe( data => {
+              this.data = data;
+              resolve(this.data);
+          });
+        });
+      });
+  }
+  getRentalStatusDetails(choice, labelvalue) {
+    const url = this.baseUrl + '/api/dash/GetRentalStatusDetail/' + choice + '/' + labelvalue + '/';
+    return new Promise<any>( resolve => {
+        this.storage.get('accessToken').then((token) => {
+          this.http.get(url, {headers : this.getHeaders(token)})
+          .subscribe( data => {
+              this.data = data;
+              resolve(this.data);
+          });
+        });
+      });
+  }
+
+  getActiveWishList() {
+    const url = this.baseUrl + '/api/wish';
+    return new Promise<any>( resolve => {
+        this.storage.get('accessToken').then((token) => {
+          this.http.get(url, {headers : this.getHeaders(token)})
+          .subscribe( data => {
+              this.data = data;
+              resolve(this.data);
+          });
+        });
+      });
+  }
+  getRentalTransactions() {
+    const url = this.baseUrl + '/api/trans';
+    return new Promise<any>( resolve => {
+        this.storage.get('accessToken').then((token) => {
+          this.http.get(url, {headers : this.getHeaders(token)})
+          .subscribe( data => {
+              this.data = data;
+              resolve(this.data);
+          });
+        });
+      });
+  }
+
+  getNotificationList() {
+    const url = this.baseUrl + '/api/dash';
+    return new Promise<any>( resolve => {
+        this.storage.get('accessToken').then((token) => {
+          this.http.get(url, {headers : this.getHeaders(token)})
+          .subscribe( data => {
+              this.data = data;
+              resolve(this.data);
+          });
+        });
+      });
+  }
+  AddToWishList(isbn) {
+    const url = this.baseUrl + '/api/wish/' + isbn;
+    return new Promise<any>( resolve => {
+        this.storage.get('accessToken').then((token) => {
+          const body = JSON.stringify({isbn});
+          this.http.put (url, body, {headers : this.getJSONHeaders(token)})
+          .subscribe( data => {
+              this.data = data;
+              resolve(this.data);
+          });
+        });
+      });
+  }
+  getSchoolStats(stat) {
+    const url = this.baseUrl + '/api/history/get/' + stat;
+
+    return new Promise<any>( resolve => {
+        this.storage.get('accessToken').then((token) => {
+          this.http.get (url,  {headers : this.getHeaders(token)})
+          .subscribe( data => {
+              this.data = data;
+              resolve(this.data);
+          });
+        });
+      });
+  }
+
+
+  getTweets() {
+    const url = this.baseUrl + '/api/tweet';
+    return new Promise<any>( resolve => {
+        this.storage.get('accessToken').then((token) => {
+          this.http.get(url, {headers : this.getHeaders(token)})
+          .subscribe( data => {
+              this.data = data;
+              resolve(this.data);
+          });
+        });
+      });
+  }
 }

@@ -1,22 +1,21 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
-import { icbService } from '../../shared/service';
-import { HomePage } from '../home/home';
-import { ToastController } from 'ionic-angular';
-import { Authentication } from '../../shared/shared';
-import { Login } from '../login/login';
+import { NavController, NavParams, ToastController } from '@ionic/angular';
+import { ICBService } from '../../shared/service';
+// import { HomePage } from './home';
+import { Authentication } from '../../shared/authentication.service';
+
 @Component({
     selector: 'page-Return',
     templateUrl: 'Return.html',
-    providers: [icbService]
+    providers: [ICBService]
 })
 export class ReturnPage {
 
   book: Array<any>;
   trans: Array<any>;
-    constructor(public navCtrl: NavController, private navParams: NavParams, private bookService: icbService,
-      public toastCtrl: ToastController,public authentication: Authentication) {
-        this.book = navParams.get('book');
+    constructor(public navCtrl: NavController, private navParams: NavParams, private bookService: ICBService,
+                public toastCtrl: ToastController, public authentication: Authentication) {
+        this.book = this.navParams.get('book');
         this.bookService.getTransaction(navParams.get('isbn')).then(
           data => {
             this.trans = data;
@@ -24,25 +23,26 @@ export class ReturnPage {
         );
 
     }
-    markReturn(trasnsId){
+    markReturn(trasnsId) {
            this.bookService.markReturn(trasnsId).then(
-             data => {
+             async data => {
                this.trans = data;
-               let toast = this.toastCtrl.create({
-                message: "Returned successfully !",
+               const toast = await this.toastCtrl.create({
+                message: 'Returned successfully !',
                 duration: 2000
               });
-              toast.present();
-              if(this.trans.length == 0)
-                this.navCtrl.push(HomePage);
+               toast.present();
+               if (this.trans.length === 0) {
+                this.navCtrl.pop();
+              } // push(HomePage);
            }
        );
    }
    logOut() {
     // console.log(event.target.value);
          this.authentication.logout();
-         this.navCtrl.push(Login);
-
+         // this.navCtrl.push(Login);
+         this.navCtrl.navigateForward('Login');
  }
 
 }

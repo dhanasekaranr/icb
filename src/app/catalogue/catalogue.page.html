@@ -1,0 +1,45 @@
+<app-header [title]="'Catalogue'"></app-header>
+<ion-content class="home" padding >
+    <span *ngIf="this.AvailableCount" style="color: green; font-size: .8em;align-content: right">
+      Total Books:{{this.AvailableCount}}({{this.books.length}}); Rented Out:{{this.RentedOut}}</span>
+    <ion-item>
+      <ion-searchbar
+        [showCancelButton]="true"
+        (ionInput)="FilterBookDB($event)"
+        (ionCancel)="searchBookDB($event)">
+      </ion-searchbar>
+    </ion-item>
+    <ion-list>
+      <ion-item-sliding *ngFor="let book of books | search : DescriptionSearch : null" >
+        <ion-item>
+
+             <ion-avatar thumbnail  slot="start" (click)="bookInfo(book)">
+                  <img src="{{book.PictureLink}}" />
+              </ion-avatar>
+              <ion-label text-wrap> 
+                  <h2>{{book.Description}}</h2>
+                  <p *ngIf="book.TotalCopies > 0" class="item-description">
+                    Available : {{book.TotalCopies - book.RentedCopies}}
+                  <span *ngIf="book.RentedCopies > 0">[Checked Out : {{book.RentedCopies}}]</span></p>
+                  <p *ngIf="book.TotalCopies == 1" style="color:green;">{{book.Code}} </p>
+              </ion-label>
+
+          <ion-icon *ngIf="book.WishList != 'Y'" name="heart-empty" (click)="AddToWishList(book,'Y','Added to Wish List!')" style="color:red" title="Add to Wish list"></ion-icon>
+          <ion-icon *ngIf="book.WishList === 'Y'" name="heart" (click)="AddToWishList(book,'N','Removed from your Wish List!')" style="color:red" title="Remove from Wish list"></ion-icon>
+      </ion-item>
+        <ion-item-options *ngIf="this.authentication.getIsAdmin() == 'Y'" side="end">
+          <button ion-button color="danger" style="background-color: red;color:white" (click)="returnBook(book)"  *ngIf="book.RentedCopies > 0 ">
+              <ion-icon name="refresh"></ion-icon>
+              Return ({{book.RentedCopies}})
+          </button>
+          <button ion-button  color="primary" style="background-color: green; color:white" (click)="checkout(book)" *ngIf="(book.TotalCopies - book.RentedCopies) > 0" >
+              <ion-icon name="cart"></ion-icon>
+            Check out ({{book.TotalCopies - book.RentedCopies}})
+          </button>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+</ion-content>
+
+
+

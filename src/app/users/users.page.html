@@ -1,0 +1,28 @@
+<app-header title="User List"></app-header>
+<ion-content class="home" padding>
+  <ion-item>
+      <ion-searchbar
+      [showCancelButton]="true"
+      (ionInput)="FilterUserDB($event)"
+      (ionCancel)="searchUserDB($event)">
+    </ion-searchbar>
+  </ion-item>
+  <ion-list>
+  <ion-item *ngFor="let user of users | search: null:null:null:null:FirstNameSearch">
+      <ion-avatar slot=""> 
+          <ion-icon name="person" ></ion-icon>
+      </ion-avatar>
+      <ion-label text-wrap>
+         <h2>{{user.FirstName}} {{user.LastName}}</h2><p *ngIf="user.JSONObject">( Rented : {{user.JSONObject.length}} )</p>
+         <ion-label *ngIf="user.JSONObject">
+            <ion-item lines="none" *ngFor="let bk of user.JSONObject" >
+              <p><span style="color: green; font-size: .8em">{{bk.Code.substr(14,3)}}</span> - {{bk.Description}}</p>
+              <ion-button slot="end" color="primary" (click)="notify(user.Id,bk.Description, bk.TransactionId)">
+                Notify ({{bk.RentedTransactionUpdate - 1}})
+              </ion-button>
+             </ion-item>
+          </ion-label>  
+      </ion-label>
+  </ion-item>
+  </ion-list>
+</ion-content>

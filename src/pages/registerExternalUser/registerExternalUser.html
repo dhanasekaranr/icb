@@ -1,22 +1,40 @@
-<!--
-  Generated template for the Characters page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
-
   <ion-navbar>
-    <ion-title>Login</ion-title>
+    <ion-title>Register</ion-title>
   </ion-navbar>
-
 </ion-header>
 
+<ion-content class="ion-padding">
+  <form #registerForm="ngForm">
+      <ion-row>
+        <ion-col>
+          <ion-list inset>
 
-<ion-content padding>
-  <h1>Register your user</h1>
-  <p>Before you can procede you need to supply a username</p>
-  
-  <button ion-button (click)="registerUser()">Register</button>
+            <ion-item>
+              <ion-input type="text" placeholder="Name" name="name" value="{{this.registerCredentials.name}}" required></ion-input>
+            </ion-item>
 
+            <ion-item>
+              <ion-input type="text" placeholder="Email" name="email" value="{{this.registerCredentials.email}}" required></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-input type="password" placeholder="Password" name="password" value="{{this.registerCredentials.password}}" required></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-input type="password" placeholder="Confirm Password" name="confirmation_password" value="{{this.registerCredentials.confirmation_password}}" required></ion-input>
+            </ion-item>
+
+          </ion-list>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col class="signup-col">
+          <button ion-button class="submit-btn" [disabled]="!registerForm.form.valid">Register</button>
+        </ion-col>
+      </ion-row>
+
+    </form>
 </ion-content>

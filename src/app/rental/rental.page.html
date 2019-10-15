@@ -1,0 +1,29 @@
+<app-header [title]="'Rental'"></app-header>
+
+<ion-content class="home" padding>
+  <ion-item>
+    <ion-searchbar
+      [showCancelButton]="true"
+      (ionInput)="FilterBookDB($event)"
+      (ionCancel)="searchTransDB()">
+    </ion-searchbar>
+  </ion-item>
+
+  <ion-list>
+      <ion-item *ngFor="let book of books | search: null:CodeSearch">
+        <ion-label text-wrap>
+          <h2>{{book.Code}}</h2>
+          <p class="item-description">{{book.Description}}</p>
+          <p *ngIf="book.Status != 2" style="color:green;">{{book.RenterName}} </p>
+        </ion-label>    
+        <ion-button color="danger" (click)="markReturn(book.TransactionId)" slot="end" *ngIf="book.Status != 2 ">
+            <ion-icon name="refresh"></ion-icon>
+            Return Book
+        </ion-button>
+        <ion-button color="primary" (click)="checkout(book)" slot="end" *ngIf="book.Status == 2 ">
+            <ion-icon name="cart"></ion-icon>
+            Check out
+        </ion-button>          
+      </ion-item>
+  </ion-list>
+</ion-content>

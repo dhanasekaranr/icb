@@ -1,58 +1,40 @@
-import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
-import { StatusBar, Splashscreen } from 'ionic-native';
-import { HttpModule } from '@angular/http';
-import { Storage } from '@ionic/storage';
-
-import { Authentication, FacebookAuthentication, CredentialsAuthentication, Values, GlobalSettings, User} from '../shared/shared';
-
-import { Login } from '../pages/login/login';
-import { Tab } from '../pages/tab/tab';
-
-import { HomePage } from '../pages/home/home';
-import { ContactPage } from '../pages/contact/contact';
-import { UserPage } from '../pages/user/user';
-import { BookInfo } from '../pages/home/BookInfo';
-import { ReturnPage } from '../pages/home/Return';
-import { CheckOutPage } from '../pages/home/CheckOut';
-import { MultiCopies } from '../pages/home/MultiCopies';
-import '../shared/rxjs-operators';
+import { HeaderPage } from './layout/header';
+import { Component } from '@angular/core';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { Platform } from '@ionic/angular';
+import { SplashScreen } from '@ionic-native/splash-screen/ngx';
+import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { PopoverPage } from '../pages/home/popover';
+import { NotificationPopoverPage } from '../pages/home/notificationPopover';
+import { GlobalSettings, User, Authentication, CredentialsAuthentication } from '../shared/shared';
+import { IonicStorageModule } from '@ionic/storage';
 
 @Component({
-  templateUrl: 'app.html',
+  selector: 'app-root',
+  templateUrl: 'app.component.html',
+  styleUrls: ['app.component.scss'],
   providers: [
-    HttpModule,
-    Storage,
-    Authentication,
-    FacebookAuthentication,
-    CredentialsAuthentication,
-    Values,
-    User,
-    GlobalSettings,
-      Tab, HomePage, ContactPage, UserPage, BookInfo, ReturnPage,CheckOutPage,MultiCopies
+    HttpClientModule,  HttpClient,
+    IonicStorageModule,
+   PopoverPage, NotificationPopoverPage, Authentication,
+   CredentialsAuthentication,
+   User,
+   GlobalSettings, HeaderPage
   ]
 })
-export class MyApp {
-  @ViewChild(Nav) nav: Nav;
-
-  rootPage: any = Tab;
-
-  constructor(public platform: Platform) {
+export class AppComponent {
+  constructor(
+    private platform: Platform,
+    private splashScreen: SplashScreen,
+    private statusBar: StatusBar
+  ) {
     this.initializeApp();
   }
 
   initializeApp() {
     this.platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
-      StatusBar.styleDefault();
-      Splashscreen.hide();
+      this.statusBar.styleDefault();
+      this.splashScreen.hide();
     });
-  }
-
-  openPage(page) {
-    // Reset the content nav to have just this page
-    // we wouldn't want the back button to show in this scenario
-    this.nav.setRoot(page.component);
   }
 }

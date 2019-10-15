@@ -1,6 +1,5 @@
 {
-  "name": "$safeappid$",
-  "app_id": "8c6418b5",
+  "name": "ICBApp",
   "integrations": {},
-  "type": "ionic-angular"
+  "type": "angular"
 }

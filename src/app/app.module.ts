@@ -1,37 +1,33 @@
-import { NgModule, ErrorHandler } from '@angular/core';
-import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
-import { MyApp } from './app.component';
-import { Login } from '../pages/login/login';
-import { RegisterExternalUser } from '../pages/registerExternalUser/registerExternalUser';
-import { ValuesPage } from '../pages/values/values';
-import { Tab } from '../pages/tab/tab';
-import { HomePage } from '../pages/home/home';
-import { ContactPage } from '../pages/contact/contact';
-import { UserPage } from '../pages/user/user';
-import { BookInfo } from '../pages/home/BookInfo';
-import { CheckOutPage } from '../pages/home/CheckOut';
-import { MultiCopies } from '../pages/home/MultiCopies';
-import { ReturnPage } from '../pages/home/Return';
-import { Search} from '../shared/Search';
+import { NotificationPopoverPage } from './../pages/home/notificationPopover';
+import { PopoverPage } from './../pages/home/popover';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { RouteReuseStrategy } from '@angular/router';
+import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
+import { SplashScreen } from '@ionic-native/splash-screen/ngx';
+import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { ChartsModule } from 'ng2-charts';
+import { HttpClientModule } from '@angular/common/http';
+import { IonicStorageModule } from '@ionic/storage';
+import { ICBService } from 'src/shared/service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 @NgModule({
-  declarations: [
-    MyApp,
-    RegisterExternalUser,
-    ValuesPage,
-      Login,
-      Tab, HomePage, ContactPage, UserPage,BookInfo, CheckOutPage,ReturnPage, Search,MultiCopies
+  declarations: [AppComponent, PopoverPage, NotificationPopoverPage],
+  entryComponents: [PopoverPage, NotificationPopoverPage],
+  imports: [BrowserModule, IonicModule.forRoot(), IonicStorageModule.forRoot(), AppRoutingModule, HttpClientModule,
+     ChartsModule, BrowserAnimationsModule],
+  providers: [
+    StatusBar,
+    SplashScreen,
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, ICBService, InAppBrowser
   ],
-  imports: [
-    IonicModule.forRoot(MyApp)
-  ],
-  bootstrap: [IonicApp],
-  entryComponents: [
-    MyApp,
-    RegisterExternalUser,
-    ValuesPage,
-    Login,
-      Tab, HomePage, ContactPage, UserPage, BookInfo, CheckOutPage,ReturnPage,MultiCopies
-  ],
-  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
+  bootstrap: [AppComponent],
+  exports:      []
 })
-export class AppModule {}
+export class AppModule {
+
+}

@@ -1,0 +1,81 @@
+<ion-header>
+    <ion-toolbar color="header">
+      <ion-title class="ion-text-center">Home</ion-title>
+      <ion-buttons slot="end">
+          <ion-button id="notification-button" fill="clear" (click)="notificationPopover($event)">
+            <ion-icon name="notifications"></ion-icon>
+            <ion-badge id="notifications-badge" >{{this.NotificationCount}}</ion-badge>
+        </ion-button>
+        <ion-button id="notification-button" fill="clear" (click)="presentPopover($event)">
+            <ion-icon name="heart"></ion-icon>
+            <ion-badge id="notifications-badge">{{this.WishesCount}}</ion-badge>
+        </ion-button>
+        <ion-button (click)=this.logOut();>
+          <ion-icon slot="icon-only" name="md-log-out" ></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+<ion-content>
+  <ion-card>
+      <ion-card-header>
+        Books
+      </ion-card-header>
+      <ion-card-content>
+        <canvas #lineCanvas></canvas>
+      </ion-card-content>
+    </ion-card>
+     <div>
+    <ion-grid>
+      <ion-row nowrap>
+        <ion-col>
+          <ion-card text-center padding-right padding-top padding-bottom style="background-color:#f18973" (click)="showRentals(this.Transactions)">
+            <ion-icon name="book">
+                <ion-badge id="notifications-badge" >{{this.AvailableCount}}</ion-badge>
+            </ion-icon>
+            <span>Books({{this.RentedOut}})</span>
+          </ion-card>
+        </ion-col>
+        <ion-col>
+          <ion-card text-center padding style="background-color:#82b74b;" (click)="showHistory(this.booksStat)">
+              <ion-icon name="pulse">
+                  <ion-badge id="notifications-badge" color="danger"></ion-badge>
+                </ion-icon>
+            <span>Statistics</span>
+          </ion-card>
+        </ion-col>
+        <ion-col>
+          <ion-card text-center padding style="background-color:#feb236 " (click)="showStats()">
+              <ion-icon name="logo-twitter">
+                  <ion-badge id="notifications-badge" color="danger"></ion-badge>
+                </ion-icon>
+              <span>News</span>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+ 
+    <ion-list>
+        <ion-list-header>
+            Current Rental List
+          </ion-list-header>
+      
+  
+          <ion-item *ngFor="let tran of Transactions">
+            <ion-avatar slot="start" (click)="bookInfo(tran)">
+              <img src="{{tran.PictureLink}}">
+            </ion-avatar>
+            <ion-label>
+              <h3>{{tran.BorrowerName}} {{tran.RentedDate | date: 'MM/dd/yyyy'}} <button style="background-color: transparent">..... </button></h3>
+              <p>{{tran.Description}}</p>              
+            </ion-label>
+          </ion-item>
+
+
+
+    </ion-list>
+
+</ion-content>
+
