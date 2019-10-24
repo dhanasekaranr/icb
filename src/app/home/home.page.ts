@@ -1,9 +1,17 @@
 import { Component, ViewChild } from '@angular/core';
+<<<<<<< HEAD
 import { NotificationPopoverPage } from 'src/app/home/notificationPopover';
 import { PopoverController, NavController, LoadingController } from '@ionic/angular';
 import { Authentication } from 'src/shared/shared';
 import { ICBService } from 'src/shared/service';
 import { PopoverPage } from 'src/app/home/popover';
+=======
+import { NotificationPopoverPage } from 'src/pages/home/notificationPopover';
+import { PopoverController, NavController, LoadingController } from '@ionic/angular';
+import { Authentication } from 'src/shared/shared';
+import { ICBService } from 'src/shared/service';
+import { PopoverPage } from 'src/pages/home/popover';
+>>>>>>> 67b127f... ICB 2.0
 import { Chart } from 'chart.js';
 import { MasterDetailService } from 'src/providers/data-service/masterDetailService';
 
