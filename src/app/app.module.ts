@@ -1,5 +1,3 @@
-import { NotificationPopoverPage } from './../pages/home/notificationPopover';
-import { PopoverPage } from './../pages/home/popover';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -16,8 +14,8 @@ import { ICBService } from 'src/shared/service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
-  declarations: [AppComponent, PopoverPage, NotificationPopoverPage],
-  entryComponents: [PopoverPage, NotificationPopoverPage],
+  declarations: [AppComponent, ],
+  entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), IonicStorageModule.forRoot(), AppRoutingModule, HttpClientModule,
      ChartsModule, BrowserAnimationsModule],
   providers: [

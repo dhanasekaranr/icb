@@ -4,8 +4,8 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-import { PopoverPage } from '../pages/home/popover';
-import { NotificationPopoverPage } from '../pages/home/notificationPopover';
+import { PopoverPage } from './home/popover';
+import { NotificationPopoverPage } from './home/notificationPopover';
 import { GlobalSettings, User, Authentication, CredentialsAuthentication } from '../shared/shared';
 import { IonicStorageModule } from '@ionic/storage';
 

@@ -2,24 +2,19 @@
   max-height: 35vh;
   overflow: hidden;
 }
-#notification-button {            
-  position: relative;
-  width: 42px;
-  top:1px;
-  right: 1px;
-  overflow: visible!important;
-}
 
 
-#notifications-badge {
 
-  position: absolute;
-  top: -3px;
-  right: -3px;
-  border-radius: 100%;
-  font-weight: 100;
-  color:white;
-  
+ion-button {
+	ion-badge {
+		position: absolute;
+		opacity: 0.9;
+        top: 0.1rem;
+        right: 0.1rem;
+		& ~ ion-icon {
+			margin-right: .5rem;
+		}
+  }
 }
 P{
   font-weight: lighter;font-size: 1.25ex;
