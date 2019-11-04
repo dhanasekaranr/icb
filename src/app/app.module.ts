@@ -1,5 +1,5 @@
-import { NotificationPopoverPage } from './../pages/home/notificationPopover';
-import { PopoverPage } from './../pages/home/popover';
+import { NotificationPopoverPage } from './home/notificationPopover';
+import { PopoverPage } from './home/popover';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';

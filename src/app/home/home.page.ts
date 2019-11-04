@@ -1,9 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
-import { NotificationPopoverPage } from 'src/pages/home/notificationPopover';
+import { NotificationPopoverPage } from 'src/app/home/notificationPopover';
 import { PopoverController, NavController, LoadingController } from '@ionic/angular';
 import { Authentication } from 'src/shared/shared';
 import { ICBService } from 'src/shared/service';
-import { PopoverPage } from 'src/pages/home/popover';
+import { PopoverPage } from 'src/app/home/popover';
 import { Chart } from 'chart.js';
 import { MasterDetailService } from 'src/providers/data-service/masterDetailService';
 
