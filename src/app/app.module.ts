@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-=======
-import { NotificationPopoverPage } from './../pages/home/notificationPopover';
-import { PopoverPage } from './../pages/home/popover';
->>>>>>> 67b127f... ICB 2.0
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -17,15 +12,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { IonicStorageModule } from '@ionic/storage';
 import { ICBService } from 'src/shared/service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { PopoverPage } from './home/popover';
+import { NotificationPopoverPage } from './home/notificationPopover';
 
 @NgModule({
-<<<<<<< HEAD
-  declarations: [AppComponent, ],
-  entryComponents: [],
-=======
   declarations: [AppComponent, PopoverPage, NotificationPopoverPage],
   entryComponents: [PopoverPage, NotificationPopoverPage],
->>>>>>> 67b127f... ICB 2.0
   imports: [BrowserModule, IonicModule.forRoot(), IonicStorageModule.forRoot(), AppRoutingModule, HttpClientModule,
      ChartsModule, BrowserAnimationsModule],
   providers: [

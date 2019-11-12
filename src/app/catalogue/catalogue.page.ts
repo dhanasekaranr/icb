@@ -88,7 +88,7 @@ export class CataloguePage {
       async data => {
         const toast = await this.toastCtrl.create({
          message,
-         duration: 2000
+         duration: 1000
        });
         toast.present();
         key.WishList = flag;

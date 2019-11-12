@@ -32,13 +32,16 @@ import { ToastController, NavParams, ModalController } from '@ionic/angular';
            duration: 2000
          });
           toast.present();
-          this.viewCtrl.dismiss();
+         // this.viewCtrl.dismiss();
           this.wishes.splice(i, 1);
         }
-    ); }
+    ); 
+  }
 
-    close() {
-      this.viewCtrl.getTop();
-      this.viewCtrl.dismiss();
+    async close() {
+      const topLoader = await this.viewCtrl.getTop();
+      if (topLoader ) {
+        await topLoader.dismiss();
+        }
     }
   }

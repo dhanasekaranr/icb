@@ -4,13 +4,8 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-<<<<<<< HEAD
 import { PopoverPage } from './home/popover';
 import { NotificationPopoverPage } from './home/notificationPopover';
-=======
-import { PopoverPage } from '../pages/home/popover';
-import { NotificationPopoverPage } from '../pages/home/notificationPopover';
->>>>>>> 67b127f... ICB 2.0
 import { GlobalSettings, User, Authentication, CredentialsAuthentication } from '../shared/shared';
 import { IonicStorageModule } from '@ionic/storage';
 

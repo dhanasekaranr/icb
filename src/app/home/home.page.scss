@@ -2,21 +2,6 @@
   max-height: 35vh;
   overflow: hidden;
 }
-<<<<<<< HEAD
-
-
-
-ion-button {
-	ion-badge {
-		position: absolute;
-		opacity: 0.9;
-        top: 0.1rem;
-        right: 0.1rem;
-		& ~ ion-icon {
-			margin-right: .5rem;
-		}
-  }
-=======
 #notification-button {            
   position: relative;
   width: 42px;
@@ -35,7 +20,6 @@ ion-button {
   font-weight: 100;
   color:white;
   
->>>>>>> 67b127f... ICB 2.0
 }
 P{
   font-weight: lighter;font-size: 1.25ex;
