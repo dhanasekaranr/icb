@@ -3,13 +3,18 @@
       <ion-title class="ion-text-center">Home</ion-title>
       <ion-buttons slot="end">
           <ion-button id="notification-button" fill="clear" (click)="notificationPopover($event)">
-            <ion-icon name="notifications"></ion-icon>
+            <ion-icon name="notifications" ></ion-icon>
             <ion-badge id="notifications-badge" >{{this.NotificationCount}}</ion-badge>
-        </ion-button>
+
+      </ion-button>
+
         <ion-button id="notification-button" fill="clear" (click)="presentPopover($event)">
-            <ion-icon name="heart"></ion-icon>
-            <ion-badge id="notifications-badge">{{this.WishesCount}}</ion-badge>
-        </ion-button>
+          <ion-icon name="heart"></ion-icon>
+          <ion-badge id="notifications-badge">{{this.WishesCount}}</ion-badge>
+
+
+      </ion-button>
+
         <ion-button (click)=this.logOut();>
           <ion-icon slot="icon-only" name="md-log-out" ></ion-icon>
         </ion-button>
