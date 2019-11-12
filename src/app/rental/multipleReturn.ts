@@ -6,7 +6,7 @@ import { Authentication } from '../../shared/authentication.service';
 
 @Component({
     selector: 'page-MultipleReturn',
-    templateUrl: 'MultipleReturn.html',
+    templateUrl: 'multipleReturn.html',
     providers: [ICBService]
 })
 export class MultipleReturnPage {
