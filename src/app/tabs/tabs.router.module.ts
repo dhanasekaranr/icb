@@ -38,6 +38,16 @@ const routes: Routes = [
         ]
       },
       {
+        path: 'registration',
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+              import('../registration/registration.module').then(m => m.RegistrationPageModule)
+          }
+        ]
+      },
+      {
         path: 'rental',
         children: [
           {

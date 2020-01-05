@@ -26,7 +26,9 @@
           </ion-list>
         </ion-col>
       </ion-row>
+      <p text-right>Forgot Password?</p>
       <ion-row>
+        
         <ion-col class="signup-col">
           <ion-button class="submit-btn" (click)="credentialsLogin()">Login</ion-button>
         </ion-col>
@@ -34,7 +36,7 @@
       <p class="item-description" style="color: red">{{this.errMessage}}</p>
     </div>
     <p class="ion-text-center">Don't have a account?</p>
-    <ion-button expand="full" color="danger" (click)="this.ForgotPassword()">Register</ion-button>
+    <ion-button expand="full" color="danger" (click)="this.Register()">Register</ion-button>
 </ion-content>
 
 <ion-footer>

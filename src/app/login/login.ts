@@ -34,6 +34,9 @@ export class LoginPage {
   ForgotPassword() {
   this.inAppBrowser.create('http://icarebooks.com/Account/ForgotPassword');
 }
+Register() {
+  this.navCtrl.navigateForward('tabs/registration');
+}
   async credentialsLogin() {
     const credentials = {
           username: this.email,

@@ -64,6 +64,19 @@ export class Authentication {
 
         // return this.accessTokenSubject;
   }
+    // Register
+    register(credentials) {
+      if (credentials.FirstName === null || credentials.Email === null || credentials.Password === null) {
+        return Observable.throw("Please insert credentials");
+      } else {
+        return this.credentialsAuthentication.register(credentials)
+        .pipe(map( (body: any) => {
+          // Cache the access token in the service
+          return body;
+        }), catchError(this.handleError));
+      }
+    }
+
   handleError(error: Response) {
     // Clear the saved accessToken
 
