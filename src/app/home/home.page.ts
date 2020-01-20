@@ -8,6 +8,7 @@ import { Chart } from 'chart.js';
 import { MasterDetailService } from 'src/providers/data-service/masterDetailService';
 import { PopoverPage } from './popover';
 import { NotificationPopoverPage } from './notificationPopover';
+import { SettingPopover } from './settingPopover';
 
 @Component({
   selector: 'app-home',
@@ -52,6 +53,16 @@ export class HomePage {
          this.navCtrl.navigateForward('tabs/login');
        }
    }
+   async settingsPopover(myEvent: any) {
+    const popover = await this.popoverCtrl.create({
+      component: SettingPopover,      event: myEvent,
+      translucent: true});
+
+      return await popover.present();
+      popover.onDidDismiss();
+    
+ }
+
    async presentPopover(myEvent: any) {
     const popover = await this.popoverCtrl.create({
       component: PopoverPage,

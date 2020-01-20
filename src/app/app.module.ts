@@ -14,10 +14,11 @@ import { ICBService } from 'src/shared/service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PopoverPage } from './home/popover';
 import { NotificationPopoverPage } from './home/notificationPopover';
+import { SettingPopover } from './home/settingPopover';
 
 @NgModule({
-  declarations: [AppComponent, PopoverPage, NotificationPopoverPage],
-  entryComponents: [PopoverPage, NotificationPopoverPage],
+  declarations: [AppComponent, PopoverPage, NotificationPopoverPage,SettingPopover],
+  entryComponents: [PopoverPage, NotificationPopoverPage, SettingPopover],
   imports: [BrowserModule, IonicModule.forRoot(), IonicStorageModule.forRoot(), AppRoutingModule, HttpClientModule,
      ChartsModule, BrowserAnimationsModule],
   providers: [

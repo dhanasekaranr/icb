@@ -8,6 +8,7 @@ import { PopoverPage } from './home/popover';
 import { NotificationPopoverPage } from './home/notificationPopover';
 import { GlobalSettings, User, Authentication, CredentialsAuthentication } from '../shared/shared';
 import { IonicStorageModule } from '@ionic/storage';
+import { SettingPopover } from './home/settingPopover';
 
 @Component({
   selector: 'app-root',
@@ -16,7 +17,7 @@ import { IonicStorageModule } from '@ionic/storage';
   providers: [
     HttpClientModule,  HttpClient,
     IonicStorageModule,
-   PopoverPage, NotificationPopoverPage, Authentication,
+   PopoverPage, NotificationPopoverPage, Authentication, SettingPopover,
    CredentialsAuthentication,
    User,
    GlobalSettings, HeaderPage
