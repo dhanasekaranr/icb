@@ -33,28 +33,15 @@ export class ProfilePage implements OnInit {
         this.registrationForm = this.formBuilder.group({
           FirstName: new FormControl('', Validators.required),
           LastName: new FormControl('', Validators.required),
-          Email: new FormControl({ disabled: true},Validators.required),
-          }, 
-        (formGroup: FormGroup) => {
-        return PasswordValidator.areEqual(formGroup);
-      })
+          Email: new FormControl({value:'Test@Test.com', disabled: true})
+          })
       this.registrationForm.get('FirstName').setValue('Test');
       this.registrationForm.get('LastName').setValue('Test');
-      this.registrationForm.get('Email').setValue('Test@Test.com');
+
   }
   validation_messages = {
-    'FirstName': [
-      { type: 'required', message: 'Name is required.' }
-    ],
-    'LastName': [
-      { type: 'required', message: 'Last name is required.' }
-    ],
-    'Email': [
-      { type: 'required', message: 'Email is required.' },
-      { type: 'pattern', message: 'Please enter a valid email.' }
-    ]
-
-    
+    'FirstName': [{ type: 'required', message: 'Name is required.' }],
+    'LastName': [{ type: 'required', message: 'Last name is required.' }]
   };
 
   loginModal() {

@@ -18,100 +18,47 @@ import { PasswordValidator } from '../registration/password.validator';
 })
 
 export class SettingsPage implements OnInit {
-  loader: any ; 
-  registrationForm: FormGroup;
-  matching_passwords_group: FormGroup;
-  validationMessage: Array<any>;
+  loader: any ;
+  groups= <any>[];
+  public myForm: FormGroup;
+  private studentCount: number = 1;
+  editedItem = <any>[];
   constructor(public navCtrl: NavController, private service: ICBService, public platform: Platform,
               public actionsheetCtrl: ActionSheetController, public authentication: Authentication,
-              public loading: LoadingController, public toastCtrl: ToastController, private ms: MasterDetailService,
-              public formBuilder: FormBuilder) {
+              public loading: LoadingController, public toastCtrl: ToastController, private ms: MasterDetailService, private formBuilder: FormBuilder
+            ) {
+              this.myForm = formBuilder.group({
+                student1: ['', Validators.required]
+              });
+              this.editedItem.push('1');
       }
 
       createSuccess = false;
+      removeControl(control){
+        this.myForm.removeControl(control.key);
+      }
+      addControl(){
+        this.studentCount++;
+        this.myForm.addControl('student' + this.studentCount, new FormControl('', Validators.required));
+      }
    ngOnInit() {
-        this.registrationForm = this.formBuilder.group({
-          FirstName: new FormControl('', Validators.required),
-          LastName: new FormControl('', Validators.required),
-          Email: new FormControl('', Validators.compose([
-            Validators.required,
-            Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
-          ])),
-          Password: new FormControl('', Validators.compose([
-            Validators.minLength(5),
-            Validators.required,
-            Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$')
-          ])),
-          ConfirmPassword: new FormControl('', Validators.required)}, 
-        (formGroup: FormGroup) => {
-        return PasswordValidator.areEqual(formGroup);
-      })
-      this.registrationForm.get('FirstName').setValue('Test');
-      this.registrationForm.get('LastName').setValue('Test');
-      this.registrationForm.get('Email').setValue('Test@Test.com');
-      this.registrationForm.get('Password').setValue('Test101@');
-      this.registrationForm.get('ConfirmPassword').setValue('Test101@');
+    this.service.getGroups().then(
+      data => {
+        console.log(data);
+        this.groups = data;
+       // this.loader.dismiss();
+            }
+        ).catch(err => {
+          console.log(err);
+      });
   }
-  validation_messages = {
-    'FirstName': [
-      { type: 'required', message: 'Name is required.' }
-    ],
-    'LastName': [
-      { type: 'required', message: 'Last name is required.' }
-    ],
-    'Email': [
-      { type: 'required', message: 'Email is required.' },
-      { type: 'pattern', message: 'Please enter a valid email.' }
-    ],
-    'Password': [
-      { type: 'required', message: 'Password is required.' },
-      { type: 'minlength', message: 'Password must be at least 5 characters long.' },
-      { type: 'pattern', message: 'Your password must contain at least one uppercase, one lowercase, and one number.' }
-    ],
-    'ConfirmPassword': [
-      { type: 'required', message: 'Confirm password is required.' }
-    ],
-    'matching_passwords': [
-      { type: 'areEqual', message: 'Password mismatch.' }
-    ]
-  };
-
+ 
   loginModal() {
     this.navCtrl.navigateForward('tabs/login');
   }
   
-  async onSubmit(values){
-    this.validationMessage = Array<any>();
-    this.loader = await this.loading.create({message: 'Registering...'});
-    this.loader.present().then(() => {
-      this.authentication.register(this.registrationForm.value).subscribe(async success => {
-        const toast = await this.toastCtrl.create({
-          message: 'Registration successfully, check your inbox for approval email !',
-          duration: 2000,
-          showCloseButton: true,
-          cssClass: "toast-mess",
-        });
-        toast.present();
-        this.loader.dismiss();
-    },
-      async error => {
-      if(error.error.ModelState){
-        this.validationMessage = error.error.ModelState[""];
-      }
-      else{
-        this.validationMessage.push(error.statusText);
-      }
-        this.loader.dismiss();
-        const toast = await this.toastCtrl.create({
-          message: 'Registration Failed, try again latter !',
-          duration: 2000,
-          showCloseButton: true,
-          cssClass: "toast-mess",
-        });
-        toast.present();
-    }
-    )});
+ 
 
-}
+
   
 }
