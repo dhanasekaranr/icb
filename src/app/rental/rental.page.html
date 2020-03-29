@@ -11,7 +11,7 @@
 
   <ion-list>
       <ion-item *ngFor="let book of books | search: null:CodeSearch">
-        <ion-label text-wrap>
+        <ion-label class="ion-text-wrap">
           <h2>{{book.Code}}</h2>
           <p class="item-description">{{book.Description}}</p>
           <p *ngIf="book.Status != 2" style="color:green;">{{book.RenterName}} </p>

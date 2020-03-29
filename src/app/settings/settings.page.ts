@@ -5,7 +5,7 @@ import { NavController, ToastController, Platform, LoadingController, ActionShee
 import { ICBService } from 'src/shared/service';
 import { Authentication } from 'src/shared/shared';
 import { MasterDetailService } from 'src/providers/data-service/masterDetailService';
-import { FormGroup, FormControl, Validators,ReactiveFormsModule, FormBuilder  } from '@angular/forms';
+import { FormGroup, FormControl, Validators,ReactiveFormsModule, FormBuilder, FormArray  } from '@angular/forms';
 import { reduce } from 'rxjs/operators';
 import { PasswordValidator } from '../registration/password.validator';
 
@@ -27,10 +27,13 @@ export class SettingsPage implements OnInit {
               public actionsheetCtrl: ActionSheetController, public authentication: Authentication,
               public loading: LoadingController, public toastCtrl: ToastController, private ms: MasterDetailService, private formBuilder: FormBuilder
             ) {
-              this.myForm = formBuilder.group({
-                student1: ['', Validators.required]
-              });
-              this.editedItem.push('1');
+
+              this.getRelationShips(formBuilder);
+
+            //  this.myForm = formBuilder.group({
+              //  student1: ['', Validators.required]
+              //});
+              //this.editedItem.push('1');
       }
 
       createSuccess = false;
@@ -41,21 +44,37 @@ export class SettingsPage implements OnInit {
         this.studentCount++;
         this.myForm.addControl('student' + this.studentCount, new FormControl('', Validators.required));
       }
-   ngOnInit() {
-    this.service.getGroups().then(
-      data => {
-        console.log(data);
-        this.groups = data;
-       // this.loader.dismiss();
-            }
-        ).catch(err => {
-          console.log(err);
-      });
-  }
+
+      ngOnInit() {
+        this.service.getGroups().then(
+          data => {
+            console.log(data);
+            this.groups = data;
+          // this.loader.dismiss();
+                }
+            ).catch(err => {
+              console.log(err);
+          });
+      }
  
-  loginModal() {
-    this.navCtrl.navigateForward('tabs/login');
-  }
+      getRelationShips(fb: FormBuilder) {
+        this.service.getRelationShips().then(
+          data => {
+            console.log(data);
+            //this.groups = data;
+            const formControls = data.map(control => new FormControl(false));
+            this.myForm = fb.group({
+              firstName: new FormArray(formControls)
+            });
+          // this.loader.dismiss();
+                }
+            ).catch(err => {
+              console.log(err);
+          });
+      }
+      loginModal() {
+        this.navCtrl.navigateForward('tabs/login');
+      }
   
  
 

@@ -12,7 +12,7 @@
       <ion-avatar slot=""> 
           <ion-icon name="person" ></ion-icon>
       </ion-avatar>
-      <ion-label text-wrap>
+      <ion-label class="ion-text-wrap">
          <h2>{{user.FirstName}} {{user.LastName}}</h2><p *ngIf="user.JSONObject">( Rented : {{user.JSONObject.length}} )</p>
          <ion-label *ngIf="user.JSONObject">
             <ion-item lines="none" *ngFor="let bk of user.JSONObject" >

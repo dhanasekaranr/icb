@@ -16,7 +16,7 @@
              <ion-avatar thumbnail  slot="start" (click)="bookInfo(book)">
                   <img src="{{book.PictureLink}}" />
               </ion-avatar>
-              <ion-label text-wrap> 
+              <ion-label class="ion-text-wrap"> 
                   <h2>{{book.Description}}</h2>
                   <p *ngIf="book.TotalCopies > 0" class="item-description">
                     Available : {{book.TotalCopies - book.RentedCopies}}
