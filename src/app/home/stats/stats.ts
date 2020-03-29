@@ -33,8 +33,8 @@ export class StatsPage {
  transactions = [];
  choice: any;
 
- @ViewChild('barCanvas', {static: false}) barCanvas: { nativeElement: any; };
- @ViewChild('doughnutCanvas', {static: false}) doughnutCanvas: { nativeElement: any; };
+ @ViewChild('barCanvas') barCanvas: { nativeElement: any; };
+ @ViewChild('doughnutCanvas') doughnutCanvas: { nativeElement: any; };
 
 
  doughnutChartMethod() {

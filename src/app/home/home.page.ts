@@ -34,7 +34,7 @@ export class HomePage {
               public loading: LoadingController) {
 
   }
-  @ViewChild('lineCanvas', {static: false}) lineCanvas: { nativeElement: any; };
+  @ViewChild('lineCanvas') lineCanvas: { nativeElement: any; };
 
   lineChart: any;
   async ionViewWillEnter() {
