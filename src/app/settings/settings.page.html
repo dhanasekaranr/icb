@@ -1,11 +1,12 @@
 <app-header [title]="'Settings'"></app-header>
 <ion-content>
+  <!--
   <ng-container *ngFor="let validation of  this.validationMessage">
     <div class="error-message">
       <ion-icon name="information-circle-outline"></ion-icon> {{ validation }}
     </div>
   </ng-container>
- 
+ -->
 
 
 
@@ -23,10 +24,12 @@
   </ion-list>
   <ion-list lines="none">
     <form [formGroup]="myForm">
+      <!--
       <ion-item *ngFor="let control of myForm.controls.musicPreferences.controls | keyvalue">
         <ion-input required type="text" [formControlName]="control.firstName" placeHolder="student name..."></ion-input>
         <ion-icon (click)="removeControl(control)" name="close-circle"></ion-icon>
       </ion-item>
+      -->
     </form>
   </ion-list>
   <ion-button color="danger" (click)="addControl()">Add Student</ion-button>

@@ -1,10 +1,10 @@
 import { HeaderPage } from 'src/app/layout/header';
-import { NavigationOptions } from '@ionic/angular/dist/providers/nav-controller';
 import { Component } from '@angular/core';
 import { NavController, ToastController, Platform, LoadingController, ActionSheetController } from '@ionic/angular';
 import { ICBService } from 'src/shared/service';
 import { Authentication } from 'src/shared/shared';
 import { MasterDetailService } from 'src/providers/data-service/masterDetailService';
+import { NavigationOptions } from '@ionic/angular/providers/nav-controller';
 
 
 

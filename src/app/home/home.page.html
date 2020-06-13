@@ -39,17 +39,19 @@
     </ion-card>
      <div>
     <ion-grid>
-      <ion-row nowrap>
+      <ion-row>
+         <!--
         <ion-col>
-          <ion-card class="ion-text-center" padding-right padding-top padding-bottom style="background-color:#f18973" (click)="showRentals(this.Transactions)">
+          <ion-card class=" ion-text-center ion-padding" style="background-color:#f18973" (click)="showRentals(this.Transactions)">
             <ion-icon name="book">
                 <ion-badge id="notifications-badge" >{{this.AvailableCount}}</ion-badge>
             </ion-icon>
             <span>Books({{this.RentedOut}})</span>
           </ion-card>
         </ion-col>
+                  -->
         <ion-col>
-          <ion-card class="ion-text-center ion-padding" style="background-color:#82b74b;" (click)="showHistory(this.booksStat)">
+          <ion-card class="ion-padding ion-text-center" style="background-color:#82b74b;" (click)="showHistory(this.booksStat)">
               <ion-icon name="pulse">
                   <ion-badge id="notifications-badge" color="danger"></ion-badge>
                 </ion-icon>
@@ -57,7 +59,7 @@
           </ion-card>
         </ion-col>
         <ion-col>
-          <ion-card class="ion-text-center ion-padding"  style="background-color:#feb236 " (click)="showStats()">
+          <ion-card class="ion-padding ion-text-center"  style="background-color:#feb236 " (click)="showStats()">
               <ion-icon name="logo-twitter">
                   <ion-badge id="notifications-badge" color="danger"></ion-badge>
                 </ion-icon>

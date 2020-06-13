@@ -1,13 +1,10 @@
 import { HeaderPage } from 'src/app/layout/header';
-import { NavigationOptions } from '@ionic/angular/dist/providers/nav-controller';
 import { Component, OnInit } from '@angular/core';
-import { NavController, ToastController, Platform, LoadingController, ActionSheetController, AlertController } from '@ionic/angular';
+import { NavController, ToastController, Platform, LoadingController, ActionSheetController } from '@ionic/angular';
 import { ICBService } from 'src/shared/service';
 import { Authentication } from 'src/shared/shared';
 import { MasterDetailService } from 'src/providers/data-service/masterDetailService';
-import { FormGroup, FormControl, Validators,ReactiveFormsModule, FormBuilder, FormArray  } from '@angular/forms';
-import { reduce } from 'rxjs/operators';
-import { PasswordValidator } from '../registration/password.validator';
+import { FormGroup, FormControl, Validators, FormBuilder, FormArray  } from '@angular/forms';
 
 
 @Component({

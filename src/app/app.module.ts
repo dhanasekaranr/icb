@@ -15,13 +15,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PopoverPage } from './home/popover';
 import { NotificationPopoverPage } from './home/notificationPopover';
 import { SettingPopover } from './home/settingPopover';
+import { GlobalSettings, Authentication, CredentialsAuthentication } from 'src/shared/shared';
+import { GlobalFunctions } from 'src/shared/globalFunctions';
 
 @NgModule({
   declarations: [AppComponent, PopoverPage, NotificationPopoverPage,SettingPopover],
   entryComponents: [PopoverPage, NotificationPopoverPage, SettingPopover],
   imports: [BrowserModule, IonicModule.forRoot(), IonicStorageModule.forRoot(), AppRoutingModule, HttpClientModule,
      ChartsModule, BrowserAnimationsModule],
-  providers: [
+  providers: [GlobalSettings, GlobalFunctions, Authentication, CredentialsAuthentication, 
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, ICBService, InAppBrowser
