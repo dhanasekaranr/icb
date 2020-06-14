@@ -7,6 +7,7 @@ import { CredentialsAuthentication } from './credentialsAuthentication';
 import { GlobalSettings } from './globalSettings';
 import { map, catchError } from 'rxjs/operators';
 
+
 @Injectable()
 export class Authentication {
 

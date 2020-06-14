@@ -1,0 +1,33 @@
+
+<ion-header>
+  <ion-navbar color="header">
+    <ion-title style="text-align: center">Return Book</ion-title>
+        <ion-buttons end>
+          <button style="background-color: #0277bd">
+            <ion-icon  style="color:white; font-size: 25px;" name="md-log-out" tabtitle="LogOut" (click)="this.logOut();"></ion-icon>
+          </button>
+        </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+  <ion-content class="home" padding>
+    <div *ngIf="book" class="selection">
+      <ion-card>
+        <ion-item text-wrap>
+          <ion-avatar item-left image-large>
+            <img src="{{book.PictureLink}}" />
+          </ion-avatar>
+          <p class="item-description">{{book.Description}}</p>
+
+        </ion-item>
+      </ion-card>
+    </div>
+      <ion-list>
+          <ion-item *ngFor="let tran of trans" >
+            <ion-icon name="contact" item-start></ion-icon> {{tran.CreatedBy}}
+            <button default ion-button item-right color="primary" (click)="markReturn(tran.Id)">
+              Return</button>
+             <br> Rented Date : {{tran.CreatedDate | date: "MM/dd/yyyy"}}
+          </ion-item>
+        </ion-list>
+  </ion-content>
