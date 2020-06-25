@@ -2,9 +2,9 @@ import { Component, ViewChild } from '@angular/core';
 import { NavController} from '@ionic/angular';
 import { ICBService } from '../../../shared/service';
 import { Chart } from 'chart.js';
-import { MasterDetailService } from 'src/providers/data-service/masterDetailService';
-import { Authentication } from 'src/shared/shared';
 import 'chartjs-plugin-labels';
+import { MasterDetailService } from '../../../providers/data-service/masterDetailService';
+import { Authentication } from '../../../shared/authentication.service';
 @Component({
   selector: 'page-stats',
   templateUrl: 'stats.html',
@@ -33,8 +33,8 @@ export class StatsPage {
  transactions = [];
  choice: any;
 
- @ViewChild('barCanvas', {static: false}) barCanvas: { nativeElement: any; };
- @ViewChild('doughnutCanvas', {static: false}) doughnutCanvas: { nativeElement: any; };
+ @ViewChild('barCanvas') barCanvas: { nativeElement: any; };
+ @ViewChild('doughnutCanvas') doughnutCanvas: { nativeElement: any; };
 
 
  doughnutChartMethod() {

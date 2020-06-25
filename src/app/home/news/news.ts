@@ -3,7 +3,8 @@ import { Component } from '@angular/core';
 import { LoadingController, AlertController, ToastController, NavController } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { ICBService } from '../../../shared/service';
-import { Authentication } from 'src/shared/shared';
+import { Authentication } from '../../../shared/authentication.service';
+
 
 @Component({
   selector: 'page-news',

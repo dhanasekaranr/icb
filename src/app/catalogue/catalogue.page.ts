@@ -1,10 +1,10 @@
-import { HeaderPage } from 'src/app/layout/header';
-import { NavigationOptions } from '@ionic/angular/dist/providers/nav-controller';
 import { Component } from '@angular/core';
 import { NavController, ToastController, Platform, LoadingController, ActionSheetController } from '@ionic/angular';
-import { ICBService } from 'src/shared/service';
-import { Authentication } from 'src/shared/shared';
-import { MasterDetailService } from 'src/providers/data-service/masterDetailService';
+import { NavigationOptions } from '@ionic/angular/providers/nav-controller';
+import { ICBService } from '../../shared/service';
+import { HeaderPage } from '../layout/header';
+import { Authentication } from '../../shared/authentication.service';
+import { MasterDetailService } from '../../providers/data-service/masterDetailService';
 
 
 
@@ -88,7 +88,7 @@ export class CataloguePage {
       async data => {
         const toast = await this.toastCtrl.create({
          message,
-         duration: 2000
+         duration: 1000
        });
         toast.present();
         key.WishList = flag;

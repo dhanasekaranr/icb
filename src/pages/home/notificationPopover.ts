@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { icbService } from '../../shared/service';
-import { ToastController,NavParams,ViewController } from 'ionic-angular';
+import { ICBService } from '../../shared/service';
+import { ToastController,NavParams, ModalController  } from '@ionic/angular';
+
 
 @Component({
     template: `
@@ -12,11 +13,11 @@ import { ToastController,NavParams,ViewController } from 'ionic-angular';
         </ion-item>
       </ion-list>
       `,
-    providers: [icbService]
+    providers: [ICBService]
   })
   export class NotificationPopoverPage {
     notifications: any;
-    constructor(public viewCtrl: ViewController, private service: icbService,public toastCtrl: ToastController,navParams: NavParams) {
+    constructor(public viewCtrl: ModalController , private service: ICBService,public toastCtrl: ToastController,navParams: NavParams) {
      this.notifications = navParams.data.data;
     }
 

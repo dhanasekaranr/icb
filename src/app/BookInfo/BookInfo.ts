@@ -4,7 +4,8 @@ import { ICBService } from '../../shared/service';
 import { Authentication } from '../../shared/authentication.service';
 import { LoginPage } from '../login/login';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MasterDetailService } from 'src/providers/data-service/masterDetailService';
+import { MasterDetailService } from '../../providers/data-service/masterDetailService';
+
 @Component({
     selector: 'page-BookInfo',
     templateUrl: 'BookInfo.html',

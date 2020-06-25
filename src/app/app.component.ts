@@ -6,8 +6,12 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { PopoverPage } from './home/popover';
 import { NotificationPopoverPage } from './home/notificationPopover';
-import { GlobalSettings, User, Authentication, CredentialsAuthentication } from '../shared/shared';
 import { IonicStorageModule } from '@ionic/storage';
+import { SettingPopover } from './home/settingPopover';
+import { Authentication } from '../shared/authentication.service';
+import { CredentialsAuthentication } from '../shared/credentialsAuthentication';
+import { User } from '../shared/user';
+import { GlobalSettings } from '../shared/globalSettings';
 
 @Component({
   selector: 'app-root',
@@ -16,7 +20,7 @@ import { IonicStorageModule } from '@ionic/storage';
   providers: [
     HttpClientModule,  HttpClient,
     IonicStorageModule,
-   PopoverPage, NotificationPopoverPage, Authentication,
+   PopoverPage, NotificationPopoverPage, Authentication, SettingPopover,
    CredentialsAuthentication,
    User,
    GlobalSettings, HeaderPage

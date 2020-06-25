@@ -1,4 +1,4 @@
-import { MasterDetailService } from 'src/providers/data-service/masterDetailService';
+import { MasterDetailService } from '../../../providers/data-service/masterDetailService';
 import { Component } from '@angular/core';
 import { NavController, ToastController } from '@ionic/angular';
 import { ICBService } from '../../../shared/service';

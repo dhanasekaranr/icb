@@ -25,7 +25,11 @@ import { NavParams, ModalController } from '@ionic/angular';
 
 
 
-    close() {
-      this.viewCtrl.dismiss(this.notifications.length);
+    async close() {
+      //this.viewCtrl.dismiss(this.notifications.length);
+      const topLoader = await this.viewCtrl.getTop();
+      if (topLoader ) {
+        await topLoader.dismiss(this.notifications.length);
+      }
     }
   }

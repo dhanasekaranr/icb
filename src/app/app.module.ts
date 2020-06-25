@@ -1,5 +1,3 @@
-import { NotificationPopoverPage } from './home/notificationPopover';
-import { PopoverPage } from './home/popover';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -12,15 +10,22 @@ import { AppComponent } from './app.component';
 import { ChartsModule } from 'ng2-charts';
 import { HttpClientModule } from '@angular/common/http';
 import { IonicStorageModule } from '@ionic/storage';
-import { ICBService } from 'src/shared/service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { PopoverPage } from './home/popover';
+import { NotificationPopoverPage } from './home/notificationPopover';
+import { SettingPopover } from './home/settingPopover';
+import { GlobalSettings } from '../shared/globalSettings';
+import { GlobalFunctions } from '../shared/globalFunctions';
+import { Authentication } from '../shared/authentication.service';
+import { CredentialsAuthentication } from '../shared/credentialsAuthentication';
+import { ICBService } from '../shared/service';
 
 @NgModule({
-  declarations: [AppComponent, PopoverPage, NotificationPopoverPage],
-  entryComponents: [PopoverPage, NotificationPopoverPage],
+  declarations: [AppComponent, PopoverPage, NotificationPopoverPage, SettingPopover],
+  entryComponents: [PopoverPage, NotificationPopoverPage, SettingPopover],
   imports: [BrowserModule, IonicModule.forRoot(), IonicStorageModule.forRoot(), AppRoutingModule, HttpClientModule,
      ChartsModule, BrowserAnimationsModule],
-  providers: [
+  providers: [GlobalSettings, GlobalFunctions, Authentication, CredentialsAuthentication,
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, ICBService, InAppBrowser

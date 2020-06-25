@@ -15,9 +15,10 @@ export class ICBService {
 
     constructor(private http: HttpClient, private storage: Storage, private globalSettings: GlobalSettings, private func: GlobalFunctions) {
 
-       this.baseUrl = 'http://localhost:52146'; // globalSettings.getSettings().apiUrl;
+      // this.baseUrl = 'http://localhost:52146'; // globalSettings.getSettings().apiUrl;
 
-     // this.baseUrl =   this.func.getSettings().apiUrl; // 'http://api.icarebooks.com';
+    //  this.baseUrl =   this.func.getSettings().apiUrl; // 'http://api.icarebooks.com';
+    this.baseUrl =   'http://api.icarebooks.com';
     }
     public setDestn(destn) {
       this.destn = destn;
@@ -257,6 +258,32 @@ export class ICBService {
 
   getTweets() {
     const url = this.baseUrl + '/api/tweet';
+    return new Promise<any>( resolve => {
+        this.storage.get('accessToken').then((token) => {
+          this.http.get(url, {headers : this.getHeaders(token)})
+          .subscribe( data => {
+              this.data = data;
+              resolve(this.data);
+          });
+        });
+      });
+  }
+
+  getGroups() {
+    const url = this.baseUrl + '/api/user/getgroups';
+    return new Promise<any>( resolve => {
+        this.storage.get('accessToken').then((token) => {
+          this.http.get(url, {headers : this.getHeaders(token)})
+          .subscribe( data => {
+              this.data = data;
+              resolve(this.data);
+          });
+        });
+      });
+  }
+
+  getRelationShips() {
+    const url = this.baseUrl + '/api/user/getRelationships';
     return new Promise<any>( resolve => {
         this.storage.get('accessToken').then((token) => {
           this.http.get(url, {headers : this.getHeaders(token)})
