@@ -1,42 +1,49 @@
-import { Component } from '@angular/core';
-import { NavController, ToastController, Platform, LoadingController, ActionSheetController } from '@ionic/angular';
+import { Component, OnDestroy } from '@angular/core';
+
+import { ActionSheetController, LoadingController, NavController, Platform, ToastController } from '@ionic/angular';
 import { NavigationOptions } from '@ionic/angular/providers/nav-controller';
+import { MasterDetailService } from '../../providers/data-service/masterDetailService';
+import { Authentication } from '../../shared/authentication.service';
 import { ICBService } from '../../shared/service';
 import { HeaderPage } from '../layout/header';
-import { Authentication } from '../../shared/authentication.service';
-import { MasterDetailService } from '../../providers/data-service/masterDetailService';
-
-
 
 @Component({
   selector: 'app-catalogue',
   templateUrl: 'catalogue.page.html',
   styleUrls: ['catalogue.page.scss'],
-  providers: [ICBService, HeaderPage]
+  providers: [ICBService, HeaderPage],
 })
 export class CataloguePage {
-  books: Array<any>; Available: Array<any>;
-  AvailableCount: any; RentedOut: any ; queryval = '';
-  loader: any ; DescriptionSearch = '';
-
+  public books: Array<any>; public Available: Array<any>;
+  public AvailableCount: any; public RentedOut: any ; public queryval = '';
+  public loader: any ; public DescriptionSearch = '';
+  public userlist: any;
+  public selectedBook: any;
+  
   constructor(public navCtrl: NavController, private service: ICBService, public platform: Platform,
-              public actionsheetCtrl: ActionSheetController, public authentication: Authentication,
-              public loading: LoadingController, public toastCtrl: ToastController, private ms: MasterDetailService) {
+              public authentication: Authentication,
+              public loading: LoadingController, public toastCtrl: ToastController, private ms: MasterDetailService,
+              public actionSheetCtrl: ActionSheetController) {
 
       }
-
-
-   async ionViewWillEnter() {
+  
+   public async ionViewWillEnter() {
    // if (this.books != null) {return; }
     if ( this.authentication.getAccessToken() != null) {
         this.loader = await this.loading.create({message: 'Getting books...'});
         this.searchBookDB(null);
+        //
+        this.service.getRelationShips().then(
+          async (data) => {
+           this.userlist = data;
+          });
+
       } else {
         this.navCtrl.navigateForward('tabs/login');
       }
   }
 
-  searchBookDB(event: any ) {
+  public searchBookDB(event: any ) {
      if ( event ) {
       if (event.target.value !== undefined) {
         this.queryval = event.target.value;
@@ -44,10 +51,9 @@ export class CataloguePage {
      }
      if ( this.queryval.length > 1 ||  this.queryval === '' ) {
 
-
         this.loader.present().then(() => {
           this.service.searchTrans('book', this.queryval).then(
-            data => {
+            (data) => {
               console.log(data);
               this.books = data;
               this.RentedOut =  this.books.reduce((previous, current) => {
@@ -57,62 +63,101 @@ export class CataloguePage {
                 return previous + parseInt(current.TotalCopies, 10);
               }, 0);
               this.loader.dismiss();
-                  }
-              ).catch(err => {
+                  },
+              ).catch((err) => {
                 console.log(err);
             });
 
         });
 
-
-
       }
   }
-  getIdCheval() {
+  public getIdCheval() {
 
     this.AvailableCount = this.books.reduce((previous, current) => {
       return previous + parseInt(current.Course.allocation, 10);
     }, 0);
   }
-  FilterBookDB(event: any ) {
+  public FilterBookDB(event: any ) {
     this.DescriptionSearch = event.target.value;
 
 }
 
-  bookInfo( key: any ) {
+  public bookInfo( key: any ) {
     this.ms.setDestn(key);
     this.navCtrl.navigateForward('tabs/bookInfo');
   }
-  AddToWishList(key: any , flag: any , message: any ) {
+  public AddToWishList(key: any , flag: any , message: any ) {
     this.service.AddToWishList(key.ISBN).then(
-      async data => {
+      async (data) => {
         const toast = await this.toastCtrl.create({
          message,
-         duration: 1000
+         duration: 1000,
        });
         toast.present();
         key.WishList = flag;
-      }
-);
+      },
+    );
   }
-  returnBook( key: any ) {
+
+  public async AddToHold(key: any) {
+    let actionSheet: any;
+    const actionbutton: any[] =  [];
+
+    this.userlist.forEach(async (option) => {
+      actionbutton.push({
+              text: option.FirstName + ' ' + option.LastName ,
+              handler: () => {
+                const message: any  = 'Placed hold request';
+                this.service.AddToHold(key.ISBN, key.ProposedCode, option.UserId, key.CreatedBy).then(
+                  async (data) => {
+                    const toast = await this.toastCtrl.create({
+                      message ,
+                     duration: 1000,
+                   });
+                    toast.present();
+                    if (data) {
+                      key.Hold = 'Y';
+                    }
+                  },
+                  );
+                actionSheet.dismiss();
+                return false;
+              },
+            });
+
+        });
+            // cancel
+    actionbutton.push({text: 'Cancel' ,
+    icon: 'close',
+    role: 'destructive',
+              handler: () => {
+                actionSheet.dismiss();
+                return false;
+              }});
+
+    actionSheet = await this.actionSheetCtrl.create({header: 'Pick a Name ', buttons: actionbutton});
+
+    actionSheet.present();
+  }
+  public returnBook( key: any ) {
 
         if (key.TotalCopies > 1 ) {
           this.ms.setDestn(key);
           this.navCtrl.navigateForward('tabs/multipleReturnPage');
         } else {
           this.service.markReturn(key.RentedTransId).then(
-            async data => {
+            async (data) => {
               const toast = await this.toastCtrl.create({
                message: 'Returned successfully !',
-               duration: 2000
+               duration: 2000,
              });
               toast.present();
               this.searchBookDB(null);
       });
     }
   }
-  checkout( key: any) {
+  public checkout( key: any) {
     this.ms.setDestn(key);
     this.ms.setAction('Out');
     if (key.TotalCopies > 1 ) {
@@ -123,13 +168,13 @@ export class CataloguePage {
   }
 
   }
-  openMenu(event, key) {
+  public openMenu(event, key) {
     this.service.getBookProfile(key.ISBN).then(
-      async data => {
+      async (data) => {
         this.Available = data;
         this.RentedOut = this.Available.filter((t) => t.Status === '3').length;
         this.AvailableCount = this.Available.filter((t) => t.Status !== '3').length;
-        const actionSheet = await this.actionsheetCtrl.create({
+        const actionSheet = await this.actionSheetCtrl.create({
           header: 'Click the link below.',
           cssClass: 'action-sheets-basic-page',
           buttons: [
@@ -140,11 +185,11 @@ export class CataloguePage {
                   handler: () => {
                      const navigationOptions: NavigationOptions = {
                       queryParams: {
-                        book: key
-                      }
+                        book: key,
+                      },
                     };
                      this.navCtrl.navigateForward('CheckOutPage', navigationOptions);
-                  }
+                  },
               },
        /*       {
                   text: 'Checked Out - ' + this.RentedOut,
@@ -173,14 +218,14 @@ export class CataloguePage {
                   role: 'cancel', // will always sort to be on the bottom
                   icon: !this.platform.is('ios') ? 'close' : null,
                   handler: () => {
-                  }
-              }
-          ]
+                  },
+              },
+          ],
       });
         actionSheet.present();
     });
   }
-  itemTapped(event, book) {
+  public itemTapped(event, book) {
     const navigationOptions: NavigationOptions = {queryParams: {book}};
     this.navCtrl.navigateForward('BookInfo', navigationOptions);
 

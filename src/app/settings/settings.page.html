@@ -5,29 +5,35 @@
       <ion-icon name="information-circle-outline"></ion-icon> {{ validation }}
     </div>
   </ng-container>
- 
-
-
-
+ <!--
   <ion-list>
-  
     <ion-item>
       <ion-label>Groups</ion-label>
-      <ion-select multiple="true" placeholder="Select One" value="{{editedItem}}">
+      <ion-select multiple="true" placeholder="Select One" [compareWith]="compareWithFn" value="{{editedItem}}">
         <ion-select-option *ngFor="let group of groups" value="{{group.Id}}">{{group.GroupName}}</ion-select-option>
       </ion-select>
     </ion-item>
-  
-   
-  
   </ion-list>
+-->
   <ion-list lines="none">
     <form [formGroup]="myForm">
-      <ion-item *ngFor="let control of myForm.controls | keyvalue">
-        <ion-input required type="text" [formControlName]="control.key" placeHolder="student name..."></ion-input>
-        <ion-icon (click)="removeControl(control)" name="close-circle"></ion-icon>
+      <ion-item *ngFor="let control of groups | keyvalue">
+        <b>School/Group: </b> {{control.value.GroupName}}
       </ion-item>
     </form>
   </ion-list>
+
+  <ion-list>
+      <ion-item *ngFor="let control of relationship | keyvalue">
+      <b>Student Name: </b> {{control.value.FirstName}}        {{control.value.LastName}}
+      </ion-item>
+  </ion-list>
+
+
+
+<!--
   <ion-button color="danger" (click)="addControl()">Add Student</ion-button>
+  <ion-button color="danger" >Save</ion-button>
+-->
+
 </ion-content> 

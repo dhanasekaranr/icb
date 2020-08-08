@@ -1,17 +1,18 @@
 import { Component } from '@angular/core';
-import { NavController, LoadingController } from '@ionic/angular';
-import { Authentication } from '../../shared/authentication.service';
-import { Storage } from '@ionic/storage';
+import {  InAppBrowserOptions } from '@ionic-native/in-app-browser';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+import { LoadingController, NavController } from '@ionic/angular';
+import { Storage } from '@ionic/storage';
+import { Authentication } from '../../shared/authentication.service';
 @Component({
   selector: 'page-login',
-  templateUrl: 'login.html'
+  templateUrl: 'login.html',
 })
 export class LoginPage {
-    email: string;
-    pwd: string;
-    errMessage: string;
-    loader: any;
+    public email: string;
+    public pwd: string;
+    public errMessage: string;
+    public loader: any;
   constructor(private inAppBrowser: InAppBrowser, public navCtrl: NavController,
               private authentication: Authentication,
               private storage: Storage, public loading: LoadingController) {
@@ -25,30 +26,51 @@ export class LoginPage {
                         }
                     });
 
-
               }
-
-  createAccount() {
+              public options: InAppBrowserOptions = {
+                location : 'yes', // Or 'no'
+                hidden : 'no', // Or  'yes'
+                clearcache : 'yes',
+                clearsessioncache : 'yes',
+                zoom : 'yes', // Android only ,shows browser zoom controls
+                hardwareback : 'yes',
+                mediaPlaybackRequiresUserAction : 'no',
+                shouldPauseOnSuspend : 'no', // Android only
+                closebuttoncaption : 'Close', // iOS only
+                disallowoverscroll : 'no', // iOS only
+                toolbar : 'yes', // iOS only
+                enableViewportScale : 'no', // iOS only
+                allowInlineMediaPlayback : 'no', // iOS only
+                presentationstyle : 'pagesheet', // iOS only
+                fullscreen : 'yes', // Windows only
+            };
+  public createAccount() {
       this.navCtrl.navigateForward('/RegisterExternalUser');
   }
-  ForgotPassword() {
+  public ForgotPassword() {
   this.inAppBrowser.create('http://icarebooks.com/Account/ForgotPassword');
 }
-Register() {
+public Register() {
   this.navCtrl.navigateForward('tabs/registration');
 }
-  async credentialsLogin() {
+
+public openWithInAppBrowser(url: string) {
+  const target = '_blank';
+  this.inAppBrowser.create(url, target, this.options);
+}
+
+  public async credentialsLogin() {
     const credentials = {
           username: this.email,
-          password: this.pwd
+          password: this.pwd,
     };
     this.loader = await this.loading.create({message: 'Authenticating...'});
     this.loader.present().then(() => {
           this.authentication.credentialsLogin(credentials)
-              .subscribe( token => {
+              .subscribe( (token) => {
                     this.loader.dismiss();
                     this.navCtrl.navigateForward('tabs');
-                }, error => {
+                }, (error) => {
                 this.errMessage = error.error.error_description;
                 this.loader.dismiss();
       });

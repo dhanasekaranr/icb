@@ -59,6 +59,18 @@
             <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
           </div>
       </ng-container>
+
+      <ion-item>
+        <ion-label position="floating" color="primary">Phone</ion-label>
+        <ion-input type="text" formControlName="Phone"></ion-input>
+      </ion-item>
+  
+        <ng-container *ngFor="let validation of validation_messages.Phone">
+          <div class="error-message" *ngIf="registrationForm.get('Phone').hasError(validation.type) && (registrationForm.get('Phone').dirty || registrationForm.get('Phone').touched)">
+            <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+          </div>
+        </ng-container>
+
     <br/>
    <ion-button type="submit" expand="full" color="danger" [disabled]="!registrationForm.valid">Register</ion-button>
   </form>

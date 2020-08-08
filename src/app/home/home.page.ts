@@ -1,41 +1,45 @@
 import { Component, ViewChild } from '@angular/core';
-import { PopoverController, NavController, LoadingController } from '@ionic/angular';
+import { LoadingController, NavController, PopoverController } from '@ionic/angular';
 import { Chart } from 'chart.js';
-import { PopoverPage } from './popover';
-import { NotificationPopoverPage } from './notificationPopover';
-import { SettingPopover } from './settingPopover';
+import { ChartDataSets } from 'chart.js';
+import { Color, Label } from 'ng2-charts';
+import { MasterDetailService } from '../../providers/data-service/masterDetailService';
 import { Authentication } from '../../shared/authentication.service';
 import { ICBService } from '../../shared/service';
-import { MasterDetailService } from '../../providers/data-service/masterDetailService';
-
+import { NotificationPopoverPage } from './notificationPopover';
+import { PopoverPage } from './popover';
+import { settingPopoverPage } from './settingPopover';
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss']
+  styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-  books: Array<any>;
-  booksStat: Array<any>;
-  completedMonth = [];
-  rentalMonth = [];
-  Months = [];
-  AvailableCount = 0; RentedOut: 0;
-  wishes: Array<any>;
-  notification: Array<any>;
-  WishesCount = 0;
-  NotificationCount = 0;
-  Transactions: any;
-  TransactionsCount = 0;
-  loader: any;
+  public books: Array<any>;
+  public booksStat: Array<any>;
+  public completedMonth = [];
+  public rentalMonth = [];
+  public Months = [];
+  public AvailableCount = 0; public RentedOut: 0;
+  public wishes: Array<any>;
+  public notification: Array<any>;
+  public WishesCount = 0;
+  public NotificationCount = 0;
+  public Transactions: any;
+  public TransactionsCount = 0;
+  public holds: any;
+  public holdsCount = 0;
+
+  public loader: any;
   constructor(public navCtrl: NavController, public authentication: Authentication,
               private service: ICBService, public popoverCtrl: PopoverController, private ms: MasterDetailService,
               public loading: LoadingController) {
 
   }
-  @ViewChild('lineCanvas') lineCanvas: { nativeElement: any; };
+  @ViewChild('lineCanvas') public lineCanvas: { nativeElement: any; };
 
-  lineChart: any;
-  async ionViewWillEnter() {
+  public lineChart: any;
+  public async ionViewWillEnter() {
        if ( this.authentication.getAccessToken() != null) {
         this.RentedOut = 0;
         this.loader = await this.loading.create({message: 'loading dashboard...'});
@@ -46,27 +50,28 @@ export class HomePage {
         this.getActiveWishList();
         this.getNotificationList();
         this.getRentalTransactions();
+        this.getReceiving();
         });
        } else {
          this.navCtrl.navigateForward('tabs/login');
        }
    }
-   async settingsPopover(myEvent: any) {
+   public async settingsPopover(myEvent: any) {
     const popover = await this.popoverCtrl.create({
-      component: SettingPopover,      event: myEvent,
+      component: settingPopoverPage,      event: myEvent,
       translucent: true});
 
-      return await popover.present();
-      popover.onDidDismiss();
-    
+    return await popover.present();
+    popover.onDidDismiss();
+
  }
 
-   async presentPopover(myEvent: any) {
+   public async presentPopover(myEvent: any) {
     const popover = await this.popoverCtrl.create({
       component: PopoverPage,
       componentProps : { data: this.wishes },
       event: myEvent,
-      translucent: true
+      translucent: true,
     });
     return await popover.present();
 
@@ -74,56 +79,74 @@ export class HomePage {
 
   }
 
-  async notificationPopover(myEvent: any) {
+  public async notificationPopover(myEvent: any) {
 
     const popover = await this.popoverCtrl.create({ component: NotificationPopoverPage, componentProps : { data: this.notification }});
     popover.present();
     popover.onDidDismiss();
   }
 
-  bookInfo( key: any) {
+  public bookInfo( key: any) {
     this.ms.setDestn(key);
     this.navCtrl.navigateForward('/tabs/bookInfo');
   }
-  showRentals( key: any) {
+  public showRentals( key: any) {
     this.ms.setDestn(key);
     this.navCtrl.navigateForward('/tabs/rentalsPage');
   }
-  showStats() {
+
+  public showReceiving( key: any) {
+    this.ms.setDestn(key);
+    this.navCtrl.navigateForward('/tabs/receivingPage');
+  }
+
+
+  public showStats() {
     this.navCtrl.navigateForward('/tabs/statsPage');
   }
 
-  showHistory( key: any) {
+  public showHistory( key: any) {
     this.ms.setDestn(key);
     this.navCtrl.navigateForward('/tabs/historyPage');
   }
-  getNotificationList() {
+  public getNotificationList() {
     this.service.getNotificationList().then(
-        data => {
+        (data) => {
           this.notification = data;
           this.NotificationCount = this.notification.length;
       });
     }
-  getRentalTransactions() {
+  public getRentalTransactions() {
 
     this.service.getRentalTransactions().then(
-        data => {
+        (data) => {
           this.Transactions = data;
           this.TransactionsCount = this.Transactions.length;
           this.loader.dismiss();
-      }
+      },
   ); }
 
-  getActiveWishList() {
+  public getReceiving() {
+
+    this.service.getReceiving().then(
+        (data) => {
+          this.holds = data;
+          this.holdsCount = this.holds.length;
+          this.loader.dismiss();
+      },
+  ); }
+
+
+  public getActiveWishList() {
     this.service.getActiveWishList().then(
-        data => {
+        (data) => {
           this.wishes = data;
           this.WishesCount = this.wishes.length;
-      }
+      },
   ); }
-   getBookCounts() {
+   public getBookCounts() {
       this.service.searchTrans('book', '').then(
-        data => {
+        (data) => {
 
           this.books = data;
           this.RentedOut =  this.books.reduce((previous, current) => {
@@ -132,14 +155,14 @@ export class HomePage {
           this.AvailableCount = this.books.reduce((previous, current) => {
             return previous + parseInt(current.TotalCopies, 10);
           }, 0);
-              }
-          ).catch(err => {
+              },
+          ).catch((err) => {
             console.log(err);
         });
     }
-   getRentalStatus() {
+   public getRentalStatus() {
         this.service.getRentalStatus('monthly', '0').then(
-            data => {
+            (data) => {
               this.booksStat = data;
               this.completedMonth.length = 0;
               this.rentalMonth.length = 0;
@@ -153,12 +176,12 @@ export class HomePage {
                     }
                   });
               this.lineChart.update();
-              }
-          ).catch(err => {
+              },
+          ).catch((err) => {
                 console.log(err);
         });
     }
-  drawLineChart() {
+  public drawLineChart() {
 
  this.lineChart = new Chart(this.lineCanvas.nativeElement, {
 
@@ -209,14 +232,14 @@ export class HomePage {
                   pointHitRadius: 1,
                   data: this.rentalMonth,
                   spanGaps: true,
-              }
-            ]
-        }
+              },
+            ],
+        },
 
     });
 
 }
-logOut() {
+public logOut() {
   this.authentication.logout();
   this.navCtrl.navigateForward('/tabs/login');
 

@@ -2,14 +2,14 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class GlobalSettings {
-    // private apiUrl = 'http://localhost:52146';
-   private apiUrl = 'http://api.icarebooks.com';
+     private apiUrl = 'http://localhost:52146';
+   // private apiUrl = 'http://api.icarebooks.com';
 
   constructor() {}
 
-  getSettings() {
+  public getSettings() {
     return {
-      apiUrl: this.apiUrl
+      apiUrl: this.apiUrl,
     };
   }
 }

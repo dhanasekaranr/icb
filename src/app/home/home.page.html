@@ -4,30 +4,25 @@
       <ion-buttons slot="start">
         <ion-button  fill="clear" id="notification-button" (click)="settingsPopover($event)">
           <ion-icon name="settings" ></ion-icon>
-
-
-    </ion-button></ion-buttons>
-      <ion-buttons slot="end">
-          <ion-button id="notification-button" fill="clear" (click)="notificationPopover($event)">
+        </ion-button>
+      </ion-buttons>
+      <ion-buttons slot="end" style="width:30%">
+          <ion-button id="notification-button" fill="clear" (click)="notificationPopover($event)" style="width:60%">
             <ion-icon name="notifications" ></ion-icon>
             <ion-badge id="notifications-badge" >{{this.NotificationCount}}</ion-badge>
-
-      </ion-button>
-
-        <ion-button id="notification-button" fill="clear" (click)="presentPopover($event)">
-          <ion-icon name="heart"></ion-icon>
-          <ion-badge id="notifications-badge">{{this.WishesCount}}</ion-badge>
-
-
-      </ion-button>
-
-        <ion-button (click)=this.logOut();>
-          <ion-icon slot="icon-only" name="md-log-out" ></ion-icon>
-        </ion-button>
+          </ion-button>
+          <!--
+          <ion-button id="notification-button" fill="clear" (click)="presentPopover($event)" style="width:40%">
+            <ion-icon name="heart"></ion-icon>
+            <ion-badge id="notifications-badge">{{this.WishesCount}}</ion-badge>
+          </ion-button>
+          -->
+          <ion-button (click)=this.logOut();>
+            <ion-icon slot="icon-only" name="log-out" ></ion-icon>
+          </ion-button>
       </ion-buttons>
     </ion-toolbar>
   </ion-header>
-
 <ion-content>
   <ion-card>
       <ion-card-header>
@@ -40,31 +35,46 @@
      <div>
     <ion-grid>
       <ion-row>
-         <!--
-        <ion-col>
-          <ion-card class=" ion-text-center ion-padding" style="background-color:#f18973" (click)="showRentals(this.Transactions)">
+        <ion-col class="ion-align-self-start">
+          <a class="icon-circle-large" style="background-color:#117A65" (click)="this.holdsCount > 0 && showReceiving(this.holds)">
+            <ion-badge id="notifications-badge-large" >{{this.holdsCount}}</ion-badge>
+            <ion-icon name="archive">
+            </ion-icon>
+          </a>
+           <p *ngIf="this.authentication.getIsAdmin() === 'Y'" style="padding-right: 10px; text-align: center;">Receiving</p> 
+           <p *ngIf="this.authentication.getIsAdmin() != 'Y'" style="padding-right: 10px; text-align: center;">Hold</p> 
+        <!--
+          <ion-card class="ion-padding ion-text-center" style="background-color:#f18973" (click)="showRentals(this.Transactions)">
             <ion-icon name="book">
                 <ion-badge id="notifications-badge" >{{this.AvailableCount}}</ion-badge>
             </ion-icon>
-            <span>Books({{this.RentedOut}})</span>
+            <span>Holds({{this.RentedOut}})</span>
           </ion-card>
+          -->
         </ion-col>
-                  -->
-        <ion-col>
-          <ion-card class="ion-padding ion-text-center" style="background-color:#82b74b;" (click)="showHistory(this.booksStat)">
+        <ion-col class="ion-align-self-center">
+          <a class="icon-circle-large" style="background-color:#3FBFF4;" (click)="showHistory(this.booksStat)">
+            <ion-icon name="pulse"></ion-icon>
+           </a>
+         <!-- <ion-card class="ion-padding ion-text-center" style="background-color:#82b74b;" (click)="showHistory(this.booksStat)">
               <ion-icon name="pulse">
                   <ion-badge id="notifications-badge" color="danger"></ion-badge>
                 </ion-icon>
             <span>Statistics</span>
-          </ion-card>
+          </ion-card>-->
+          <p style="padding-right: 10px; text-align: center;">Statistics</p>
         </ion-col>
-        <ion-col>
-          <ion-card class="ion-padding ion-text-center"  style="background-color:#feb236 " (click)="showStats()">
+        <ion-col class="ion-align-self-end">
+          <a class="icon-circle-large" style="background-color:#feb236 " (click)="showStats()">
+            <ion-icon name="logo-twitter"></ion-icon>
+           </a>
+         <!-- <ion-card class="ion-padding ion-text-center"  style="background-color:#feb236 " (click)="showStats()">
               <ion-icon name="logo-twitter">
                   <ion-badge id="notifications-badge" color="danger"></ion-badge>
                 </ion-icon>
               <span>News</span>
-          </ion-card>
+          </ion-card>-->
+          <p style="padding-right: 10px; text-align: center;">News</p>
         </ion-col>
       </ion-row>
     </ion-grid>

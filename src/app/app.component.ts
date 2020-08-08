@@ -1,17 +1,19 @@
-import { HeaderPage } from './layout/header';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
-import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-import { PopoverPage } from './home/popover';
-import { NotificationPopoverPage } from './home/notificationPopover';
+import { Platform } from '@ionic/angular';
 import { IonicStorageModule } from '@ionic/storage';
-import { SettingPopover } from './home/settingPopover';
+import { ChartDataSets } from 'chart.js';
+import { Color, Label } from 'ng2-charts';
 import { Authentication } from '../shared/authentication.service';
 import { CredentialsAuthentication } from '../shared/credentialsAuthentication';
-import { User } from '../shared/user';
 import { GlobalSettings } from '../shared/globalSettings';
+import { User } from '../shared/user';
+import { NotificationPopoverPage } from './home/notificationPopover';
+import { PopoverPage } from './home/popover';
+import { settingPopoverPage } from './home/settingPopover';
+import { HeaderPage } from './layout/header';
 
 @Component({
   selector: 'app-root',
@@ -20,22 +22,22 @@ import { GlobalSettings } from '../shared/globalSettings';
   providers: [
     HttpClientModule,  HttpClient,
     IonicStorageModule,
-   PopoverPage, NotificationPopoverPage, Authentication, SettingPopover,
+   PopoverPage, NotificationPopoverPage, Authentication, settingPopoverPage,
    CredentialsAuthentication,
    User,
-   GlobalSettings, HeaderPage
-  ]
+   GlobalSettings, HeaderPage,
+  ],
 })
 export class AppComponent {
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
-    private statusBar: StatusBar
+    private statusBar: StatusBar,
   ) {
     this.initializeApp();
   }
 
-  initializeApp() {
+  public initializeApp() {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();

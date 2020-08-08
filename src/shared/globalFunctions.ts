@@ -1,15 +1,14 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { NavController } from '@ionic/angular';
-import { Authentication } from './authentication.service';
-import { LoginPage } from '../app/login/login';
-import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Storage } from '@ionic/storage';
+import { Authentication } from './authentication.service';
 
 @Injectable()
 export class GlobalFunctions {
-  data: any;
-  // private apiUrl = 'http://localhost:52146';
-   private apiUrl = 'http://api.icarebooks.com';
+  public data: any;
+   private apiUrl = 'http://localhost:52146';
+  // private apiUrl = 'http://api.icarebooks.com';
   constructor(public navCtrl: NavController,
               private authentication: Authentication, private http: HttpClient, private storage: Storage) {}
 
@@ -22,12 +21,12 @@ export class GlobalFunctions {
   public getHeaders(token: any) {
     return new HttpHeaders({
       'Content-Type':  'application/x-www-form-urlencoded',
-      Authorization: 'Bearer ' + token
+      Authorization: 'Bearer ' + token,
     });
       }
-      getSettings() {
+      public getSettings() {
         return {
-          apiUrl: this.apiUrl
+          apiUrl: this.apiUrl,
         };
       }
 
