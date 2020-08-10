@@ -26,6 +26,11 @@ public searchTransDB() {
             this.holds = data;
           });
 }
+public bookInfo( key: any ) {
+  this.ms.setDestn(key);
+  this.navCtrl.navigateForward('tabs/bookInfo');
+}
+
 public FilterBookDB(event) {
   this.DescriptionSearch = event.target.value;
 

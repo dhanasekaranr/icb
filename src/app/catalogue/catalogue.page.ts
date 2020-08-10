@@ -1,17 +1,16 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component} from '@angular/core';
 
 import { ActionSheetController, LoadingController, NavController, Platform, ToastController } from '@ionic/angular';
 import { NavigationOptions } from '@ionic/angular/providers/nav-controller';
 import { MasterDetailService } from '../../providers/data-service/masterDetailService';
 import { Authentication } from '../../shared/authentication.service';
 import { ICBService } from '../../shared/service';
-import { HeaderPage } from '../layout/header';
 
 @Component({
   selector: 'app-catalogue',
   templateUrl: 'catalogue.page.html',
   styleUrls: ['catalogue.page.scss'],
-  providers: [ICBService, HeaderPage],
+  providers: [ICBService],
 })
 export class CataloguePage {
   public books: Array<any>; public Available: Array<any>;
@@ -19,14 +18,14 @@ export class CataloguePage {
   public loader: any ; public DescriptionSearch = '';
   public userlist: any;
   public selectedBook: any;
-  
+
   constructor(public navCtrl: NavController, private service: ICBService, public platform: Platform,
               public authentication: Authentication,
               public loading: LoadingController, public toastCtrl: ToastController, private ms: MasterDetailService,
               public actionSheetCtrl: ActionSheetController) {
 
       }
-  
+
    public async ionViewWillEnter() {
    // if (this.books != null) {return; }
     if ( this.authentication.getAccessToken() != null) {

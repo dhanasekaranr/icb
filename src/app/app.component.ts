@@ -4,8 +4,6 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Platform } from '@ionic/angular';
 import { IonicStorageModule } from '@ionic/storage';
-import { ChartDataSets } from 'chart.js';
-import { Color, Label } from 'ng2-charts';
 import { Authentication } from '../shared/authentication.service';
 import { CredentialsAuthentication } from '../shared/credentialsAuthentication';
 import { GlobalSettings } from '../shared/globalSettings';

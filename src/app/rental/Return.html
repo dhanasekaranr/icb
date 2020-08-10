@@ -1,15 +1,20 @@
 
-<ion-header>
-  <ion-navbar color="header">
-    <ion-title style="text-align: center">Return Book</ion-title>
-        <ion-buttons end>
-          <button style="background-color: #0277bd">
-            <ion-icon  style="color:white; font-size: 25px;" name="log-out" tabtitle="LogOut" (click)="this.logOut();"></ion-icon>
-          </button>
-        </ion-buttons>
-  </ion-navbar>
-</ion-header>
 
+<ion-header>
+  <ion-toolbar color="head">
+      <ion-buttons slot="start">
+        <ion-button>
+          <ion-icon slot="icon-only" name="backspace"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      <ion-title class="primary">Return Book</ion-title>
+      <ion-buttons slot="primary">
+        <ion-button (click)=this.logOut();>
+          <ion-icon slot="icon-only" name="log-out" ></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+</ion-header>
   <ion-content class="home" padding>
     <div *ngIf="book" class="selection">
       <ion-card>

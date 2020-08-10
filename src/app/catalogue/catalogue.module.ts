@@ -1,19 +1,22 @@
+import { CommonModule } from '@angular/common';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { IonicModule } from '@ionic/angular';
+import { PipesModule } from '../../shared/pipes.module';
 import { LayoutModule } from '../layout/layout.module';
 import { CataloguePage } from './catalogue.page';
-import { IonicModule } from '@ionic/angular';
-import { RouterModule } from '@angular/router';
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { PipesModule } from '../../shared/pipes.module';
 
 @NgModule({
   imports: [
     IonicModule,
     CommonModule,
     FormsModule,
-    RouterModule.forChild([{ path: '', component: CataloguePage }]), PipesModule, LayoutModule
+    RouterModule.forChild([{ path: '', component: CataloguePage }]), PipesModule, LayoutModule,
   ],
-  declarations: [CataloguePage]
+  declarations: [CataloguePage],
+  schemas: [
+    CUSTOM_ELEMENTS_SCHEMA,
+  ],
 })
 export class CataloguePageModule {}

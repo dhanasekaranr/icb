@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
@@ -19,6 +19,7 @@ import { ICBService } from '../shared/service';
 import { NotificationPopoverPage } from './home/notificationPopover';
 import { PopoverPage } from './home/popover';
 import { settingPopoverPage } from './home/settingPopover';
+
 @NgModule({
   declarations: [AppComponent, PopoverPage, NotificationPopoverPage, settingPopoverPage],
   entryComponents: [PopoverPage, NotificationPopoverPage, settingPopoverPage],
@@ -31,6 +32,9 @@ import { settingPopoverPage } from './home/settingPopover';
   ],
   bootstrap: [AppComponent],
   exports:      [],
+  schemas: [
+    CUSTOM_ELEMENTS_SCHEMA,
+  ],
 })
 export class AppModule {
 

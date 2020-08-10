@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
@@ -13,6 +13,8 @@ import { ProfilePage } from './profile.page';
     FormsModule,
     RouterModule.forChild([{ path: '', component: ProfilePage }]), PipesModule, LayoutModule, ReactiveFormsModule,
   ],
-  declarations: [ProfilePage],
+  declarations: [ProfilePage],schemas: [
+    CUSTOM_ELEMENTS_SCHEMA,
+  ],
 })
 export class ProfilePageModule {}

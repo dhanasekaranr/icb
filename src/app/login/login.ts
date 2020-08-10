@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import {  InAppBrowserOptions } from '@ionic-native/in-app-browser';
-import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+import { InAppBrowser, InAppBrowserOptions } from '@ionic-native/in-app-browser/ngx';
 import { LoadingController, NavController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { Authentication } from '../../shared/authentication.service';
@@ -13,7 +12,7 @@ export class LoginPage {
     public pwd: string;
     public errMessage: string;
     public loader: any;
-  constructor(private inAppBrowser: InAppBrowser, public navCtrl: NavController,
+  constructor(private inAppBrowser: InAppBrowser , public navCtrl: NavController,
               private authentication: Authentication,
               private storage: Storage, public loading: LoadingController) {
 
