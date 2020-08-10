@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="io.secantsoft.icarebooks" version="9.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.secantsoft.icarebooks" version="9.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>ICBApp</name>
     <description>App for online sharing books between friends and local groups.</description>
     <author email="Dhana.Ramaswami@secantsoft.com" href="http://secantsoft.com">Secant Software Team</author>
@@ -50,6 +50,9 @@
         <splash density="port-xxxhdpi" src="resources/android/splash/drawable-port-xxxhdpi-screen.png" />
     </platform>
     <platform name="ios">
+        <config-file parent="NSCameraUsageDescription" target="*-Info.plist">
+          <string>We are using a camera for ISBN barcode scanning, used for book rental and display book information.</string>
+        </config-file>
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
         <icon height="57" src="resources/ios/icon/icon.png" width="57" />
