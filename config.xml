@@ -50,6 +50,11 @@
         <splash density="port-xxxhdpi" src="resources/android/splash/drawable-port-xxxhdpi-screen.png" />
     </platform>
     <platform name="ios">
+        <preference name="WKWebViewOnly" value="true" /> 
+        <feature name="CDVWKWebViewEngine"> 
+            <param name="ios-package" value="CDVWKWebViewEngine" /> 
+        </feature> 
+        <preference name="CordovaWebViewEngine" value="CDVWKWebViewEngine" />
         <config-file parent="NSCameraUsageDescription" target="*-Info.plist">
           <string>We are using a camera for ISBN barcode scanning, used for book rental and display book information.</string>
         </config-file>
