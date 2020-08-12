@@ -212,7 +212,7 @@ export class HomePage {
                     spanGaps: true,
                 },
                 {
-                  label: 'Current Rental',
+                  label: 'In Rental',
                   fill: false,
                   lineTension: 0.1,
                   backgroundColor: 'rgba(192,77,192,0.4)',

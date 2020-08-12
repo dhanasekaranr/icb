@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
@@ -13,9 +13,7 @@ import { SettingsPage } from './settings.page';
     FormsModule,
     RouterModule.forChild([{ path: '', component: SettingsPage }]), PipesModule, LayoutModule, ReactiveFormsModule,
   ],
-  declarations: [SettingsPage],
-  schemas: [
-    CUSTOM_ELEMENTS_SCHEMA,
-  ],
+  declarations: [SettingsPage]
+
 })
 export class SettingsPageModule {}

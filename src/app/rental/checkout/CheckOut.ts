@@ -1,36 +1,39 @@
-import { MasterDetailService } from '../../../providers/data-service/masterDetailService';
 import { Component } from '@angular/core';
 import { NavController, ToastController } from '@ionic/angular';
-import { ICBService } from '../../../shared/service';
+import { MasterDetailService } from '../../../providers/data-service/masterDetailService';
 import { Authentication } from '../../../shared/authentication.service';
+import { ICBService } from '../../../shared/service';
 
 @Component({
     selector: 'page-CheckOut',
     templateUrl: 'CheckOut.html',
-    providers: [ICBService]
+    providers: [ICBService],
 })
 export class CheckOutPage {
-  queryval: any;
-  users: Array<any>;
-  code = '';
-  description = '';
-  NameSearch = '';
-  HomePage = 'N';
+  public queryval: any;
+  public users: Array<any>;
+  public code = '';
+  public description = '';
+  public NameSearch = '';
+  public HomePage = 'N';
     constructor(public navCtrl: NavController,  private bookService: ICBService,
                 public authentication: Authentication, public toastCtrl: ToastController, private ms: MasterDetailService) {
 
-
     }
-    ionViewWillEnter() {
-     this.code = this.ms.getDestn().Code;
-     this.description = this.ms.getDestn().Description;
-     this.HomePage = this.ms.getHome();
-     this.searchUserDB(null);
+    public ionViewWillEnter() {
+      if ( this.authentication.getAccessToken() != null) {
+        this.code = this.ms.getDestn().Code;
+        this.description = this.ms.getDestn().Description;
+        this.HomePage = this.ms.getHome();
+        this.searchUserDB(null);
+          } else {
+         this.navCtrl.navigateForward('tabs/login');
+       }
     }
-  FilterUserDB(event) {
+  public FilterUserDB(event) {
       this.NameSearch = event.target.value;
   }
-    searchUserDB(event) {
+    public searchUserDB(event) {
       this.queryval = '';
       if ( event ) {
         if (event.target.value !== undefined) {
@@ -40,18 +43,18 @@ export class CheckOutPage {
 
       if (this.queryval.length > 1 || this.queryval === '') {
           this.bookService.getUserByISBN(this.queryval, this.code).then(
-              data => {
+              (data) => {
                 this.users = data;
-            }
+            },
         );
         }
   }
-  updateStat(id: any) {
+  public updateStat(id: any) {
       this.bookService.markRent(this.queryval, id, this.code).then(
-        async data => {
+        async (data) => {
           const toast = await this.toastCtrl.create({
           message: 'Checked out successfully !',
-          duration: 2000
+          duration: 2000,
         });
           if (data) {
           toast.present();

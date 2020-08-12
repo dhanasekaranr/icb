@@ -21,7 +21,13 @@ export class NewsPage {
   }
 
   public ionViewWillEnter() {
-    this.loadTimeline();
+    if ( this.authentication.getAccessToken() != null) {
+      this.loadTimeline();
+     } else {
+       this.navCtrl.navigateForward('tabs/login');
+     }
+
+    
   }
 
   public loadTimeline(refresher?: undefined) {

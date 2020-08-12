@@ -114,13 +114,33 @@
   --ion-color-light-contrast-rgb: 0, 0, 0;
   --ion-color-light-shade: #d7d8da;
   --ion-color-light-tint: #f5f6f9;
+  p{
+    //font-weight: lighter;
+    font-size: 1.25ex;
+    color: red;
+  }
+
+  @media only screen  and (min-device-width: 320px) {
+   
+    p{font-size:1.25ex}
+    ion-avatar{      width: 5ex; height: 5ex;  }
+    }
+  @media only screen  and (min-device-width: 375px) {
+    p{font-size:1.5ex}
+    ion-avatar{width: 6ex; height: 6ex;  }
+    }
+   @media only screen  and (min-device-width: 414px) {
+    p{font-size:1.5ex}
+    ion-avatar{width: 8ex; height: 8ex;  }
+    }
+    @media only screen  and (min-device-width: 768px) {
+      p{font-size:2.25ex}
+      ion-avatar{width: 15ex; height: 15ex;  }
+    }
+
+    
 
 
-
-p{
-  font-weight: lighter;font-size: 1.25ex;
-  color: red;
-}
 .header{
   background-color:  #0277bd;
 }

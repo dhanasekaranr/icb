@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
@@ -13,9 +13,6 @@ import { UsersPage } from './users.page';
     FormsModule,
     RouterModule.forChild([{ path: '', component: UsersPage }]), PipesModule, LayoutModule,
   ],
-  declarations: [UsersPage],
-  schemas: [
-    CUSTOM_ELEMENTS_SCHEMA,
-  ],
+  declarations: [UsersPage]
 })
 export class UsersPageModule {}

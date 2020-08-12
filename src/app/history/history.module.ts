@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
@@ -14,9 +14,6 @@ import { HistoryPage } from './history.page';
     FormsModule,
     RouterModule.forChild([{ path: '', component: HistoryPage }]), PipesModule, LayoutModule,
   ],
-  declarations: [HistoryPage],
-  schemas: [
-    CUSTOM_ELEMENTS_SCHEMA,
-  ],
+  declarations: [HistoryPage]
 })
 export class HistoryPageModule {}

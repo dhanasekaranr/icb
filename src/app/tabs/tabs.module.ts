@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { IonicModule } from '@ionic/angular';
@@ -28,8 +28,6 @@ import { TabsPageRoutingModule } from './tabs.router.module';
   ],
   declarations: [TabsPage, LoginPage, BookInfoPage, CurrentRentalsPage, NewsPage,
     StatsPage, CheckOutPage, MultiCopiesPage, MultipleReturnPage, ReceivingPage, ReturnPage],
-    schemas: [
-      CUSTOM_ELEMENTS_SCHEMA,
-    ],
+    
 })
 export class TabsPageModule {}
