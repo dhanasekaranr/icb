@@ -36,7 +36,7 @@ public register(credentials: { firstName: string; lastName: string; email: strin
       'Content-Type':  'application/json',
     }),
   };
-  console.log(credentials);
+  // console.log(credentials);
 
   // const loginData = 'grant_type=password&username=' + credentials.username + '&password=' + credentials.password;
   // Construct POST Headers

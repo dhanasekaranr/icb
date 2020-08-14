@@ -69,7 +69,7 @@ export class ProfilePage implements OnInit {
         });
       this.service.getUser().then(
             (data) => {
-              console.log(data);
+            //  console.log(data);
               // this.registrationForm.get('FirstName').setValue(data.FirstName);
               // this.registrationForm.get('LastName').setValue(data.LastName);
               this.registrationForm.get('Email').setValue(data.Email);
@@ -82,7 +82,7 @@ export class ProfilePage implements OnInit {
 
       this.service.getGroups().then(
               (data) => {
-                console.log(data);
+               // console.log(data);
                 this.groups = data;
                 // this.editedItem.push('1');
 
@@ -94,7 +94,7 @@ export class ProfilePage implements OnInit {
 
       this.service.getRelationShips().then(
                 (data) => {
-                  console.log(data);
+                //  console.log(data);
                   this.relationship = data;
                  // this.loader.dismiss();
                       },

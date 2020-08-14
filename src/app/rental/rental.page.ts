@@ -13,17 +13,26 @@ import { ICBService } from '../../shared/service';
 export class RentalPage {
   public sub: any;
   public books: Array<any>;
-  public loader: Promise<HTMLIonLoadingElement>; public CodeSearch = '';
+  public loader: any; public CodeSearch = '';
   constructor(public navCtrl: NavController, private icbservice: ICBService, public platform: Platform,
               public toastCtrl: ToastController, public authentication: Authentication, public loading: LoadingController,
               private ms: MasterDetailService, private route: ActivatedRoute,
               private router: Router) {
 }
 public searchTransDB() {
+  this.loader.present().then(() => {
       this.icbservice.searchTrans('book', 'GetBookCodes').then(
           (data) => {
               this.books = data;
-          });
+              this.loader.dismiss();
+          },
+          ).catch((err) => {
+            console.log(err);
+            this.loader.dismiss();
+        });
+
+        });
+
 }
 public FilterBookDB(event) {
   this.CodeSearch = event.target.value;
@@ -33,7 +42,9 @@ public OnDestroy() {
   this.sub.unsubscribe();
 }
 
-public ionViewWillEnter() {
+public async ionViewWillEnter() {
+
+/*
  this.sub  = this.route
       .queryParams
       .subscribe((params) => {
@@ -41,15 +52,14 @@ public ionViewWillEnter() {
           this.books = null;
         }
       });
+*/
+ // if (this.books != null) {return; }
 
- if (this.books != null) {return; }
- if ( this.authentication.getAccessToken() != null) {
-      this.loader = this.loading.create({
-        message: 'Getting books...',
-      });
-      this.searchTransDB();
+  if ( this.authentication.getAccessToken() != null) {
+     this.loader = await this.loading.create({message: 'Getting Rentals...'});
+     this.searchTransDB();
     } else {
-     this.navCtrl.navigateForward('tabs/login');
+      this.navCtrl.navigateForward('tabs/login');
     }
 }
 public markReturn(trasnsId: any) {

@@ -22,7 +22,7 @@ export class ReceivingPage  {
 public searchTransDB() {
       this.icbservice.searchTrans('hold', '').then(
           (data) => {
-            console.log(data);
+           // console.log(data);
             this.holds = data;
           });
 }

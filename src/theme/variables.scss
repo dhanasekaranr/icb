@@ -119,27 +119,48 @@
     font-size: 1.25ex;
     color: red;
   }
-
+  ion-popover ion-item{
+    color: green; font-size: .8em;align-content: right
+  
+  }
   @media only screen  and (min-device-width: 320px) {
    
     p{font-size:1.25ex}
-    ion-avatar{      width: 5ex; height: 5ex;  }
+    ion-avatar{width: 5ex; height: 5ex;  }
     }
+
   @media only screen  and (min-device-width: 375px) {
     p{font-size:1.5ex}
     ion-avatar{width: 6ex; height: 6ex;  }
+    ion-popover {--width: 30ex; }
+    
     }
    @media only screen  and (min-device-width: 414px) {
     p{font-size:1.5ex}
     ion-avatar{width: 8ex; height: 8ex;  }
+    ion-popover {--width: 30ex; }
     }
     @media only screen  and (min-device-width: 768px) {
       p{font-size:2.25ex}
       ion-avatar{width: 15ex; height: 15ex;  }
+      ion-popover {--width: 50ex; }
+      .popover-content{
+        top: 45px !important;
+
+        
+      }
     }
 
-    
+    @media only screen  and (min-device-width: 1024px) {
+      p{font-size:2.25ex}
+      ion-avatar{width: 15ex; height: 15ex;  }
+      ion-popover {--width: 65ex; }
+      .popover-content{
+        top: 45px !important;
+       
+      }
 
+    }
 
 .header{
   background-color:  #0277bd;
@@ -151,6 +172,8 @@
 .backdrop-no-scroll ion-backdrop+* ion-content {
   --overflow: visible;
 }
+
+ion-app.platform-ios12 ion-content { pointer-events: auto; /*fix scroll lock on ios12.2*/ }
 
 }
 
