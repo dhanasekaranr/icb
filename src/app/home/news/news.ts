@@ -1,9 +1,10 @@
 
 import { Component } from '@angular/core';
-import { AlertController, LoadingController, NavController, ToastController } from '@ionic/angular';
+import { AlertController, LoadingController, NavController } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { Authentication } from '../../../shared/authentication.service';
 import { ICBService } from '../../../shared/service';
+import { ToastService } from 'src/shared/toaster.service';
 
 @Component({
   selector: 'page-news',
@@ -16,8 +17,8 @@ export class NewsPage {
   public loading: any;
 
   constructor( private service: ICBService,
-               private alertCtrl: AlertController, private loadingCtrl: LoadingController,
-               private toastCtrl: ToastController, public authentication: Authentication, public navCtrl: NavController) {
+               private loadingCtrl: LoadingController,
+               public authentication: Authentication, public navCtrl: NavController) {
   }
 
   public ionViewWillEnter() {
@@ -30,7 +31,7 @@ export class NewsPage {
     
   }
 
-  public loadTimeline(refresher?: undefined) {
+  public loadTimeline() {
 
     if ( this.authentication.getAccessToken() != null) {
       this.showLoading();
@@ -65,14 +66,5 @@ export class NewsPage {
    // this.loading.present();
   }
 
-  private showError(text: any) {
-    this.loading.dismiss();
-   /* let alert = this.alertCtrl.create({
-      title: 'Error',
-      message: text,
-      buttons: ['OK']
-    });*/
-  //  alert.present(prompt);
-  }
 
 }

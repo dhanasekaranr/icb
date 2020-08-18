@@ -1,7 +1,8 @@
 import { Component} from '@angular/core';
 
-import { ActionSheetController, LoadingController, NavController, Platform, ToastController } from '@ionic/angular';
+import { ActionSheetController, LoadingController, NavController, Platform } from '@ionic/angular';
 import { NavigationOptions } from '@ionic/angular/providers/nav-controller';
+import { ToastService } from 'src/shared/toaster.service';
 import { MasterDetailService } from '../../providers/data-service/masterDetailService';
 import { Authentication } from '../../shared/authentication.service';
 import { ICBService } from '../../shared/service';
@@ -21,7 +22,7 @@ export class CataloguePage {
 
   constructor(public navCtrl: NavController, private service: ICBService, public platform: Platform,
               public authentication: Authentication,
-              public loading: LoadingController, public toastCtrl: ToastController, private ms: MasterDetailService,
+              public loading: LoadingController, public toastCtrl: ToastService, private ms: MasterDetailService,
               public actionSheetCtrl: ActionSheetController) {
 
       }
@@ -89,12 +90,8 @@ export class CataloguePage {
   public AddToWishList(key: any , flag: any , message: any ) {
     this.service.AddToWishList(key.ISBN).then(
       async (data) => {
-        const toast = await this.toastCtrl.create({
-         message,
-         duration: 1000,
-       });
-        toast.present();
-        key.WishList = flag;
+       this.toastCtrl.showToast(message);
+       key.WishList = flag;
       },
     );
   }
@@ -110,12 +107,8 @@ export class CataloguePage {
                 const message: any  = 'Placed hold request';
                 this.service.AddToHold(key.ISBN, key.ProposedCode, option.UserId, key.CreatedBy).then(
                   async (data) => {
-                    const toast = await this.toastCtrl.create({
-                      message ,
-                     duration: 1000,
-                   });
-                    toast.present();
-                    if (data) {
+                   this.toastCtrl.showToast(message);
+                   if (data) {
                       key.Hold = 'Y';
                     }
                   },
@@ -147,12 +140,8 @@ export class CataloguePage {
         } else {
           this.service.markReturn(key.RentedTransId).then(
             async (data) => {
-              const toast = await this.toastCtrl.create({
-               message: 'Returned successfully !',
-               duration: 2000,
-             });
-              toast.present();
-              this.searchBookDB(null);
+             this.toastCtrl.showToast('Returned Successfully !');
+             this.searchBookDB(null);
       });
     }
   }

@@ -34,3 +34,10 @@ ion-toast.toast-mess {
     color: var(--ion-color-light);
     --background: var(--ion-color-dark);
   }
+
+  ion-toast.toast-mess-exception {
+    opacity: 0.9;
+    text-align: center;
+    color: var(--ion-color-light);
+    --background: var(--ion-color-danger);
+  }

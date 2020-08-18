@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { ActionSheetController, LoadingController, NavController, Platform, ToastController } from '@ionic/angular';
+import { ActionSheetController, LoadingController, NavController, Platform } from '@ionic/angular';
 import { Authentication } from '../../shared/authentication.service';
 import { ICBService } from '../../shared/service';
+import { ToastService } from 'src/shared/toaster.service';
 
 @Component({
   selector: 'app-users',
@@ -15,7 +16,7 @@ export class UsersPage {
   public queryval = '';
   public loader; public FirstNameSearch;
   constructor(public navCtrl: NavController, private icbservice: ICBService, public platform: Platform,
-              public actionsheetCtrl: ActionSheetController, public toastCtrl: ToastController, public loading: LoadingController,
+              public actionsheetCtrl: ActionSheetController, public toastCtrl: ToastService, public loading: LoadingController,
               public authentication: Authentication) {
 }
 
@@ -50,14 +51,10 @@ public FilterUserDB(event: any) {
   this.FirstNameSearch = event.target.value;
 }
 public notify(userId: any, BookId: any, transactions: any) {
-  this.icbservice.notify(userId, BookId, transactions, this.queryval).then(
+        this.icbservice.notify(userId, BookId, transactions, this.queryval).then(
                async (data) => {
                  this.users = data;
-                 const toast = await this.toastCtrl.create({
-                  message: 'Notified User !',
-                  duration: 2000,
-                });
-                 toast.present();
+                 this.toastCtrl.showToast('Notified User !');
              },
          );
      }
